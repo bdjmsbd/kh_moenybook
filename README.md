@@ -14,9 +14,8 @@ git build 순서
   - Java, Version 21로 변경
   - JavaScript 선택 Version 1.0 체크
   - Dynamic Web Module 선택, 우측에 Runtimes 클릭하고 apach-tomcat 선택
-Apply - Apply and Close
-
-6. WEB-INF-lib 폴더에 jar 파일 붙여넣기 
+  - Apply - Apply and Close
+6. WEB-INF - lib 폴더에 jar 파일 붙여넣기
 7. 메뉴에서 Project - clean 실행
 8. Run as Server로 실행
 
