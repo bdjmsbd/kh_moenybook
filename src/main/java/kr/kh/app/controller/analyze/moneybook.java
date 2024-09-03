@@ -1,4 +1,4 @@
-package kr.kh.app.controller.temp;
+package kr.kh.app.controller.analyze;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -72,7 +72,7 @@ public class moneybook extends HttpServlet {
 			// System.out.println(cal);
 
 			request.setAttribute("cal", cal);
-			request.getRequestDispatcher("/WEB-INF/views/temp/moneybook.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/analyze/moneybook.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			

@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+:root {
+	--font-size: 14px;
+	
+	--color-default: #191919;
+    --color-bak: #fff;
+}
+
+body {
+	font-size: var(--font-size);
+	color: var(--color-default);
+	background-color: var(--color-bak);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background: var(--color-bak);
+}
