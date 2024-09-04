@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header>
+	<a class="open-menu" onclick="openMenu();">
+		<i class="fa-solid fa-bars"></i>
+	</a>
 	<nav id="gnb">
 		<ul>
 			<li>
@@ -18,5 +21,10 @@
 			</li>
 		</ul>
 	</nav>
+	<script>
+		function openMenu(){
+			$('header').toggleClass('show');
+		}
+	</script>
 </header>
 <section id="body" class="container">
