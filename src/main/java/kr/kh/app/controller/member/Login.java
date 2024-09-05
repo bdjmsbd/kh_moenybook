@@ -1,4 +1,4 @@
-package kr.kh.app.controller;
+package kr.kh.app.controller.member;
 
 import java.io.IOException;
 

@@ -1,167 +1,137 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>È¸¿ø°¡ÀÔ</title>
-
-<jsp:include page="/WEB-INF/views/common/head.jsp" />
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
-
-<style type="text/css">
-label.error {
-	color: red;
-}
-
-button.btn-dup {
-	background-color: rgb(50, 200, 80);
-}
-</style>
-</head>
-<body>
-
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-
-	<div class="container" style="min-height: calc(100vh - 246px)">
-		<h1>È¸¿ø °¡ÀÔ</h1>
-		<form action="<c:url value="/signup"/>" method="post" id="form">
-
-			<div class="form-group">
-				<label for="id">¾ÆÀÌµğ:</label>
-				<div class="input-group mb-3">
-					<input type="text" class="form-control" id="id" name="id">
-					<div class="input-group-append">
-						<button type="button"
-							class="input-group-text btn btn-outline-success btn-dup mb-3">¾ÆÀÌµğ
-							Áßº¹ °Ë»ç</button>
-					</div>
-					<label class="error" for="id" generated="true"
-						style="display: none;">¿¡·¯¿¡·¯</label>
-				</div>
+<h1 class="text-center mb-5">íšŒì› ê°€ì…</h1>
+<form action="<c:url value="/signup"/>" method="post" id="form">
+	<div class="form-group">
+		<label for="id">ì•„ì´ë””:</label>
+		<div class="input-group mb-3">
+			<input type="text" class="form-control" id="id" name="id">
+			<div class="input-group-append">
+				<button type="button"
+					class="input-group-text btn btn-outline-success btn-dup mb-3">ì•„ì´ë””
+					ì¤‘ë³µ ê²€ì‚¬</button>
 			</div>
-			<div class="form-group">
-				<label for="pwd">ºñ¹Ğ¹øÈ£:</label> <input type="password"
-					class="form-control" id="pwd" name="pwd">
-			</div>
-			<div class="form-group">
-				<label for="pwd2">ºñ¹Ğ¹øÈ£ È®ÀÎ:</label> <input type="password"
-					class="form-control" id="pwd2" name="pwd2">
-			</div>
-			<div class="form-group">
-				<label for="email">ÀÌ¸ŞÀÏ:</label> <input type="text"
-					class="form-control" id="email" name="email">
-			</div>
-			<button type="submit" class="btn btn-outline-success col-12">È¸¿ø°¡ÀÔ</button>
-		</form>
+			<label class="error" for="id" generated="true"
+				style="display: none;">ì—ëŸ¬ì—ëŸ¬</label>
+		</div>
 	</div>
+	<div class="form-group">
+		<label for="pwd">ë¹„ë°€ë²ˆí˜¸:</label> <input type="password"
+			class="form-control" id="pwd" name="pwd">
+	</div>
+	<div class="form-group">
+		<label for="pwd2">ë¹„ë°€ë²ˆí˜¸ í™•ì¸:</label> <input type="password"
+			class="form-control" id="pwd2" name="pwd2">
+	</div>
+	<div class="form-group">
+		<label for="email">ì´ë©”ì¼:</label> <input type="text"
+			class="form-control" id="email" name="email">
+	</div>
+	<button type="submit" class="btn btn-outline-success col-12">íšŒì›ê°€ì…</button>
+</form>
 
+<script type="text/javascript">
+	var flag = false;
 
-
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-
-	<script type="text/javascript">
-		var flag = false;
-
-		$('#form')
-				.validate(
-						{
-							rules : {
-								id : {
-									required : true,
-									regex : /^\w{6,13}$/
-								},
-								pwd : {
-									required : true,
-									regex : /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[^\w])([^\w]{1}|[\w]{1}){6,15}$/
-								},
-								pwd2 : {
-									equalTo : pwd
-								},
-								email : {
-									required : true,
-									email : true
-								}
+	$('#form')
+			.validate(
+					{
+						rules : {
+							id : {
+								required : true,
+								regex : /^\w{6,13}$/
 							},
-							messages : {
-								id : {
-									required : 'ÇÊ¼ö Ç×¸ñÀÔ´Ï´Ù.',
-									regex : '¾ÆÀÌµğ´Â ¿µ¾î, ¼ıÀÚ¸¸ °¡´ÉÇÏ¸ç, 6~13ÀÚÀÌ¾î¾ß ÇÕ´Ï´Ù.'
-								},
-								pwd : {
-									required : 'ÇÊ¼ö Ç×¸ñÀÔ´Ï´Ù.',
-									regex : '¿µ¾î ´ë¼Ò¹®ÀÚ, ¼ıÀÚ, Æ¯¼ö¹®ÀÚ°¡ ²À µé¾î°¡¾ß ÇÏ¸ç, 6~15ÀÚÀÌ¾î¾ß ÇÕ´Ï´Ù.'
-								},
-								pwd2 : {
-									required : 'ÇÊ¼ö Ç×¸ñÀÔ´Ï´Ù.',
-									equalTo : 'ºñ¹øÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.'
-								},
-								email : {
-									required : 'ÇÊ¼ö Ç×¸ñÀÔ´Ï´Ù.',
-									email : '¿Ã¹Ù¸¥ ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾Æ´Õ´Ï´Ù'
-								}
+							pwd : {
+								required : true,
+								regex : /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[^\w])([^\w]{1}|[\w]{1}){6,15}$/
 							},
-							submitHandler : function() {
-								if (!flag) {
-									alert('¾ÆÀÌµğ Áßº¹ °Ë»ç¸¦ ÇÏ¼¼¿ä.');
-									return false;
-								}
-								return checkId();
+							pwd2 : {
+								equalTo : pwd
+							},
+							email : {
+								required : true,
+								email : true
 							}
-						});
+						},
+						messages : {
+							id : {
+								required : 'í•„ìˆ˜ í•­ëª©ì…ë‹ˆë‹¤.',
+								regex : 'ì•„ì´ë””ëŠ” ì˜ì–´, ìˆ«ìë§Œ ê°€ëŠ¥í•˜ë©°, 6~13ìì´ì–´ì•¼ í•©ë‹ˆë‹¤.'
+							},
+							pwd : {
+								required : 'í•„ìˆ˜ í•­ëª©ì…ë‹ˆë‹¤.',
+								regex : 'ì˜ì–´ ëŒ€ì†Œë¬¸ì, ìˆ«ì, íŠ¹ìˆ˜ë¬¸ìê°€ ê¼­ ë“¤ì–´ê°€ì•¼ í•˜ë©°, 6~15ìì´ì–´ì•¼ í•©ë‹ˆë‹¤.'
+							},
+							pwd2 : {
+								required : 'í•„ìˆ˜ í•­ëª©ì…ë‹ˆë‹¤.',
+								equalTo : 'ë¹„ë²ˆì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.'
+							},
+							email : {
+								required : 'í•„ìˆ˜ í•­ëª©ì…ë‹ˆë‹¤.',
+								email : 'ì˜¬ë°”ë¥¸ ì´ë©”ì¼ í˜•ì‹ì´ ì•„ë‹™ë‹ˆë‹¤'
+							}
+						},
+						submitHandler : function() {
+							if (!flag) {
+								alert('ì•„ì´ë”” ì¤‘ë³µ ê²€ì‚¬ë¥¼ í•˜ì„¸ìš”.');
+								return false;
+							}
+							return checkId();
+						}
+					});
 
-		$.validator.addMethod('regex', function(value, element, regex) {
-			var re = new RegExp(regex);
-			return this.optional(element) || re.test(value);
-		}, "Á¤±ÔÇ¥Çö½ÄÀ» È®ÀÎÇÏ¼¼¿ä.");
+	$.validator.addMethod('regex', function(value, element, regex) {
+		var re = new RegExp(regex);
+		return this.optional(element) || re.test(value);
+	}, "ì •ê·œí‘œí˜„ì‹ì„ í™•ì¸í•˜ì„¸ìš”.");
 
-		$('.btn-dup').click(function() {
-			//¾ÆÀÌµğ¸¦ °¡Á®¿È.
-			var id = $('[name=id]').val();
-			//¾ÆÀÌµğ À¯È¿¼º °Ë»ç È®ÀÎ
-			var regex = /^\w{6,13}$/;
-			if (!regex.test(id)) {
-				alert('¾ÆÀÌµğ´Â ¿µ¾î, ¼ıÀÚ¸¸ °¡´ÉÇÏ¸ç, 6~13ÀÚÀÌ¾î¾ß ÇÕ´Ï´Ù.');
-				return;
-			}
-			if (checkId()) {
-				alert('»ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.');
-				flag = true;
-			} else {
-				alert('ÀÌ¹Ì »ç¿ë ÁßÀÎ ¾ÆÀÌµğÀÔ´Ï´Ù.');
-			}
-		});
-
-		function checkId() {
-
-			var res = false;
-			var id = $('[name=id]').val();
-
-			$.ajax({
-				async : false,
-				url : '<c:url value="/check/id"/>',
-				data : {
-					me_id : id
-				},
-				success : function(data) {
-					res = data.result;
-				},
-				error : function(xhr) {
-					console.log(xhr);
-
-				}
-			});
-			return res;
+	$('.btn-dup').click(function() {
+		//ì•„ì´ë””ë¥¼ ê°€ì ¸ì˜´.
+		var id = $('[name=id]').val();
+		//ì•„ì´ë”” ìœ íš¨ì„± ê²€ì‚¬ í™•ì¸
+		var regex = /^\w{6,13}$/;
+		if (!regex.test(id)) {
+			alert('ì•„ì´ë””ëŠ” ì˜ì–´, ìˆ«ìë§Œ ê°€ëŠ¥í•˜ë©°, 6~13ìì´ì–´ì•¼ í•©ë‹ˆë‹¤.');
+			return;
 		}
+		if (checkId()) {
+			alert('ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.');
+			flag = true;
+		} else {
+			alert('ì´ë¯¸ ì‚¬ìš© ì¤‘ì¸ ì•„ì´ë””ì…ë‹ˆë‹¤.');
+		}
+	});
 
-		$('[name=id]').change(function() {
-			flag = false;
+	function checkId() {
+
+		var res = false;
+		var id = $('[name=id]').val();
+
+		$.ajax({
+			async : false,
+			url : '<c:url value="/check/id"/>',
+			data : {
+				me_id : id
+			},
+			success : function(data) {
+				res = data.result;
+			},
+			error : function(xhr) {
+				console.log(xhr);
+
+			}
 		});
-	</script>
-</body>
-</html>
+		return res;
+	}
+
+	$('[name=id]').change(function() {
+		flag = false;
+	});
+</script>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.sub.jsp" />
