@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<h1>회원 가입</h1>
+<h1 class="text-center mb-5">회원 가입</h1>
 <form action="<c:url value="/signup"/>" method="post" id="form">
 	<div class="form-group">
 		<label for="id">아이디:</label>

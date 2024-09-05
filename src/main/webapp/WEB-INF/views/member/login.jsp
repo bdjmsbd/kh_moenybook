@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<h1>로그인</h1>
+<h1 class="text-center mb-5">로그인</h1>
 <form action="<c:url value="/login"/>" method="post" id="form">
 	<div class="form-group">
 		<label for="id">아이디:</label> <input type="text" class="form-control"
