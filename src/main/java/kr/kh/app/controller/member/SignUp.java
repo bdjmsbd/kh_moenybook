@@ -38,7 +38,7 @@ public class SignUp extends HttpServlet {
 			if(memberService.signUp(id, pw, pw_ckh, email)) {
 				
 				req.setAttribute("msg", "회원가입에 성공하였습니다.");
-				req.setAttribute("url", "/");
+				req.setAttribute("url", "/login");
 			}
 			else {
 				throw new RuntimeException();
@@ -47,7 +47,7 @@ public class SignUp extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("msg", "회원가입에 실패하였습니다.");
-			req.setAttribute("url", "/");
+			req.setAttribute("url", "/signup");
 		}
 		
 		req.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(req, resp);
