@@ -4,6 +4,9 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+
 <h1 class="text-center mb-5">회원 가입</h1>
 <form action="<c:url value="/signup"/>" method="post" id="form">
 	<div class="form-group">
@@ -12,24 +15,22 @@
 			<input type="text" class="form-control" id="id" name="id">
 			<div class="input-group-append">
 				<button type="button"
-					class="input-group-text btn btn-outline-success btn-dup mb-3">아이디
-					중복 검사</button>
+					class="input-group-text btn btn-outline-success btn-dup mb-3">
+					아이디 중복 검사</button>
 			</div>
-			<label class="error" for="id" generated="true"
-				style="display: none;">에러에러</label>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="pwd">비밀번호:</label> <input type="password"
-			class="form-control" id="pwd" name="pwd">
+		<label for="pw">비밀번호:</label>
+		<input type="password" class="form-control" id="pw" name="pw">
 	</div>
 	<div class="form-group">
-		<label for="pwd2">비밀번호 확인:</label> <input type="password"
-			class="form-control" id="pwd2" name="pwd2">
+		<label for="pw2">비밀번호 확인:</label>
+		<input type="password" class="form-control" id="pw2" name="pw2">
 	</div>
 	<div class="form-group">
-		<label for="email">이메일:</label> <input type="text"
-			class="form-control" id="email" name="email">
+		<label for="email">이메일:</label>
+		<input type="text" class="form-control" id="email" name="email">
 	</div>
 	<button type="submit" class="btn btn-outline-success col-12">회원가입</button>
 </form>

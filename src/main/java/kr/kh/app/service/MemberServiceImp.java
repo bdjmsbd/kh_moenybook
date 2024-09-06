@@ -37,6 +37,11 @@ public class MemberServiceImp implements MemberService {
 
 	@Override
 	public boolean signUp(MemberVO member) {
+		if(member == null ||
+			member.getMe_id() == null ||
+			member.getMe_pw() == null ||
+			member.getMe_email() == null) return false;
+		
 		if (checkRegex(member.getMe_id(), "^\\w{6,13}$")) return false;
 		if (checkRegex(member.getMe_pw(), "^[a-zA-Z0-9!@#$%^&*()]{6,15}$")) return false;
 		if (checkRegex(member.getMe_email(), "^[A-Za-z0-9_]+@[A-Za-z0-9_]+(\\.[A-Za-z]{2,}){1,}$")) return false;

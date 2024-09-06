@@ -26,10 +26,13 @@ public class SignUp extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
-		String pw = req.getParameter("pwd");
+		String pw = req.getParameter("pw");
+		String pw2 = req.getParameter("pw2");
 		String email = req.getParameter("email");
 		
 		MemberVO member = new MemberVO(id, pw, email);
+		
+		if(!pw.equals(pw2)) throw new RuntimeException();
 		
 		try {
 			if(memberService.signUp(member)) {

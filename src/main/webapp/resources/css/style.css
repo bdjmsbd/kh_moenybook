@@ -47,3 +47,5 @@ header nav ul li:hover {background: var(--light); font-weight: 900;}
 header nav ul li a {color: inherit !important; display: block; height: 100%; padding: .5em 2em;}
 
 #form {max-width: 500px; width: 80vw; margin: 0 auto;}
+
+.error {color: var(--red);}
