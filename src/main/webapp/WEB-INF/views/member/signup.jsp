@@ -4,6 +4,9 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+
 <h1 class="text-center mb-5">회원 가입</h1>
 <form action="<c:url value="/signup"/>" method="post" id="form">
 	<div class="form-group">
