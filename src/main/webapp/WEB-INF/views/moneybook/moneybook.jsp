@@ -5,6 +5,8 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
 <div style="display: flex;">
 	<div class="container"
 		style="min-height: calc(100vh - 237px); float: left;">
@@ -34,30 +36,30 @@
 					</tr>
 					<tr>
 						<c:forEach begin="1" end="${cal.tdCnt}" step="1" var="i">
-						<td>
-						<c:choose>
-							<c:when test="${(i > cal.startBlankCnt) && (i <= cal.startBlankCnt + cal.lastDate)}">
+							<td>
 								<c:choose>
-								<c:when test="${i % 7 == 0 }">
-									<span class="text-primary">${i - cal.startBlankCnt }</span>
-								</c:when>
-								<c:when test="${i % 7 == 1 }">
-									<span class="text-danger">${i - cal.startBlankCnt }</span>
-								</c:when>
-								<c:otherwise>
-									<span> ${i - cal.startBlankCnt }</span>
-								</c:otherwise>
+									<c:when test="${(i > cal.startBlankCnt) && (i <= cal.startBlankCnt + cal.lastDate)}">
+										<c:choose>
+										<c:when test="${i % 7 == 0 }">
+											<span class="text-primary">${i - cal.startBlankCnt }</span>
+										</c:when>
+										<c:when test="${i % 7 == 1 }">
+											<span class="text-danger">${i - cal.startBlankCnt }</span>
+										</c:when>
+										<c:otherwise>
+											<span> ${i - cal.startBlankCnt }</span>
+										</c:otherwise>
+										</c:choose>
+									</c:when> 
+									<c:otherwise>
+										&nbsp;
+									</c:otherwise>
 								</c:choose>
-							</c:when> 
-							<c:otherwise>
-								&nbsp;
-							</c:otherwise>
-						</c:choose>
-						</td>
-						<c:if test="${(i != cal.tdCnt) && (i % 7 == 0) }">
-						</tr>
-						<tr>							
-						</c:if>
+							</td>
+							<c:if test="${(i != cal.tdCnt) && (i % 7 == 0) }">
+								</tr>
+								<tr>							
+							</c:if>
        					</c:forEach>
 					</tr>
 				</table>
