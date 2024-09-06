@@ -29,6 +29,7 @@ header {
     background: var(--color-bak);
     box-shadow: 0 0 30px rgba(0,0,0,.2);
 	transition: .3s ease;
+	z-index: 99;
 }
 header.show {left: 0;}
 header .open-menu {
