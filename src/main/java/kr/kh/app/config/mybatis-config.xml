@@ -28,7 +28,12 @@
 
 	<mappers>
 		<mapper resource="kr/kh/app/dao/MemberMapper.xml" />
+<<<<<<< Updated upstream
 <!-- 		<mapper resource="kr/kh/app/dao/AccountBookMapper.xml" /> 
 		<mapper resource="kr/kh/app/dao/PostMapper.xml" /> -->
+=======
+		<mapper resource="kr/kh/app/dao/AccountBookMapper.xml" />
+		<mapper resource="kr/kh/app/dao/PostMapper.xml" />
+>>>>>>> Stashed changes
 	</mappers>
 </configuration>

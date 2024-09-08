@@ -58,6 +58,9 @@
 			</c:if>
 			<li class="nav-item"><a class="nav-link disabled" href="#"></a>
 			</li>
+			<li>
+				<a href="<c:url value="/accountbook/insert" />">가계부 등록(임시)</a>
+			</li>
 		</ul>
 	</nav>
 </body>
