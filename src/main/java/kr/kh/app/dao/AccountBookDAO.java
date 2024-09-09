@@ -1,5 +1,6 @@
 package kr.kh.app.dao;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,4 +16,8 @@ public interface AccountBookDAO {
 
 	void insertAccountBook(@Param("ab")AccountBookVO newAB);
 
+=======
+public interface AccountBookDAO {
+
+>>>>>>> main
 }

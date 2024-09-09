@@ -16,7 +16,7 @@ public class SignUp extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private MemberService memberService = new MemberService();
+	MemberService memberService = new MemberService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/views/member/signup.jsp").forward(request, response);

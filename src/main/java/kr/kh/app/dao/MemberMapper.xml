@@ -25,5 +25,4 @@
 		select * from member
 		where me_cookie = #{sid} and me_limit > now()
 	</select>
-
 </mapper>

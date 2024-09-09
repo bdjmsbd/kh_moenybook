@@ -12,11 +12,15 @@ public class AccountBookVO {
 	private int ab_num;
 	private int ab_at_num;
 	private int ab_pp_num;
+<<<<<<< HEAD
 	private int ab_pt_num;
+=======
+>>>>>>> main
 	private String ab_me_id;
 	private Date ab_date;
 	private int ab_amount;
 	private String ab_detail;
+<<<<<<< HEAD
 	
 	public AccountBookVO(int ab_at_num, int ab_pp_num, int ab_pt_num, String ab_me_id, Date ab_date, int ab_amount, String ab_detail, int regularity) {
 		
@@ -29,5 +33,7 @@ public class AccountBookVO {
 		this.ab_amount = ab_amount;
 		this.ab_detail = ab_detail;
 	}
+=======
+>>>>>>> main
 
 }
