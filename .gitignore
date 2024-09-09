@@ -155,5 +155,4 @@ log4j.xml
 /build/
 
 .gitignore
-*.xml
 *.MF
