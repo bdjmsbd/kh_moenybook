@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.app.dao.AccountBookDAO">
+	<select id="selectPaymentPurposeList" resultType="PaymentPurposeVO">
+		select * from payment_purpose
+	</select>
+	<select id="selectPaymentTypeList" resultType="PaymentTypeVO">
+		select * from payment_type
+	</select>
+	<insert id="insertAccountBook">
+		insert into accountbook(ab_at_num, ab_pp_num, ab_pt_num, ab_me_id, ab_date, ab_amount, ab_detail)
+		values (#{ab.ab_at_num},#{ab.ab_pp_num},#{ab.ab_pt_num},#{ab.ab_me_id},#{ab.ab_date},#{ab.ab_amount},#{ab.ab_detail})
+	</insert>
+</mapper>
