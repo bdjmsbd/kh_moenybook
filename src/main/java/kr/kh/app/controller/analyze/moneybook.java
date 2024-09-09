@@ -22,6 +22,7 @@ public class moneybook extends HttpServlet {
 		int month = 0; // 0 ~ 11
 
 		try {
+
 			// 년도, 월 중 하나라도 지정(넘겨져 오지)되지 않으면 오늘날짜 기준으로 월달력 출력
 			if (request.getParameter("year") == null || request.getParameter("month") == null) {
 				Calendar today = Calendar.getInstance();
@@ -71,7 +72,6 @@ public class moneybook extends HttpServlet {
 			// System.out.println(cal);
 
 			request.setAttribute("cal", cal);
-
 			request.getRequestDispatcher("/WEB-INF/views/analyze/moneybook.jsp").forward(request, response);
 
 		} catch (Exception e) {
