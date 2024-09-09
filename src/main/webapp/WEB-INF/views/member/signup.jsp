@@ -4,8 +4,10 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
 
 <h1 class="text-center mb-5">회원 가입</h1>
 <form action="<c:url value="/signup"/>" method="post" id="form">
@@ -40,50 +42,52 @@
 <script type="text/javascript">
 	var flag = false;
 
-	$('#form').validate({
-		rules : {
-			id : {
-				required : true,
-				regex : /^\w{6,13}$/
-			},
-			pwd : {
-				required : true,
-				regex : /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[^\w])([^\w]{1}|[\w]{1}){6,15}$/
-			},
-			pwd2 : {
-				equalTo : pwd
-			},
-			email : {
-				required : true,
-				email : true
-			}
-		},
-		messages : {
-			id : {
-				required : '필수 항목입니다.',
-				regex : '아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.'
-			},
-			pwd : {
-				required : '필수 항목입니다.',
-				regex : '영어 대소문자, 숫자, 특수문자가 꼭 들어가야 하며, 6~15자이어야 합니다.'
-			},
-			pwd2 : {
-				required : '필수 항목입니다.',
-				equalTo : '비번이 일치하지 않습니다.'
-			},
-			email : {
-				required : '필수 항목입니다.',
-				email : '올바른 이메일 형식이 아닙니다'
-			}
-		},
-		submitHandler : function() {
-			if (!flag) {
-				alert('아이디 중복 검사를 하세요.');
-				return false;
-			}
-			return checkId();
-		}
-	});
+	$('#form')
+			.validate(
+					{
+						rules : {
+							id : {
+								required : true,
+								regex : /^\w{6,13}$/
+							},
+							pwd : {
+								required : true,
+								regex : /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[^\w])([^\w]{1}|[\w]{1}){6,15}$/
+							},
+							pwd2 : {
+								equalTo : pwd
+							},
+							email : {
+								required : true,
+								email : true
+							}
+						},
+						messages : {
+							id : {
+								required : '필수 항목입니다.',
+								regex : '아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.'
+							},
+							pwd : {
+								required : '필수 항목입니다.',
+								regex : '영어 대소문자, 숫자, 특수문자가 꼭 들어가야 하며, 6~15자이어야 합니다.'
+							},
+							pwd2 : {
+								required : '필수 항목입니다.',
+								equalTo : '비번이 일치하지 않습니다.'
+							},
+							email : {
+								required : '필수 항목입니다.',
+								email : '올바른 이메일 형식이 아닙니다'
+							}
+						},
+						submitHandler : function() {
+							if (!flag) {
+								alert('아이디 중복 검사를 하세요.');
+								return false;
+							}
+							return checkId();
+						}
+					});
 
 	$.validator.addMethod('regex', function(value, element, regex) {
 		var re = new RegExp(regex);
@@ -108,6 +112,7 @@
 	});
 
 	function checkId() {
+
 		var res = false;
 		var id = $('[name=id]').val();
 
@@ -122,6 +127,7 @@
 			},
 			error : function(xhr) {
 				console.log(xhr);
+
 			}
 		});
 		return res;

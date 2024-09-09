@@ -12,6 +12,6 @@ public interface AccountBookDAO {
 
 	List<AccountTypeVO> selectPaymentTypeList();
 
-	void insertAccountBook(@Param("ab")AccountBookVO newAB);
+	void insertAccountBook(@Param("ab") AccountBookVO newAB);
 
 }

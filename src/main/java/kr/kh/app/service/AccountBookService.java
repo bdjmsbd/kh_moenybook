@@ -15,7 +15,7 @@ import kr.kh.app.model.vo.AccountTypeVO;
 public class AccountBookService {
 
 	private AccountBookDAO accountBookDao;
-	
+
 	public AccountBookService() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
 		InputStream inputStream;
@@ -30,7 +30,7 @@ public class AccountBookService {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<AccountTypeVO> getPaymentPurposeList() {
 		return accountBookDao.selectPaymentPurposeList();
 	}

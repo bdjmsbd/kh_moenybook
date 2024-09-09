@@ -8,4 +8,5 @@ import lombok.NoArgsConstructor;
 public class PaymentTypeVO {
 	private int pt_num;
 	private String pt_name;
+	private int pt_at_num;
 }
