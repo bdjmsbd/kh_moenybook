@@ -1,6 +1,5 @@
 package kr.kh.app.service;
 
-import java.io.InputStream;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -138,4 +137,54 @@ public class MemberService{
 		memberDao.updateMemberCookie(user);
 	}
 
+	public boolean checkId(String me_id) {
+		return memberDao.selectMember(me_id) == null;
+	}
+
+	
+	public MemberVO login(MemberVO member) {
+		if (member == null) {
+			return null;
+		}
+
+		MemberVO user = memberDao.selectMember(member.getMe_id());
+
+		// 가입되지 않은 아이디이면
+		if (user == null) {
+			return null;
+		}
+		// 비번이 같으면
+		if (user.getMe_pw().equals(member.getMe_pw())) {
+			return user;
+		}
+		return null;
+	}
+	
+	public Cookie createCookie(MemberVO user, HttpServletRequest request) {
+		if (user == null) {
+			return null;
+		}
+		HttpSession session = request.getSession();
+		// 쿠키는 이름, 값, 만료시간, path가 필요
+		String me_cookie = session.getId();
+		// 쿠키 이름이 AL, 값은 현재 세션 아이디값
+		Cookie cookie = new Cookie("AL", me_cookie);
+		cookie.setPath("/");
+		int time = 60 * 60 * 24 * 7  * 1000;
+		cookie.setMaxAge(time);
+		user.setMe_cookie(me_cookie);
+		// 만료시간은 현재 시간 + 1주일뒤
+		Date date = new Date(System.currentTimeMillis() + time);
+		user.setMe_limit(date);
+		memberDao.updateMemberCookie(user);
+		return cookie;
+	}
+	
+	public MemberVO getMemberBySid(String sid) {
+		return memberDao.selectMemberBySid(sid);
+	}
+
+	public void updateMemberCookie(MemberVO user) {
+		memberDao.updateMemberCookie(user);
+	}
 }

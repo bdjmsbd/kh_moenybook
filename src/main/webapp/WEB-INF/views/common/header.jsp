@@ -14,7 +14,13 @@
 				<a href="<c:url value="/moneybook" />">가계부</a>
 			</li>
 			<li>
+				<a href="<c:url value="/analyze" />">분석</a>
+			</li>
+			<li>
 				<a href="<c:url value="/board" />">게시판</a>
+			</li>
+			<li>
+				<a href="<c:url value="/accountbook/insert" />">가계부 등록(임시)</a>
 			</li>
 		</ul>
 	</nav>
