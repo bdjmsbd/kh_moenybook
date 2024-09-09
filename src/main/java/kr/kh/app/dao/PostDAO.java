@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import kr.kh.app.model.vo.AccountBookVO;
 import kr.kh.app.model.vo.AccountTypeVO;
 
-public interface PostServiceDAO {
+public interface PostDAO {
 
 	List<AccountTypeVO> selectPaymentPurposeList();
 
