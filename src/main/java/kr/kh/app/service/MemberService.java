@@ -1,25 +1,19 @@
 package kr.kh.app.service;
 
+import java.util.Date;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import kr.kh.app.dao.MemberDAO;
 import kr.kh.app.model.vo.MemberVO;
 
-public interface MemberService {
+public class MemberService {
+	
+	private MemberDAO memberDao;
 
-	boolean signUp(MemberVO member);
-
-	boolean checkId(String me_id);
-
-	MemberVO login(MemberVO member);
-
-<<<<<<< Updated upstream
-	Cookie createCookie(MemberVO user, HttpServletRequest request);
-
-	MemberVO getMemberBySid(String sid);
-
-	void updateMemberCookie(MemberVO user);
-=======
 	public boolean signUp(MemberVO member) {
 		if(member == null ||
 			member.getMe_id() == null ||
@@ -53,7 +47,6 @@ public interface MemberService {
 	}
 
 	public boolean checkId(String me_id) {
-
 		return memberDao.selectMember(me_id) == null;
 	}
 
@@ -97,14 +90,10 @@ public interface MemberService {
 	}
 	
 	public MemberVO getMemberBySid(String sid) {
-		// TODO Auto-generated method stub
 		return memberDao.selectMemberBySid(sid);
 	}
 
 	public void updateMemberCookie(MemberVO user) {
-		// TODO Auto-generated method stub
 		memberDao.updateMemberCookie(user);
 	}
->>>>>>> Stashed changes
-
 }
