@@ -5,19 +5,21 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
 <div style="display: flex;">
 	<div class="container"
 		style="min-height: calc(100vh - 237px); float: left;">
 		<div class="container mt-3">
 			<div class="mt-3 mb-3 p-3 d-flex justify-content-between">
 				<span> <a class="btn btn-outline-dark btn-sm"
-					href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month-1}"/>">
+					href="<c:url value="/moneybook?year=${cal.year}&month=${cal.month-1}"/>">
 						[이전달] </a>
 				</span> 
 				<span class="fw-bold fs-3">${cal.year}년 ${cal.month+1}월</span> 
 				<span>
 					<a class="btn btn-outline-dark btn-sm"
-					href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month+1}"/>">
+					href="<c:url value="/moneybook?year=${cal.year}&month=${cal.month+1}"/>">
 						[다음달] </a>
 				</span>
 			</div>
@@ -34,30 +36,30 @@
 					</tr>
 					<tr>
 						<c:forEach begin="1" end="${cal.tdCnt}" step="1" var="i">
-						<td>
-						<c:choose>
-							<c:when test="${(i > cal.startBlankCnt) && (i <= cal.startBlankCnt + cal.lastDate)}">
+							<td>
 								<c:choose>
-								<c:when test="${i % 7 == 0 }">
-									<span class="text-primary">${i - cal.startBlankCnt }</span>
-								</c:when>
-								<c:when test="${i % 7 == 1 }">
-									<span class="text-danger">${i - cal.startBlankCnt }</span>
-								</c:when>
-								<c:otherwise>
-									<span> ${i - cal.startBlankCnt }</span>
-								</c:otherwise>
+									<c:when test="${(i > cal.startBlankCnt) && (i <= cal.startBlankCnt + cal.lastDate)}">
+										<c:choose>
+										<c:when test="${i % 7 == 0 }">
+											<span class="text-primary">${i - cal.startBlankCnt }</span>
+										</c:when>
+										<c:when test="${i % 7 == 1 }">
+											<span class="text-danger">${i - cal.startBlankCnt }</span>
+										</c:when>
+										<c:otherwise>
+											<span> ${i - cal.startBlankCnt }</span>
+										</c:otherwise>
+										</c:choose>
+									</c:when> 
+									<c:otherwise>
+										&nbsp;
+									</c:otherwise>
 								</c:choose>
-							</c:when> 
-							<c:otherwise>
-								&nbsp;
-							</c:otherwise>
-						</c:choose>
-						</td>
-						<c:if test="${(i != cal.tdCnt) && (i % 7 == 0) }">
-						</tr>
-						<tr>							
-						</c:if>
+							</td>
+							<c:if test="${(i != cal.tdCnt) && (i % 7 == 0) }">
+								</tr>
+								<tr>							
+							</c:if>
        					</c:forEach>
 					</tr>
 				</table>
@@ -67,36 +69,58 @@
 			2. 첫번줄 일 월 화 수 목 금 토 
 			3. 토요일 파란색 / 일요일 빨간색
 		-->
-
 		</div>
 	</div>
-	<div class="container mt-4"
-		style="min-height: calc(100vh - 245px); display: inline-block;">
+	<div class="container mt-4" style="min-height: calc(100vh - 245px); display: inline-block;">
 		<table class="table table-hover">
-			<thead>
-
-			</thead>
-			<tbody>
-				<tr>
-					<td>24/08/23 12:30</td>
-					<td></td>
-					<td colspan=2>더미 1</td>
-					<td>85,000</td>
-					<td></td>
-					<td>신용카드</td>
-				</tr>
-				<tr>
-					<td>24/08/23 12:30</td>
-					<td></td>
-					<td colspan=2>더미 2</td>
-					<td>45,000</td>
-					<td></td>
-					<td>신용카드</td>
-				</tr>
-			</tbody>
+			<tr>
+				<td>24/08/23 12:30</td>
+				<td></td>
+				<td colspan=2>더미 1</td>
+				<td>85,000</td>
+				<td></td>
+				<td>신용카드</td>
+			</tr>
+			<tr>
+				<td>24/08/23 12:30</td>
+				<td></td>
+				<td colspan=2>더미 2</td>
+				<td>45,000</td>
+				<td></td>
+				<td>신용카드</td>
+			</tr>
 		</table>
+		
+		<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openInsert();">내역 등록</div>
 	</div>
 </div>
+
+<div id="modal" class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content"></div>
+	</div>
+</div>
+
+<script>
+function openInsert(){
+	$.ajax({
+		url: '<c:url value="/accountbook/insert" />',
+		type: 'get',
+		success: function(data){
+			$('.modal').addClass('show');
+			$('.modal-content').html(data);
+			console.log(data);
+		},
+		error : function(xhr){
+			console.log(xhr);
+		}
+	})
+}
+
+function closeForm() {
+	console.log('hi');
+}
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <jsp:include page="/WEB-INF/views/common/footer.sub.jsp" />

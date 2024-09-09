@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.dto.CalendarDTO;
 
-@WebServlet("/accountbook/accountbook")
-public class accountbook extends HttpServlet {
+@WebServlet("/accountbook")
+public class AccountBook extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,6 @@ public class accountbook extends HttpServlet {
 		int month = 0; // 0 ~ 11
 
 		try {
-
 			// 년도, 월 중 하나라도 지정(넘겨져 오지)되지 않으면 오늘날짜 기준으로 월달력 출력
 			if (request.getParameter("year") == null || request.getParameter("month") == null) {
 				Calendar today = Calendar.getInstance();
@@ -75,7 +74,6 @@ public class accountbook extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/accountbook/accountbook.jsp").forward(request, response);
 
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 			
 			request.setAttribute("msg", "달력 생성중 에러 발생!");
