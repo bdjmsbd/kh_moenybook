@@ -1,4 +1,4 @@
-package kr.kh.app.controller;
+package kr.kh.app.controller.member;
 
 import java.io.IOException;
 
@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.MemberService;
-import kr.kh.app.service.MemberServiceImp;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private MemberService memberService = new MemberServiceImp();
+	private MemberService memberService = new MemberService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

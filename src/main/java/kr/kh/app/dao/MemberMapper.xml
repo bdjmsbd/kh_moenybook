@@ -5,15 +5,15 @@
   
 <mapper namespace="kr.kh.app.dao.MemberDAO">
 	<insert id="insertMember">
-		insert into member (me_id, me_pw, me_email,
-		me_ms_name)
-		values(#{user.me_id}, #{user.me_pw}, #{user.me_email},
-		'사용')
+		insert into member (me_id, me_pw, me_email, me_authority, me_ms_name)
+		values(#{user.me_id}, #{user.me_pw}, #{user.me_email}, 'USER', '사용')
 	</insert>
+	
 	<select id="selectMember" resultType="MemberVO">
 		select * from member where
 		me_id = #{me_id}
 	</select>
+	
 	<update id="updateMemberCookie">
 		update member
 		set

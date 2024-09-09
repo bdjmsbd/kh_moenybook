@@ -19,7 +19,7 @@
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
 				<property name="url"
-					value="jdbc:mysql://localhost:3306/community" />
+					value="jdbc:mysql://localhost:3306/accountbook" />
 				<property name="username" value="root" />
 				<property name="password" value="root" />
 			</dataSource>
@@ -28,12 +28,7 @@
 
 	<mappers>
 		<mapper resource="kr/kh/app/dao/MemberMapper.xml" />
-<<<<<<< Updated upstream
-<!-- 		<mapper resource="kr/kh/app/dao/AccountBookMapper.xml" /> 
-		<mapper resource="kr/kh/app/dao/PostMapper.xml" /> -->
-=======
 		<mapper resource="kr/kh/app/dao/AccountBookMapper.xml" />
 		<mapper resource="kr/kh/app/dao/PostMapper.xml" />
->>>>>>> Stashed changes
 	</mappers>
 </configuration>
