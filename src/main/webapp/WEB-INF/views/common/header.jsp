@@ -11,7 +11,7 @@
 				<a href="<c:url value="/" />">메인</a>
 			</li>
 			<li>
-				<a href="<c:url value="/moneybook" />">가계부</a>
+				<a href="<c:url value="/accountbook/accountbook" />">가계부</a>
 			</li>
 			<li>
 				<a href="<c:url value="/board" />">게시판</a>
@@ -42,4 +42,4 @@
 		}
 	</script>
 </header>
-<section id="body" class="container">
+<section id="body" class="container" >

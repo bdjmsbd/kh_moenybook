@@ -11,13 +11,13 @@
 		<div class="container mt-3">
 			<div class="mt-3 mb-3 p-3 d-flex justify-content-between">
 				<span> <a class="btn btn-outline-dark btn-sm"
-					href="<c:url value="/moneybook?year=${cal.year}&month=${cal.month-1}"/>">
+					href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month-1}"/>">
 						[이전달] </a>
 				</span> 
 				<span class="fw-bold fs-3">${cal.year}년 ${cal.month+1}월</span> 
 				<span>
 					<a class="btn btn-outline-dark btn-sm"
-					href="<c:url value="/moneybook?year=${cal.year}&month=${cal.month+1}"/>">
+					href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month+1}"/>">
 						[다음달] </a>
 				</span>
 			</div>
