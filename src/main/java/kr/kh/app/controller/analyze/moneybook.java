@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/kr/kh/app/controller/analyze/moneybook.java
 package kr.kh.app.controller.analyze;
-========
-package kr.kh.app.controller.moneybook;
->>>>>>>> origin/jbd:src/main/java/kr/kh/app/controller/moneybook/moneybook.java
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -75,11 +71,8 @@ public class moneybook extends HttpServlet {
 			// System.out.println(cal);
 
 			request.setAttribute("cal", cal);
-<<<<<<<< HEAD:src/main/java/kr/kh/app/controller/analyze/moneybook.java
 			request.getRequestDispatcher("/WEB-INF/views/analyze/moneybook.jsp").forward(request, response);
-========
-			request.getRequestDispatcher("/WEB-INF/views/moneybook/moneybook.jsp").forward(request, response);
->>>>>>>> origin/jbd:src/main/java/kr/kh/app/controller/moneybook/moneybook.java
+
 
 		} catch (Exception e) {
 			

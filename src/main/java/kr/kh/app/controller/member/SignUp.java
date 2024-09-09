@@ -8,44 +8,54 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.MemberService;
 
+/**
+ * Servlet implementation class Signup
+ */
 @WebServlet("/signup")
 public class SignUp extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-
-	private MemberService memberService = new MemberService();
+	MemberService memberService = new MemberService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		request.getRequestDispatcher("/WEB-INF/views/member/signup.jsp").forward(request, response);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
-		String pw2 = req.getParameter("pw2");
+		String pw = req.getParameter("pwd");
+		String pw_ckh = req.getParameter("pwd2");
 		String email = req.getParameter("email");
 		
-		MemberVO member = new MemberVO(id, pw, email);
-		
-		if(!pw.equals(pw2)) throw new RuntimeException();
-		
 		try {
-			if(memberService.signUp(member)) {
+			
+			if(memberService.signUp(id, pw, pw_ckh, email)) {
+				
 				req.setAttribute("msg", "회원가입에 성공하였습니다.");
-				req.setAttribute("url", "/login");
-			} else throw new RuntimeException();
+				req.setAttribute("url", "/");
+			}
+			else {
+				throw new RuntimeException();
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("msg", "회원가입에 실패하였습니다.");
-			req.setAttribute("url", "/signup");
+			req.setAttribute("url", "/");
 		}
 		
 		req.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(req, resp);
+		
+		
+		
+		
+		
 	}
 
 }
