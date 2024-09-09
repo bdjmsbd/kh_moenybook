@@ -10,7 +10,7 @@
 		select * from payment_type
 	</select>
 	<insert id="insertAccountBook">
-		insert into accountbook(ab_at_num, ab_pp_num, ab_pt_num, ab_me_id, ab_date, ab_amount, ab_detail)
-		values (#{ab.ab_at_num},#{ab.ab_pp_num},#{ab.ab_pt_num},#{ab.ab_me_id},#{ab.ab_date},#{ab.ab_amount},#{ab.ab_detail})
+		insert into accountbook(ab_at_num, ab_pp_num, ab_pt_num, ab_me_id, ab_date, ab_amount, ab_detail, ab_regularity, ab_period)
+		values (#{ab.ab_at_num},#{ab.ab_pp_num},#{ab.ab_pt_num},#{ab.ab_me_id},#{ab.ab_date},#{ab.ab_amount},#{ab.ab_detail},#{ab.ab_regularity},#{ab.ab_period})
 	</insert>
 </mapper>

@@ -14,6 +14,8 @@ CREATE TABLE `accountBook` (
 	`ab_me_id`	varchar(15)	NOT NULL,
 	`ab_date`	date	NOT NULL,
 	`ab_amount`	int	NOT NULL,
+    `ab_regularity` int NOT NULL default 0, /* 0: 일회성, 1: 고정(주기적)*/
+	`ab_period` int NOT NULL default 0,
 	`ab_detail`	text	NULL
 );
 
@@ -28,14 +30,16 @@ DROP TABLE IF EXISTS `payment_purpose`;
 
 CREATE TABLE `payment_purpose` (
 	`pp_num`	int primary key auto_increment	NOT NULL,
-	`pp_name`	varchar(20)	NOT NULL
+	`pp_name`	varchar(20)	NOT NULL,
+    `pp_at_num` int not null /* 1: 수입, 2: 지출*/
 );
 
 DROP TABLE IF EXISTS `payment_type`;
 
 CREATE TABLE `payment_type` (
 	`pt_num`	int primary key auto_increment	NOT NULL,
-	`pt_name`	varchar(10)	NOT NULL
+	`pt_name`	varchar(10)	NOT NULL,
+    `pt_at_num` int not null /* 1: 수입, 2: 지출*/
 );
 
 
@@ -163,6 +167,20 @@ ALTER TABLE `accountBook` ADD CONSTRAINT `FK_member_TO_accountBook_1` FOREIGN KE
 )
 REFERENCES `member` (
 	`me_id`
+);
+
+ALTER TABLE `payment_purpose` ADD CONSTRAINT `FK_account_type_TO_payment_purpose_1` FOREIGN KEY (
+	`pp_at_num`
+)
+REFERENCES `account_type` (
+	`at_num`
+);
+
+ALTER TABLE `payment_type` ADD CONSTRAINT `FK_account_type_TO_payment_type_1` FOREIGN KEY (
+	`pt_at_num`
+)
+REFERENCES `account_type` (
+	`at_num`
 );
 
 ALTER TABLE `member` ADD CONSTRAINT `FK_member_state_TO_member_1` FOREIGN KEY (

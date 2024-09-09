@@ -15,26 +15,26 @@ INSERT INTO COMMUNITY(CO_NAME) VALUES('꿀팁');
 
 # 지출 종류 추가
 INSERT INTO account_type(AT_NAME) VALUES('수입');
-INSERT INTO account_type(AT_NAME) VALUES('고정수입');
 INSERT INTO account_type(AT_NAME) VALUES('지출');
-INSERT INTO account_type(AT_NAME) VALUES('고정지출');
 
 # 지출 방법 추가
-INSERT INTO payment_type(pt_name) VALUES('수입');
-INSERT INTO payment_type(pt_name) VALUES('현금');
-INSERT INTO payment_type(pt_name) VALUES('카드');
-INSERT INTO payment_type(pt_name) VALUES('계좌이체');
-INSERT INTO payment_type(pt_name) VALUES('기타');
+INSERT INTO payment_type(pt_name, pt_at_num) VALUES('수입', 1);
+INSERT INTO payment_type(pt_name, pt_at_num) VALUES('현금', 2);
+INSERT INTO payment_type(pt_name, pt_at_num) VALUES('카드', 2);
+INSERT INTO payment_type(pt_name, pt_at_num) VALUES('계좌이체', 2);
+INSERT INTO payment_type(pt_name, pt_at_num) VALUES('기타', 2);
 
 # 지출 목적 추가
-INSERT INTO payment_purpose(pp_name) VALUES('월급');
-INSERT INTO payment_purpose(pp_name) VALUES('생필품비');
-INSERT INTO payment_purpose(pp_name) VALUES('문화비');
-INSERT INTO payment_purpose(pp_name) VALUES('교통비');
-INSERT INTO payment_purpose(pp_name) VALUES('전기요금');
-INSERT INTO payment_purpose(pp_name) VALUES('수도요금');
-INSERT INTO payment_purpose(pp_name) VALUES('가스요금');
-INSERT INTO payment_purpose(pp_name) VALUES('핸드폰');
-INSERT INTO payment_purpose(pp_name) VALUES('인터넷');
-INSERT INTO payment_purpose(pp_name) VALUES('TV');
-INSERT INTO payment_purpose(pp_name) VALUES('기타');
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('월급',1);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('용돈',1);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('기타지출', 1);
+
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('생필품비', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('문화비', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('교통비', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('전기요금', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('수도요금', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('가스요금', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('핸드폰', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('인터넷', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('기타 지출', 2);
