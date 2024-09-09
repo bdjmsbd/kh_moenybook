@@ -33,17 +33,9 @@ public class MemberService {
 	}
 
 	private boolean checkRegex(String str, String regex) {
-
-		if (str == null || str.trim().length() == 0) {
-			return true;
-		}
-
-		if (Pattern.matches(regex, str)) {
-			return false;
-		}
-
+		if (str == null || str.trim().length() == 0) return true;
+		if (Pattern.matches(regex, str)) return false;
 		return true;
-
 	}
 
 	public boolean checkId(String me_id) {
@@ -52,9 +44,7 @@ public class MemberService {
 
 	
 	public MemberVO login(MemberVO member) {
-		if (member == null) {
-			return null;
-		}
+		if (member == null) return null;
 
 		MemberVO user = memberDao.selectMember(member.getMe_id());
 
@@ -70,9 +60,8 @@ public class MemberService {
 	}
 	
 	public Cookie createCookie(MemberVO user, HttpServletRequest request) {
-		if (user == null) {
-			return null;
-		}
+		if (user == null) return null;
+		
 		HttpSession session = request.getSession();
 		// 쿠키는 이름, 값, 만료시간, path가 필요
 		String me_cookie = session.getId();
@@ -96,4 +85,8 @@ public class MemberService {
 	public void updateMemberCookie(MemberVO user) {
 		memberDao.updateMemberCookie(user);
 	}
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
