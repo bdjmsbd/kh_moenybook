@@ -2,6 +2,7 @@ package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -47,9 +48,9 @@ public class Insert extends HttpServlet {
 		String ab_amountStr = request.getParameter("ab_amount");
 		String ab_detail = request.getParameter("ab_detail");
 
-		// 수입 1, 지출 3, 정기성 여부 확인해서 정기성이면 +1 해준다.
-		// 고정 수입 2, 고정 지출 4
-		String regularity = request.getParameter("regularity");
+		// 정기적인 지, 일회성인 지 판단. 정기적인 경우 주기 추가
+		String ab_regularityStr = request.getParameter("ab_regularity");
+		String ab_periodStr = request.getParameter("ab_period");
 
 		try {
 
@@ -58,15 +59,14 @@ public class Insert extends HttpServlet {
 			if (user == null) {
 				throw new Exception();
 			}
-
+			System.out.println("hi");
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 			AccountBookVO newAB = new AccountBookVO(
 					Integer.parseInt(ab_at_numStr), Integer.parseInt(ab_pp_numStr),
 					Integer.parseInt(ab_pt_numStr), user.getMe_id(), formatter.parse(ab_dateStr),
-					Integer.parseInt(ab_amountStr), ab_detail, Integer.parseInt(regularity));
-
-			// System.out.println(newAB);
+					Integer.parseInt(ab_amountStr), ab_detail, Integer.parseInt(ab_regularityStr),
+					Integer.parseInt(ab_periodStr));
 			
 			accountBookService.insertAccountBook(newAB);
 
@@ -75,7 +75,7 @@ public class Insert extends HttpServlet {
 			request.setAttribute("msg", "가계부를 등록하지 못했습니다.");
 		}
 
-		request.setAttribute("url", "/accountbook");
+		request.setAttribute("url", "/accountbook/insert");
 		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
 	}
 

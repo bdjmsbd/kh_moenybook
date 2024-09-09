@@ -18,7 +18,7 @@ import kr.kh.app.service.AccountBookService;
 import kr.kh.app.service.MemberService;
 
 @WebServlet("/accountbook/insert")
-public class insert extends HttpServlet {
+public class Insert extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
