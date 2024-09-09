@@ -85,8 +85,4 @@ public class MemberService {
 	public void updateMemberCookie(MemberVO user) {
 		memberDao.updateMemberCookie(user);
 	}
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
