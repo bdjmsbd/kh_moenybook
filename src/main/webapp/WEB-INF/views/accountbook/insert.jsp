@@ -62,7 +62,7 @@
 			<select class="form-control pt-income-box" name="ab_pt_num" id="pt_num">
 				<c:forEach items="${pt_list}" var="pt">
 					<c:if test="${pt.pt_at_num eq 1 }">
-						<option value="${pt.pt_num }">${pt.pt_name}</option>
+						<option value="${pt.pt_num } ">${pt.pt_name}</option>
 					</c:if>
 				</c:forEach>
 			</select> 

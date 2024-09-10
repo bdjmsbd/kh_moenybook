@@ -10,17 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.dto.CalendarDTO;
+import kr.kh.app.model.vo.MemberVO;
+import kr.kh.app.service.AccountBookService;
 
 @WebServlet("/accountbook")
 public class AccountBook extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	private AccountBookService accountBookService = new AccountBookService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int year = 0;
 		int month = 0; // 0 ~ 11
 
+		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
+		
 		try {
 			// 년도, 월 중 하나라도 지정(넘겨져 오지)되지 않으면 오늘날짜 기준으로 월달력 출력
 			if (request.getParameter("year") == null || request.getParameter("month") == null) {
@@ -68,8 +74,11 @@ public class AccountBook extends HttpServlet {
 			cal.setEndBlankCnt(endBlankCnt);
 			cal.setTdCnt(tdCnt);
 			
-			// System.out.println(cal);
-
+			// 사용자의 가계부 정보 가져오기
+//			List<AccountBookVO> list = accountBookService.getAccountBookList(user);
+//			
+//
+//			request.setAttribute("list", list);
 			request.setAttribute("cal", cal);
 			request.getRequestDispatcher("/WEB-INF/views/accountbook/accountbook.jsp").forward(request, response);
 

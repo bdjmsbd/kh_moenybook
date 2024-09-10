@@ -11,6 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kr.kh.app.dao.AccountBookDAO;
 import kr.kh.app.model.vo.AccountBookVO;
 import kr.kh.app.model.vo.AccountTypeVO;
+import kr.kh.app.model.vo.MemberVO;
+import kr.kh.app.model.vo.PaymentPurposeVO;
+import kr.kh.app.model.vo.PaymentTypeVO;
 
 public class AccountBookService {
 
@@ -31,16 +34,31 @@ public class AccountBookService {
 		}
 	}
 
-	public List<AccountTypeVO> getPaymentPurposeList() {
+	public List<PaymentPurposeVO> getPaymentPurposeList() {
 		return accountBookDao.selectPaymentPurposeList();
 	}
 
-	public List<AccountTypeVO> getPaymentTypeList() {
+	public List<PaymentTypeVO> getPaymentTypeList() {
 		return accountBookDao.selectPaymentTypeList();
 	}
 
 	public void insertAccountBook(AccountBookVO newAB) {
+		System.out.println("hi");
 		accountBookDao.insertAccountBook(newAB);
+		System.out.println("bye");
+	}
+
+	public List<AccountBookVO> getAccountBookList(MemberVO user, String searchDate) {
+		
+		if(user == null) {
+			return null;
+		}
+	
+		return accountBookDao.selectAccountBookList(user, searchDate);
+	}
+
+	public List<AccountTypeVO> getAccountTypeList() {
+		return accountBookDao.selectAccountTypeList();
 	}
 
 }

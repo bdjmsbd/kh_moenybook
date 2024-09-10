@@ -6,13 +6,20 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.app.model.vo.AccountBookVO;
 import kr.kh.app.model.vo.AccountTypeVO;
+import kr.kh.app.model.vo.MemberVO;
+import kr.kh.app.model.vo.PaymentPurposeVO;
+import kr.kh.app.model.vo.PaymentTypeVO;
 
 public interface AccountBookDAO {
 
-	List<AccountTypeVO> selectPaymentPurposeList();
+	List<PaymentPurposeVO> selectPaymentPurposeList();
 
-	List<AccountTypeVO> selectPaymentTypeList();
+	List<PaymentTypeVO> selectPaymentTypeList();
 
 	void insertAccountBook(@Param("ab") AccountBookVO newAB);
+
+	List<AccountBookVO> selectAccountBookList(@Param("user") MemberVO user, @Param("date")String searchDate);
+
+	List<AccountTypeVO> selectAccountTypeList();
 
 }

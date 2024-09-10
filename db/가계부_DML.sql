@@ -39,4 +39,7 @@ INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('핸드폰', 2);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('인터넷', 2);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('기타 지출', 2);
 
-INSERT INTO `accountbook`.`member` (`me_id`, `me_pw`, `me_email`, `me_authority`, `me_fail`, `me_report`, `me_ms_name`) VALUES ('a', 'a', 'a@a.com', 'ADMIN', '0', '0', '사용');
+
+#INSERT INTO `accountbook`.`member` (`me_id`, `me_pw`, `me_email`, `me_authority`, `me_fail`, `me_report`, `me_ms_name`) VALUES ('a', 'a', 'a@a.com', 'ADMIN', '0', '0', '사용');
+#INSERT INTO `accountbook`.`accountbook` (`ab_at_num`, `ab_pp_num`, `ab_pt_num`, `ab_me_id`, `ab_date`, `ab_amount`, `ab_regularity`, `ab_period`, `ab_detail`) 
+#VALUES ('2', '1', '1', 'a', '2024-08-10', '50000', '1', '1', 'qwe');

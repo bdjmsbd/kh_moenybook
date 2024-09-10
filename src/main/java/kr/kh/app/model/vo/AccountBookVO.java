@@ -21,7 +21,10 @@ public class AccountBookVO {
 	private String ab_detail;
 
 	public AccountBookVO(int ab_at_num, int ab_pp_num, int ab_pt_num, String ab_me_id, Date ab_date, int ab_amount, String ab_detail, int ab_regularity, int ab_period) {
-	
+		
+		try {
+		System.out.println("hi22");
+		
 		this.ab_at_num = ab_at_num;
 		this.ab_pp_num = ab_pp_num;
 		this.ab_pt_num = ab_pt_num;
@@ -30,7 +33,11 @@ public class AccountBookVO {
 		this.ab_amount = ab_amount;
 		this.ab_regularity = ab_regularity;
 		this.ab_period = (ab_regularity==0)?0:ab_period;
-		this.ab_detail = ab_detail;
+		this.ab_detail = (ab_detail==null)?"":ab_detail;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
