@@ -75,8 +75,8 @@ public class Insert extends HttpServlet {
 
 			
 			AccountBookVO newAB = new AccountBookVO(
-					Integer.parseInt(ab_at_numStr.trim()), Integer.parseInt(ab_pp_numStr.trim()),
-					Integer.parseInt(ab_pt_numStr.trim()), user.getMe_id(), formatter.parse(ab_dateStr.trim()),
+					Integer.parseInt(ab_at_numStr.trim()), Integer.parseInt(ab_pt_numStr.trim()),
+					Integer.parseInt(ab_pp_numStr.trim()), user.getMe_id(), formatter.parse(ab_dateStr.trim()),
 					Integer.parseInt(ab_amountStr.trim()), ab_detail, Integer.parseInt(ab_regularityStr.trim()),
 					Integer.parseInt(ab_periodStr.trim()));
 			

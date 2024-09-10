@@ -43,9 +43,7 @@ public class AccountBookService {
 	}
 
 	public void insertAccountBook(AccountBookVO newAB) {
-		System.out.println("hi");
 		accountBookDao.insertAccountBook(newAB);
-		System.out.println("bye");
 	}
 
 	public List<AccountBookVO> getAccountBookList(MemberVO user, String searchDate) {
