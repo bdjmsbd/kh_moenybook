@@ -19,25 +19,27 @@ public class AccountBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private AccountBookService accountBookService = new AccountBookService();
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int year = 0;
 		int month = 0; // 0 ~ 11
+		int day = 0;
 
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		
 		try {
+			Calendar today = Calendar.getInstance();
+			
 			// 년도, 월 중 하나라도 지정(넘겨져 오지)되지 않으면 오늘날짜 기준으로 월달력 출력
-			if (request.getParameter("year") == null || request.getParameter("month") == null) {
-				Calendar today = Calendar.getInstance();
+			if (request.getParameter("year") == null ||
+				request.getParameter("month") == null) {
 				year = today.get(Calendar.YEAR);
 				month = today.get(Calendar.MONTH);
 			} else {
 				// 출력하고자 하는 달력의 년도와 월
 				year = Integer.parseInt(request.getParameter("year")); // 2022,..
 				month = Integer.parseInt(request.getParameter("month")); // 0 ~ 11
-
 				// 이전달 클릭 year, month-1 / 다음달 클릭 year, month+1
 				// -1 -> 11,year-- 12 -> 0,year++
 				if (month == -1) {
@@ -49,6 +51,12 @@ public class AccountBook extends HttpServlet {
 					year = year + 1;
 				}
 			}
+			
+			if(request.getParameter("day") == null)
+				day = today.get(Calendar.DATE);
+			else if(!request.getParameter("day").equals(day))
+				day = Integer.parseInt(request.getParameter("day"));
+			
 			// 출력하고자 달의 1일 객체 + 1일 요일 + 마지막 날짜
 			Calendar firstDate = Calendar.getInstance();
 			firstDate.set(Calendar.YEAR, year);
@@ -66,8 +74,10 @@ public class AccountBook extends HttpServlet {
 			int tdCnt = startBlankCnt + lastDate + endBlankCnt;
 
 			CalendarDTO cal = new CalendarDTO();
+			
 			cal.setYear(year);
 			cal.setMonth(month);
+			cal.setDay(day);
 			cal.setFirstDay(firstDay);
 			cal.setLastDate(lastDate);
 			cal.setStartBlankCnt(startBlankCnt);
@@ -79,14 +89,14 @@ public class AccountBook extends HttpServlet {
 //			
 //
 //			request.setAttribute("list", list);
+			
 			request.setAttribute("cal", cal);
 			request.getRequestDispatcher("/WEB-INF/views/accountbook/accountbook.jsp").forward(request, response);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 			request.setAttribute("msg", "달력 생성중 에러 발생!");
-			request.setAttribute("url", "/WEB-INF/views/main.jsp");
+			request.setAttribute("url", "/main");
 			request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
 		}
 	}
