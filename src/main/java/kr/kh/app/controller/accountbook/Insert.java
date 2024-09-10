@@ -53,14 +53,14 @@ public class Insert extends HttpServlet {
 		String ab_periodStr = request.getParameter("ab_period");
 		if(ab_periodStr == null) ab_periodStr = "0";
 		
-		System.out.println("ab_at_numStr :"+ ab_at_numStr);
-		System.out.println("ab_pp_numStr :"+ ab_pp_numStr);
-		System.out.println("ab_pt_numStr :"+ ab_pt_numStr);
-		System.out.println("ab_dateStr :"+ ab_dateStr);
-		System.out.println("ab_amountStr :"+ ab_amountStr);
-		System.out.println("ab_detail :"+ ab_detail);
-		System.out.println("ab_regularityStr :"+ ab_regularityStr);
-		System.out.println("ab_periodStr :"+ ab_periodStr);
+//		System.out.println("ab_at_numStr :"+ ab_at_numStr);
+//		System.out.println("ab_pp_numStr :"+ ab_pp_numStr);
+//		System.out.println("ab_pt_numStr :"+ ab_pt_numStr);
+//		System.out.println("ab_dateStr :"+ ab_dateStr);
+//		System.out.println("ab_amountStr :"+ ab_amountStr);
+//		System.out.println("ab_detail :"+ ab_detail);
+//		System.out.println("ab_regularityStr :"+ ab_regularityStr);
+//		System.out.println("ab_periodStr :"+ ab_periodStr);
 
 		try {
 			
@@ -80,7 +80,7 @@ public class Insert extends HttpServlet {
 					Integer.parseInt(ab_amountStr.trim()), ab_detail, Integer.parseInt(ab_regularityStr.trim()),
 					Integer.parseInt(ab_periodStr.trim()));
 			
-			System.out.println(newAB);
+//			System.out.println(newAB);
 			
 			accountBookService.insertAccountBook(newAB);
 
