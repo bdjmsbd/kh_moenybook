@@ -6,7 +6,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/insert.css"/>">
 
 <div class="modal-header">
