@@ -6,6 +6,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 
+<body>	
 	<c:set var="now" value="<%=new java.util.Date()%>" />
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nowDate" />
 	
@@ -19,6 +20,7 @@
 			<li><a href="<c:url value="/accountbook" />">가계부(달력)</a></li>
 			<li><a href="<c:url value="/graph" />">가계부(그래프)</a></li>
 			<li><a href="<c:url value="/board" />">게시판</a></li>
+			<li><a href="<c:url value="/accountbook/insert" />">임시</a></li>
 		</ul>
 	</nav>
 

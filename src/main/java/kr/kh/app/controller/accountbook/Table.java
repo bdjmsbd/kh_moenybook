@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.kh.app.model.dto.CalendarDTO;
 import kr.kh.app.model.vo.AccountBookVO;
 import kr.kh.app.model.vo.AccountTypeVO;
 import kr.kh.app.model.vo.MemberVO;
@@ -28,6 +27,7 @@ public class Table extends HttpServlet {
 
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		String searchDate = request.getParameter("searchDate");
+		String date = request.getParameter("nowDate");
 		
 		if(searchDate == null) {
 			searchDate = "";
@@ -42,17 +42,15 @@ public class Table extends HttpServlet {
 			
 		}
 		
-		List<AccountBookVO> ab_list = accountBookService.getAccountBookList(user,searchDate);
+		List<AccountBookVO> ab_list = accountBookService.getAccountBookList(user, searchDate);
 		List<AccountTypeVO> at_list = accountBookService.getAccountTypeList();
 		List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
 		List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
 		
-		Date date = new Date();
-		if(ab_list != null) {
-			date = ab_list.get(0).getAb_date();
-			System.out.println("date: "+ date);
-		}
 		
+		if(date == null) { new Date();}
+		System.out.println("date: "+ date);
+
 		request.setAttribute("date", date);
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);

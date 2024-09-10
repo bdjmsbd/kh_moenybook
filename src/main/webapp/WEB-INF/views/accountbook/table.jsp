@@ -20,6 +20,8 @@ var oneMonthAgo = new Date(now.setMonth(now.getMonth() - 1));
 new Date(now.setDate(now.getDate() - 1))
 -->
 
+<fmt:formatDate value="${date}" pattern="yyyy-MM-dd" var="nowDate" />
+
 <a class="btn" href="<c:url value="/table?searchDate=${nowDate}"/>">이전 달</a>
 <a class="btn" href="<c:url value="/table?searchDate=${nowDate}"/>">다음 달</a>
 
