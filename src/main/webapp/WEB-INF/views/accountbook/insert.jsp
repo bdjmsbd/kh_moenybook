@@ -58,15 +58,15 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="">지불 방식</label> <select
-				class="form-control pt-income-box" name="ab_pt_num" id="pt_num">
+			<label for="">지불 방식</label> 
+			<select class="form-control pt-income-box" name="ab_pt_num" id="pt_num">
 				<c:forEach items="${pt_list}" var="pt">
 					<c:if test="${pt.pt_at_num eq 1 }">
 						<option value="${pt.pt_num }">${pt.pt_name}</option>
 					</c:if>
 				</c:forEach>
-			</select> <select class="form-control pt-expense-box" name="ab_pt_num"
-				id="pt_num">
+			</select> 
+			<select class="form-control pt-expense-box" name="ab_pt_num" id="pt_num">
 				<c:forEach items="${pt_list}" var="pt">
 					<c:if test="${pt.pt_at_num ne 1 }">
 						<option value="${pt.pt_num }">${pt.pt_name}</option>
