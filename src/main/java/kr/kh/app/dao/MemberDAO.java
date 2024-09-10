@@ -1,10 +1,17 @@
 package kr.kh.app.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
 
-@Service
+import kr.kh.app.model.vo.MemberVO;
+
 public interface MemberDAO {
+
+	void insertMember(@Param("user")MemberVO newUser);
+
+	MemberVO selectMember(@Param("me_id")String me_id);
 	
-	String getEmail(@Param("me_id")String string);
+	void updateMemberCookie(@Param("user")MemberVO user);
+
+	MemberVO selectMemberBySid(@Param("sid")String sid);
+
 }
