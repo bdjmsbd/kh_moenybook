@@ -27,7 +27,7 @@ INSERT INTO payment_type(pt_name, pt_at_num) VALUES('기타', 2);
 # 지출 목적 추가
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('월급',1);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('용돈',1);
-INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('기타지출', 1);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('기타 수입', 1);
 
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('생필품비', 2);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('문화비', 2);
@@ -38,3 +38,5 @@ INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('가스요금', 2);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('핸드폰', 2);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('인터넷', 2);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('기타 지출', 2);
+
+INSERT INTO `accountbook`.`member` (`me_id`, `me_pw`, `me_email`, `me_authority`, `me_fail`, `me_report`, `me_ms_name`) VALUES ('a', 'a', 'a@a.com', 'ADMIN', '0', '0', '사용');
