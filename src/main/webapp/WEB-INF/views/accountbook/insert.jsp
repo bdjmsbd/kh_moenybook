@@ -6,8 +6,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 
-<link rel="stylesheet" href="<c:url value="/resources/css/insert.css"/>">
-
 <div class="modal-header">
 	<h4 class="modal-title">내역 등록</h4>
 	<button type="button" class="close" data-dismiss="modal">×</button>

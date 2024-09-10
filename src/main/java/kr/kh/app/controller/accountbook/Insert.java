@@ -50,7 +50,7 @@ public class Insert extends HttpServlet {
 		// 수입 1, 지출 3, 정기성 여부 확인해서 정기성이면 +1 해준다.
 		// 고정 수입 2, 고정 지출 4
 		String regularity = request.getParameter("regularity");
-
+		
 		try {
 
 			MemberVO user = (MemberVO) request.getSession().getAttribute("user");
