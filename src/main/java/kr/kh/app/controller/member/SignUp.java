@@ -30,6 +30,7 @@ public class SignUp extends HttpServlet {
 		String email = req.getParameter("email");
 		
 		MemberVO member = new MemberVO(id, pw, email);
+		System.out.println(member);
 		
 		if(!pw.equals(pw2)) throw new RuntimeException();
 		

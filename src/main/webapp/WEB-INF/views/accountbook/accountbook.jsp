@@ -7,19 +7,19 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
-<div style="display: flex;">
+<div class="d-flex">
 	<div class="container"
 		style="min-height: calc(100vh - 237px); float: left;">
 		<div class="container mt-3">
 			<div class="mt-3 mb-3 p-3 d-flex justify-content-between">
 				<span> <a class="btn btn-outline-dark btn-sm"
-					href="<c:url value="/moneybook?year=${cal.year}&month=${cal.month-1}"/>">
+					href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month-1}"/>">
 						[이전달] </a>
 				</span> 
 				<span class="fw-bold fs-3">${cal.year}년 ${cal.month+1}월</span> 
 				<span>
 					<a class="btn btn-outline-dark btn-sm"
-					href="<c:url value="/moneybook?year=${cal.year}&month=${cal.month+1}"/>">
+					href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month+1}"/>">
 						[다음달] </a>
 				</span>
 			</div>
@@ -72,18 +72,15 @@
 		</div>
 	</div>
 	<div class="container mt-4" style="min-height: calc(100vh - 245px); display: inline-block;">
+		<h3>24/08/23</h3>
 		<table class="table table-hover">
 			<tr>
-				<td>24/08/23 12:30</td>
-				<td></td>
 				<td colspan=2>더미 1</td>
 				<td>85,000</td>
 				<td></td>
 				<td>신용카드</td>
 			</tr>
 			<tr>
-				<td>24/08/23 12:30</td>
-				<td></td>
 				<td colspan=2>더미 2</td>
 				<td>45,000</td>
 				<td></td>

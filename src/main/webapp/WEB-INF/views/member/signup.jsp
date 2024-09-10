@@ -44,12 +44,12 @@
 				required : true,
 				regex : /^\w{6,13}$/
 			},
-			pwd : {
+			pw : {
 				required : true,
 				regex : /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[^\w])([^\w]{1}|[\w]{1}){6,15}$/
 			},
-			pwd2 : {
-				equalTo : pwd
+			pw2 : {
+				equalTo : pw
 			},
 			email : {
 				required : true,
@@ -61,11 +61,11 @@
 				required : '필수 항목입니다.',
 				regex : '아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.'
 			},
-			pwd : {
+			pw : {
 				required : '필수 항목입니다.',
 				regex : '영어 대소문자, 숫자, 특수문자가 꼭 들어가야 하며, 6~15자이어야 합니다.'
 			},
-			pwd2 : {
+			pw2 : {
 				required : '필수 항목입니다.',
 				equalTo : '비번이 일치하지 않습니다.'
 			},
