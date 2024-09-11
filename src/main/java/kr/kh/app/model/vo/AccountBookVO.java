@@ -20,9 +20,8 @@ public class AccountBookVO {
 	private int ab_period;
 	private String ab_detail;
 	
-	private String at_name;
-	private String pp_name;
-	private String pt_name;
+	private int ex_sum;
+	private int im_num;
 
 	public AccountBookVO(int ab_at_num, int ab_pp_num, int ab_pt_num, String ab_me_id, Date ab_date, int ab_amount, String ab_detail, int ab_regularity, int ab_period) {
 		
