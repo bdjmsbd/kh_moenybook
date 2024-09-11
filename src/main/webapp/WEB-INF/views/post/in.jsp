@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <div class="container" style="min-height: calc(100vh - 240px)">
-	<h1>게시글 상세</h1>
+	<h1 class="text-center mb-5">게시글 상세</h1>
 	<c:if test=""></c:if>
 	<div class="form-group">
 		<label>제목 : </label>

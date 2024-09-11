@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <div class="container" style="min-height: calc(100vh - 240px)">
-	<h1 class="mt-3 mb-3">${co.co_name} 게시글 목록</h1>
+	<h1 class="text-center mb-5">${co.co_name} 게시글 목록</h1>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -110,7 +110,6 @@
 		  </div>
 	</form>
 </div>
-
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <jsp:include page="/WEB-INF/views/common/footer.sub.jsp" />

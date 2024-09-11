@@ -14,12 +14,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.MemberDAO;
+import kr.kh.app.model.vo.MemberProfilVO;
 import kr.kh.app.model.vo.MemberVO;
 
-public class MemberService{
-
+public class MemberService {
+	
 	private MemberDAO memberDao;
-
+	
 	public MemberService() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
 		InputStream inputStream;
@@ -35,65 +36,37 @@ public class MemberService{
 		}
 	}
 
-	public boolean signUp(String id, String pw, String pw_ckh, String email) {
-
-		if (checkRegex(id, "^\\w{6,13}$")) {
-			return false;
-		}
-
-		if (checkRegex(pw, "^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[^\\w])([^\\w]{1}|[\\w]{1}){6,15}$")) {
-			return false;
-		}
-
-		if (checkRegex(pw_ckh, "^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[^\\w])([^\\w]{1}|[\\w]{1}){6,15}$")) {
-			return false;
-		}
-
-		if (checkRegex(email, "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$")) {
-			return false;
-		}
-
-		if (!pw.equals(pw_ckh)) {
-			return false;
-		}
-
-		MemberVO newUser = new MemberVO(id, pw, email);
+	public boolean signUp(MemberVO member) {
+		if(member == null ||
+			member.getMe_id() == null ||
+			member.getMe_pw() == null ||
+			member.getMe_email() == null) return false;
+		
+		if (checkRegex(member.getMe_id(), "^\\w{6,13}$")) return false;
+		if (checkRegex(member.getMe_pw(), "^[a-zA-Z0-9!@#$%^&*()]{6,15}$")) return false;
+		if (checkRegex(member.getMe_email(), "^[A-Za-z0-9_]+@[A-Za-z0-9_]+(\\.[A-Za-z]{2,}){1,}$")) return false;
+		
 		try {
-			memberDao.insertMember(newUser);
-
+			return memberDao.insertMember(member);
 		} catch (Exception e) {
-
 			e.printStackTrace();
 			return false;
 		}
-
-		return true;
 	}
 
 	private boolean checkRegex(String str, String regex) {
-
-		if (str == null || str.trim().length() == 0) {
-			return true;
-		}
-
-		if (Pattern.matches(regex, str)) {
-			return false;
-		}
-
+		if (str == null || str.trim().length() == 0) return true;
+		if (Pattern.matches(regex, str)) return false;
 		return true;
-
 	}
 
 	public boolean checkId(String me_id) {
-
 		return memberDao.selectMember(me_id) == null;
 	}
 
 	
 	public MemberVO login(MemberVO member) {
-		if (member == null) {
-			return null;
-		}
+		if (member == null) return null;
 
 		MemberVO user = memberDao.selectMember(member.getMe_id());
 
@@ -109,9 +82,8 @@ public class MemberService{
 	}
 	
 	public Cookie createCookie(MemberVO user, HttpServletRequest request) {
-		if (user == null) {
-			return null;
-		}
+		if (user == null) return null;
+		
 		HttpSession session = request.getSession();
 		// 쿠키는 이름, 값, 만료시간, path가 필요
 		String me_cookie = session.getId();
@@ -129,12 +101,10 @@ public class MemberService{
 	}
 	
 	public MemberVO getMemberBySid(String sid) {
-		// TODO Auto-generated method stub
 		return memberDao.selectMemberBySid(sid);
 	}
 
 	public void updateMemberCookie(MemberVO user) {
-		// TODO Auto-generated method stub
 		memberDao.updateMemberCookie(user);
 	}
 

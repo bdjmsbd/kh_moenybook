@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.kh.app.model.vo.AccountBookVO;
+import kr.kh.app.model.vo.AccountTypeVO;
 import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
@@ -28,4 +30,9 @@ public interface PostDAO {
 
 	void deletePost(@Param("po_num")String po_num);
 
+	List<AccountTypeVO> selectPaymentPurposeList();
+
+	List<AccountTypeVO> selectPaymentTypeList();
+
+	void insertAccountBook(@Param("ab") AccountBookVO newAB);
 }

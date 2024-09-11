@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 <div class="container" style="min-height: calc(100vh - 240px)">
-	<h1>게시글 등록</h1>
+	<h1 class="text-center mb-5">게시글 등록</h1>
 	<form action="<c:url value="/post/add"/>" method="post">
 		<input type="hidden" name="po_co_num" value="${co_num}">
 		<div class="form-group">
