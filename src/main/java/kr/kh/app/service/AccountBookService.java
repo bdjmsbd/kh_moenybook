@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.AccountBookDAO;
+import kr.kh.app.model.dto.DayAmountDTO;
 import kr.kh.app.model.vo.AccountBookVO;
 import kr.kh.app.model.vo.AccountTypeVO;
 import kr.kh.app.model.vo.MemberVO;
@@ -140,7 +141,7 @@ public class AccountBookService {
 			}
 		}
 		
-		for(int i=500; i<=1000; i++) {
+		for(int i=1000; i<=1500; i++) {
 			int at = 2;
 			int pp = (int)(Math.random() * 7) +4;
 			int pt = (int)(Math.random() * 4) +2;
@@ -152,7 +153,7 @@ public class AccountBookService {
 			String date = "2024-"+ month + "-" + day;
 			String detail = "더미데이터"+ Integer.toString(i);
 			try {
-				AccountBookVO ab = new AccountBookVO(1, pp, pt, id, formatter.parse(date), amount, detail, 0, 0);
+				AccountBookVO ab = new AccountBookVO(2, pp, pt, id, formatter.parse(date), amount, detail, 0, 0);
 				accountBookDao.insertAccountBook(ab);
 				
 				System.out.println("더미데이터 생성 " + ab.getAb_detail());
@@ -161,6 +162,12 @@ public class AccountBookService {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public List<DayAmountDTO> getAmountList(MemberVO user, String date_amount) {
+		
+		
+		return accountBookDao.getAmountList(user.getMe_id(),date_amount);
 	}
 
 }

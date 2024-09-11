@@ -32,4 +32,17 @@
 		ab_at_num = #{isIncome} and
 		ab_date >= #{searchBegin} and #{searchEnd} >= ab_date;
 	</select>
+
+	<select id="getAmountList" resultType="DayAmountDTO">
+		SELECT
+			ab_date as date,
+			SUM(CASE WHEN ab_at_num = 1 THEN ab_amount ELSE 0 END) AS totalIncome,
+			SUM(CASE WHEN ab_at_num = 2 THEN ab_amount ELSE 0 END) AS totalExpense
+		FROM
+			accountbook
+		WHERE
+			ab_me_id = #{me_id} and ab_date like concat(#{date},'%')
+		GROUP BY
+			ab_date;
+	</select> 
 </mapper>

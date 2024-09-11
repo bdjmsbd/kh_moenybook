@@ -1,10 +1,10 @@
 package kr.kh.app.dao;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.kh.app.model.dto.DayAmountDTO;
 import kr.kh.app.model.vo.AccountBookVO;
 import kr.kh.app.model.vo.AccountTypeVO;
 import kr.kh.app.model.vo.MemberVO;
@@ -24,5 +24,7 @@ public interface AccountBookDAO {
 	List<AccountTypeVO> selectAccountTypeList();
 
 	List<AccountBookVO> selectAccountBookListFromDate(@Param("me_id")String me_id, @Param("searchBegin")String searchBegin, @Param("searchEnd")String searchEnd, @Param("isIncome")int isIncome);
+
+	List<DayAmountDTO> getAmountList(@Param("me_id")String me_id, @Param("date")String date_amount);
 
 }
