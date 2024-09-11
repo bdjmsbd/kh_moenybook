@@ -1,6 +1,7 @@
 package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -27,10 +28,12 @@ public class Table extends HttpServlet {
 
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		String searchDate = request.getParameter("searchDate");
-		String date = request.getParameter("nowDate");
+		//String date = request.getParameter("searchDate");
 		
 		if(searchDate == null) {
-			searchDate = "";
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+			searchDate = sdf.format(now);
 		}else {
 			// CalendarDTO cal = new CalendarDTO();
 			
@@ -47,11 +50,7 @@ public class Table extends HttpServlet {
 		List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
 		List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
 		
-		
-		if(date == null) { new Date();}
-		System.out.println("date: "+ date);
-
-		request.setAttribute("date", date);
+		request.setAttribute("curDate", searchDate);
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);
 		request.setAttribute("at_list", at_list);
