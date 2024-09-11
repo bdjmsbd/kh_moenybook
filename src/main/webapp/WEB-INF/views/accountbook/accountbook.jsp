@@ -72,13 +72,13 @@
 	<div class="list-wrapper">
 		<h3>${selected }</h3>
 		<table class="table table-hover">
-			<c:forEach items="${abList}" var="ab">
+			<c:forEach items="${ab_list}" var="ab">
 			<tr>
-				<td>${ab.at_name }</td>
+				<td>${at_list[ab.ab_at_num-1].at_name}</td>
 				<td colspan=2>${ab.ab_detail }</td>
 				<td>${ab.ab_amount }</td>
-				<td>${ab.pt_name }</td>
-				<td>${ab.pp_name }</td>
+				<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
+				<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
 			</tr>
 			</c:forEach>
 		</table>

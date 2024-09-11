@@ -32,6 +32,7 @@ public class Insert extends HttpServlet {
 
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);
+		if(request.getParameter("date") != null) request.setAttribute("date", request.getParameter("date"));
 		request.getRequestDispatcher("/WEB-INF/views/accountbook/insert.jsp").forward(request, response);
 	}
 
