@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -34,17 +35,19 @@
 			<c:forEach begin="1" end="${cal.tdCnt}" step="7" var="i">
 				<tr>
 					<c:forEach begin="${i }" end="${i + 6}" step="1" var="j">
-					<td class="text-center"> <!-- ${cal.nowDay == j} -->
-						<c:choose>
-							<c:when test="${cal.day == j}">
-								<c:set var="cls" value="selected" />
-							</c:when>
-							<c:otherwise>
-								<c:set var="cls" value="" />
-							</c:otherwise>
-						</c:choose>
+					<td class="text-center">
+						<c:if test="${selected ne null }">
+							<c:choose>
+								<c:when test="${selected.dayOfMonth == (j - cal.startBlankCnt)}">
+									<c:set var="cls" value="selected" />
+								</c:when>
+								<c:otherwise>
+									<c:set var="cls" value="" />
+								</c:otherwise>
+							</c:choose>
+						</c:if>
 						
-						<a href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j}"/>">
+						<a href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}"/>">
 							<c:if test="${(j > cal.startBlankCnt) && (j <= cal.startBlankCnt + cal.lastDate)}">
 								<c:choose>
 									<c:when test="${j % 7 == 0 }">
@@ -66,26 +69,23 @@
 		</table>
 	</div>
 	<div class="list-wrapper">
-		<h3>${cal.year} /
-		<c:choose>
-			<c:when test="${cal.month < 10}">${'0' + cal.month}</c:when>
-			<c:otherwise>${cal.month}</c:otherwise>
-		</c:choose>/
-		<c:choose>
-			<c:when test="${cal.day < 10}">${'0' + cal.day}</c:when>
-			<c:otherwise>${cal.day}</c:otherwise>
-		</c:choose>
-		</h3>
+		<h3>${selected }</h3>
 		<table class="table table-hover">
+			<c:forEach items="${abList}" var="ab">
 			<tr>
-				<td colspan=2>더미 1</td>
-				<td>85,000</td>
-				<td></td>
-				<td>신용카드</td>
+				<td>${ab.at_name }</td>
+				<td colspan=2>${ab.ab_detail }</td>
+				<td>${ab.ab_amount }</td>
+				<td>${ab.pt_name }</td>
+				<td>${ab.pp_name }</td>
 			</tr>
+			</c:forEach>
 		</table>
 		
-		<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openInsert();">내역 등록</div>
+		<c:choose>
+			<c:when test="${user ne null }"><div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openInsert();">내역 등록</div></c:when>
+			<c:otherwise><a href="<c:url value="/login"/>" class="btn btn-dark">로그인</a></c:otherwise>
+		</c:choose>
 	</div>
 </div>
 
@@ -100,10 +100,13 @@ function openInsert(){
 	$.ajax({
 		url: '<c:url value="/accountbook/insert" />',
 		type: 'get',
+		data: {
+			date: '${selected}'
+		},
 		success: function(data){
 			$('.modal').addClass('show');
 			$('.modal-content').html(data);
-			console.log(data);
+			console.log(data.date);
 		},
 		error : function(xhr){
 			console.log(xhr);

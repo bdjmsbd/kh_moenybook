@@ -1,7 +1,10 @@
 package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.dto.CalendarDTO;
+import kr.kh.app.model.vo.AccountBookVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.AccountBookService;
 
@@ -20,6 +24,7 @@ public class AccountBook extends HttpServlet {
 	
 	private AccountBookService accountBookService = new AccountBookService();
 	
+	@SuppressWarnings("deprecation")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int year = 0;
@@ -27,13 +32,13 @@ public class AccountBook extends HttpServlet {
 		int day = 0;
 		
 		try {
-			Calendar today = Calendar.getInstance();
+			LocalDate today = LocalDate.now();
 			
 			// 년도, 월 중 하나라도 지정(넘겨져 오지)되지 않으면 오늘날짜 기준으로 월달력 출력
 			if (request.getParameter("year") == null ||
 				request.getParameter("month") == null) {
-				year = today.get(Calendar.YEAR);
-				month = today.get(Calendar.MONTH);
+				year = today.getYear();
+				month = today.getMonthValue() - 1;
 			} else {
 				// 출력하고자 하는 달력의 년도와 월
 				year = Integer.parseInt(request.getParameter("year")); // 2022,..
@@ -50,9 +55,9 @@ public class AccountBook extends HttpServlet {
 				}
 			}
 			
-			if(request.getParameter("day") == null)
-				day = today.get(Calendar.DATE);
-			else if(!request.getParameter("day").equals(day))
+			if(month == today.getMonthValue() - 1 && request.getParameter("day") == null) //처음 들어갔을 때
+				day = today.getDayOfMonth();
+			else if(request.getParameter("day") != null && !request.getParameter("day").equals(day))
 				day = Integer.parseInt(request.getParameter("day"));
 			
 			// 출력하고자 달의 1일 객체 + 1일 요일 + 마지막 날짜
@@ -82,10 +87,19 @@ public class AccountBook extends HttpServlet {
 			cal.setEndBlankCnt(endBlankCnt);
 			cal.setTdCnt(tdCnt);
 			
+			if (day != 0) {
+				today = LocalDate.of(year, month + 1, day);
+			} else if(day == 0 && today.getMonthValue() - 1 != month) {
+				today = null;
+			}
+			
 			MemberVO user = (MemberVO)request.getSession().getAttribute("user");
-			accountBookService.getAccountBookList(user);
+			List<AccountBookVO> abList = null;
+			if(today != null) abList = accountBookService.getAccountBookList(user, today);
 			
 			request.setAttribute("cal", cal);
+			request.setAttribute("abList", abList);
+			request.setAttribute("selected", today);
 			request.getRequestDispatcher("/WEB-INF/views/accountbook/accountbook.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

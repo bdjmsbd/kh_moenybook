@@ -13,8 +13,4 @@ public class CalendarDTO {
 	private int startBlankCnt;
 	private int endBlankCnt;
 	private int tdCnt;
-
-	private int nowYear;
-	private int nowMonth;
-	private int nowDay;
 }

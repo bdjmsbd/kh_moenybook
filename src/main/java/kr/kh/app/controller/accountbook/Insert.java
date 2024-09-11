@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.AccountBookVO;
-import kr.kh.app.model.vo.AccountTypeVO;
 import kr.kh.app.model.vo.MemberVO;
+import kr.kh.app.model.vo.PaymentPurposeVO;
+import kr.kh.app.model.vo.PaymentTypeVO;
 import kr.kh.app.service.AccountBookService;
 import kr.kh.app.service.MemberService;
 
@@ -27,8 +28,8 @@ public class Insert extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<AccountTypeVO> pp_list = accountBookService.getPaymentPurposeList();
-		List<AccountTypeVO> pt_list = accountBookService.getPaymentTypeList();
+		List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
+		List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
 
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);
@@ -38,8 +39,6 @@ public class Insert extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
-		
 		String ab_at_numStr = request.getParameter("ab_at_num");
 		String ab_pp_numStr = request.getParameter("ab_pp_num");
 		String ab_pt_numStr = request.getParameter("ab_pt_num");
@@ -47,31 +46,45 @@ public class Insert extends HttpServlet {
 		String ab_amountStr = request.getParameter("ab_amount");
 		String ab_detail = request.getParameter("ab_detail");
 
-		// 수입 1, 지출 3, 정기성 여부 확인해서 정기성이면 +1 해준다.
-		// 고정 수입 2, 고정 지출 4
-		String regularity = request.getParameter("regularity");
+		// 정기적인 지, 일회성인 지 판단. 정기적인 경우 주기 추가
+		String ab_regularityStr = request.getParameter("ab_regularity");
+		String ab_periodStr = request.getParameter("ab_period");
+		if(ab_periodStr == null) ab_periodStr = "0";
 		
-		try {
+//		System.out.println("ab_at_numStr :"+ ab_at_numStr);
+//		System.out.println("ab_pp_numStr :"+ ab_pp_numStr);
+//		System.out.println("ab_pt_numStr :"+ ab_pt_numStr);
+//		System.out.println("ab_dateStr :"+ ab_dateStr);
+//		System.out.println("ab_amountStr :"+ ab_amountStr);
+//		System.out.println("ab_detail :"+ ab_detail);
+//		System.out.println("ab_regularityStr :"+ ab_regularityStr);
+//		System.out.println("ab_periodStr :"+ ab_periodStr);
 
+		try {
+			
 			MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 
 			if (user == null) {
 				throw new Exception();
 			}
-
+			
+			if(ab_detail==null) ab_detail ="";
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
+			
 			AccountBookVO newAB = new AccountBookVO(
-					Integer.parseInt(ab_at_numStr), Integer.parseInt(ab_pp_numStr),
-					Integer.parseInt(ab_pt_numStr), user.getMe_id(), formatter.parse(ab_dateStr),
-					Integer.parseInt(ab_amountStr), ab_detail, Integer.parseInt(regularity));
-
-			// System.out.println(newAB);
+					Integer.parseInt(ab_at_numStr.trim()), Integer.parseInt(ab_pt_numStr.trim()),
+					Integer.parseInt(ab_pp_numStr.trim()), user.getMe_id(), formatter.parse(ab_dateStr.trim()),
+					Integer.parseInt(ab_amountStr.trim()), ab_detail, Integer.parseInt(ab_regularityStr.trim()),
+					Integer.parseInt(ab_periodStr.trim()));
+			
+//			System.out.println(newAB);
 			
 			accountBookService.insertAccountBook(newAB);
 
 			request.setAttribute("msg", "새로운 가계부를 등록했습니다.");
 		} catch (Exception e) {
+			e.printStackTrace();
 			request.setAttribute("msg", "가계부를 등록하지 못했습니다.");
 		}
 
