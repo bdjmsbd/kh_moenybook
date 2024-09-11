@@ -43,23 +43,26 @@
 		</tbody>
 	</table>
 	</div>
-	<div class="form-box">
+	<div style="width: 20px;"></div>
+	<div class="form-box" style="width: 300px;">
 		<form action="<c:url value="/accountbook/search"/>">
 			<div class="btn-group ml-3 mr-2">
+				<div style="width: 10px;"></div>
 				<label class="form-check-label"> 
 				<input type="checkbox"
 					class="form-check-input" value="true" name="expense">지출
-				</label> 
+				</label>
+				<div style="width: 10px;"></div>
 				<label class="form-check-label ml-3"> 
 				<input type="checkbox" class="form-check-input" value="true" name="income">수입
 				</label>
 			</div>
-			<div class="form-group mt-2" style="border: 1px solid;">
-			<label for="begin-date">시작일:</label> 
-			<input type="date" class="form-control" id="begin" name="search_begin">
-			<label for="end-date">종료일:</label> 
-			<input type="date" class="form-control" id="end" name="search_end">
-		</div>
+			<div class="form-group mt-2" style=" border: 1px solid; padding: 5px 5px;">
+				<label for="begin-date">시작일:</label> 
+				<input type="date" class="form-control" id="begin" name="search_begin">
+				<label for="end-date">종료일:</label> 
+				<input type="date" class="form-control" id="end" name="search_end">
+			</div>
 		<button type="submit" class="btn btn-info mr-3 mb-2">조회</button>
 		</form>
 		<div class="d-flex justify-content-between">
