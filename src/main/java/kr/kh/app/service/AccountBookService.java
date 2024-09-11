@@ -88,8 +88,6 @@ public class AccountBookService {
 		return list;
 	}
 
-<<<<<<< Updated upstream
-=======
 	public int totalAmount(List<AccountBookVO> ab_list, int accountBook_type) {
 		int sum = 0;
 		
@@ -108,5 +106,4 @@ public class AccountBookService {
 		return accountBookDao.selectExportList(user.getMe_id());
 	}
 
->>>>>>> Stashed changes
 }

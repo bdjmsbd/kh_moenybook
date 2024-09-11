@@ -27,7 +27,6 @@ public class AccountBook extends HttpServlet {
 	
 	private AccountBookService accountBookService = new AccountBookService();
 	
-	@SuppressWarnings("deprecation")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int year = 0;
@@ -96,13 +95,8 @@ public class AccountBook extends HttpServlet {
 				today = null;
 			}
 			
-			//MemberVO user = (MemberVO)request.getSession().getAttribute("user");
-<<<<<<< Updated upstream
-			MemberVO user = new MemberVO("a", "a", "");
-			List<AccountBookVO> abList = null;
-=======
+			MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 			List<AccountBookVO> ab_list = null;
->>>>>>> Stashed changes
 			if(today != null) {
 				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				ab_list = accountBookService.getAccountBookList(user, today.format(format));
