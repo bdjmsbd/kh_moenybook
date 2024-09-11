@@ -91,23 +91,27 @@
 	</div>
 </div>
 
-
-
-
 <script>
 
 function searchDate(changeMonth) {
-	console.log(${curDate})
-	if(changeMonth == 0 || ${curDate} == null) { 
-		// 0일 경우, 이번 달로 넘어오도록
-		nowDate = new Date();
-	}else {		
-		// 검색한 날짜를 Date 포맷으로 변경
-		nowDate = new Date("${curDate}");
-	}
 	
-	// 검색할 날짜에 대한 새로운 Date 변수
-	searchDate = new Date(nowDate.setMonth(nowDate.getMonth() + changeMonth));
+	try {
+		
+		if(changeMonth == 0) { 
+			// 0일 경우, 이번 달로 넘어오도록
+			nowDate = new Date();
+		}else {		
+			// 검색한 날짜를 Date 포맷으로 변경
+			nowDate = new Date(curDate);
+		}
+		
+		// 검색할 날짜에 대한 새로운 Date 변수
+		searchDate = new Date(nowDate.setMonth(nowDate.getMonth() + changeMonth));
+    } catch (error) {
+        // 오류가 발생했을 때 실행할 코드
+       searchDate = new Date();
+        alert('올바른 날짜를 입력해주세요. \n이번 달로 넘어갑니다.')
+    }
 	
 	// 연도, 월, 일 추출
 	const year = searchDate.getFullYear();

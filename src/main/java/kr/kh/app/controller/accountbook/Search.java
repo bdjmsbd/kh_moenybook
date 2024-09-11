@@ -1,6 +1,8 @@
 package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,8 +36,12 @@ public class Search extends HttpServlet {
 		System.out.println("searchBegin :" +searchBegin);
 		System.out.println("searchEnd :" +searchEnd);
 		
-		if(searchBegin == null ||  searchBegin.trim().equals("")) searchBegin = "1900-01-01"; //임시
-		if(searchEnd == null ||  searchEnd.trim().equals("")) searchEnd = "2024-12-31";
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr = sdf.format(date);
+		
+		if(searchBegin == null ||  searchBegin.trim().equals("")) searchBegin = dateStr; //임시
+		if(searchEnd == null ||  searchEnd.trim().equals("")) searchEnd = dateStr;
 		
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		

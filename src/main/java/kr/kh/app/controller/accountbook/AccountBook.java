@@ -24,7 +24,6 @@ public class AccountBook extends HttpServlet {
 	
 	private AccountBookService accountBookService = new AccountBookService();
 	
-	@SuppressWarnings("deprecation")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int year = 0;
