@@ -8,7 +8,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-<link rel="stylesheet" href="<c:url value="/resources/css/insert.css"/>">
 
 <div class="d-flex account-book-container">
 	<div class="calendar-wrapper">

@@ -50,6 +50,11 @@ public class Table extends HttpServlet {
 		List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
 		List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
 		
+		int totalIncome = accountBookService.totalAmount(ab_list, 1);
+		int totalExpense = accountBookService.totalAmount(ab_list, 2);
+		
+		request.setAttribute("totalIncome", totalIncome);
+		request.setAttribute("totalExpense", totalExpense);
 		request.setAttribute("curDate", searchDate);
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);

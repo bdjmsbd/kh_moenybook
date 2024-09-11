@@ -63,8 +63,10 @@ public class AccountBookService {
 	}
 
 	public List<AccountBookVO> getAccountBookList
-	(MemberVO user, String searchExpense, String searchIncome, String searchBegin, String searchEnd) {
+	(MemberVO user, String searchType, String searchBegin, String searchEnd) {
+		
 		if(user == null) return null;
+		if(searchType == null) return null;
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
@@ -77,20 +79,33 @@ public class AccountBookService {
     
 		List<AccountBookVO> list = new ArrayList<AccountBookVO>();
 		
-		if(searchIncome != null && searchIncome.equals("true")) {
-			list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 1));
+		// 0: 수입/지출 모두 조회, 1: 수입만 조회, 2: 지출만 조회
+		switch(searchType) {
+			case "0":
+				list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 1));
+				list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 2));
+				break;
+			case "1":	
+				list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 1));
+				break;
+			case "2":
+				list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 2));
+				break;
 		}
-		
-		if(searchExpense != null && searchExpense.equals("true")) {
-			list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 2));
-		}
-		
-		if(searchIncome == null && searchExpense == null) {
-			list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 1));
-			list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 2));
-		}
-		
 		return list;
+	}
+
+	public int totalAmount(List<AccountBookVO> ab_list, int accountBook_type) {
+		int sum = 0;
+		
+		if(ab_list == null) {
+			return 0;
+		}
+		for(AccountBookVO accountbook : ab_list) {
+			if(accountbook.getAb_at_num() == accountBook_type) sum += accountbook.getAb_amount(); 
+		}
+		
+		return sum;
 	}
 
 }

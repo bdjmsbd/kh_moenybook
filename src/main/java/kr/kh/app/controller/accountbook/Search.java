@@ -26,13 +26,11 @@ public class Search extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String searchExpense = request.getParameter("expense");
-		String searchIncome = request.getParameter("income");
+		String searchType = request.getParameter("at_num");
 		String searchBegin = request.getParameter("search_begin");
 		String searchEnd = request.getParameter("search_end");
 		
-		System.out.println("searchExpense :" +searchExpense);
-		System.out.println("searchIncome :" +searchIncome);
+		System.out.println("searchType :" +searchType);
 		System.out.println("searchBegin :" +searchBegin);
 		System.out.println("searchEnd :" +searchEnd);
 		
@@ -41,13 +39,17 @@ public class Search extends HttpServlet {
 		
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		
-		List<AccountBookVO> list = accountBookService.getAccountBookList(user, searchExpense, searchIncome, searchBegin, searchEnd);
+		List<AccountBookVO> list = accountBookService.getAccountBookList(user, searchType, searchBegin, searchEnd);
 		//System.out.println(list);
 
 		List<AccountTypeVO> at_list = accountBookService.getAccountTypeList();
 		List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
 		List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
+		int totalIncome = accountBookService.totalAmount(list, 1);
+		int totalExpense = accountBookService.totalAmount(list, 2);
 		
+		request.setAttribute("totalIncome", totalIncome);
+		request.setAttribute("totalExpense", totalExpense);
 		request.setAttribute("searchPeriod", searchBegin+"~"+searchEnd);
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);
