@@ -17,8 +17,10 @@ public interface AccountBookDAO {
 
 	void insertAccountBook(@Param("ab") AccountBookVO newAB);
 
-	List<AccountBookVO> selectAccountBookList(@Param("me_id")String me_id, @Param("date")String searchDate);
+	List<AccountBookVO> selectAccountBookList(@Param("user")String me_id, @Param("date")String searchDate);
 
 	List<AccountTypeVO> selectAccountTypeList();
+
+	List<AccountBookVO> selectAccountBookListFromDate(@Param("me_id")String me_id, @Param("searchBegin")String searchBegin, @Param("searchEnd")String searchEnd, @Param("isIncome")int isIncome);
 
 }
