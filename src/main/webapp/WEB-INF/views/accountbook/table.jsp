@@ -8,13 +8,10 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<h1 class="text-center mb-5">표</h1>
-<div class="container">
-
-	<h1>${curDate}</h1>
-	<a class="btn" onclick=searchDate(-1) href="javascript:void(0);"> 이전 달</a> 
-	<a class="btn" onclick=searchDate(0) href="javascript:void(0);"> 이번 달</a> 
-	<a class="btn" onclick=searchDate(+1) href="javascript:void(0);"> 다음 달</a>
+<h1 class="text-center mb-5"> 표</h1>
+<h2>검색 &lt; ${curDate}${searchPeriod} &gt;</h2>
+<div class="d-flex container">
+	<div class="table-box d-flex justify-content-between mr-3">
 
 	<table class="table table-striped">
 		<thead>
@@ -45,7 +42,38 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
+	<div class="form-box">
+		<form action="<c:url value="/accountbook/search"/>">
+			<div class="btn-group ml-3 mr-2">
+				<label class="form-check-label"> 
+				<input type="checkbox"
+					class="form-check-input" value="true" name="expense">지출
+				</label> 
+				<label class="form-check-label ml-3"> 
+				<input type="checkbox" class="form-check-input" value="true" name="income">수입
+				</label>
+			</div>
+			<div class="form-group mt-2" style="border: 1px solid;">
+			<label for="begin-date">시작일:</label> 
+			<input type="date" class="form-control" id="begin" name="search_begin">
+			<label for="end-date">종료일:</label> 
+			<input type="date" class="form-control" id="end" name="search_end">
+		</div>
+		<button type="submit" class="btn btn-info mr-3 mb-2">조회</button>
+		</form>
+		<div class="d-flex justify-content-between">
+		<a class="btn btn-primary mr-2" onclick=searchDate(-1) href="javascript:void(0);"> 이전 달</a> 
+		<a class="btn btn-primary mr-2" onclick=searchDate(0) href="javascript:void(0);"> 이번 달</a> 
+		<a class="btn btn-primary mr-2" onclick=searchDate(+1) href="javascript:void(0);"> 다음 달</a>
+		</div>
+	</div>
+	</div>
+	<div class="btn-box">		
+		
 </div>
+
+
 <script>
 
 function searchDate(changeMonth) {

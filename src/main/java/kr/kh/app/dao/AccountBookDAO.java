@@ -1,5 +1,6 @@
 package kr.kh.app.dao;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -21,5 +22,7 @@ public interface AccountBookDAO {
 	List<AccountBookVO> selectAccountBookList(@Param("user") MemberVO user, @Param("date")String searchDate);
 
 	List<AccountTypeVO> selectAccountTypeList();
+
+	List<AccountBookVO> selectAccountBookListFromDate(@Param("me_id")String me_id, @Param("searchBegin")String searchBegin, @Param("searchEnd")String searchEnd, @Param("isIncome")int isIncome);
 
 }

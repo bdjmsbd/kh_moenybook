@@ -2,7 +2,6 @@ package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.AccountBookVO;
-import kr.kh.app.model.vo.AccountTypeVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.model.vo.PaymentPurposeVO;
 import kr.kh.app.model.vo.PaymentTypeVO;
@@ -24,7 +22,6 @@ public class Insert extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private MemberService memberService = new MemberService();
 	private AccountBookService accountBookService = new AccountBookService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
