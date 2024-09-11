@@ -45,4 +45,25 @@
 		GROUP BY
 			ab_date;
 	</select> 
+	<delete id="deleteAccountBook">
+		delete from accountbook where ab_me_id = #{me_id} and ab_num = #{ab_num}
+	</delete>
+	<select id="selectAccountBook" resultType="AccountBookVO">
+		select * from accountbook where ab_me_id = #{me_id} and ab_num = #{ab_num}
+	</select>
+	
+	<update id="updateAccountBook">
+		update accountbook set
+			ab_at_num = #{ab.ab_at_num},
+			ab_pp_num = #{ab.ab_pp_num},
+			ab_pt_num = #{ab.ab_pt_num},
+			ab_me_id = #{ab.ab_me_id},
+			ab_date = #{ab.ab_date},
+			ab_amount = #{ab.ab_amount},
+			ab_detail = #{ab.ab_detail},
+			ab_regularity = #{ab.ab_regularity},
+			ab_period = #{ab.ab_period}
+		where
+			ab_num = #{ab.ab_num}
+	</update>
 </mapper>
