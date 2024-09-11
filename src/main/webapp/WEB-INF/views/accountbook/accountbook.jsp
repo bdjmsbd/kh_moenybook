@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/insert.css"/>">
 
 <div class="d-flex account-book-container">
+	<h1 class="text-center mb-5">달력</h1>
 	<div class="calendar-wrapper">
 		<div class="mt-3 mb-3 p-3 d-flex justify-content-between">
 			<span><a class="btn btn-outline-dark btn-sm"
