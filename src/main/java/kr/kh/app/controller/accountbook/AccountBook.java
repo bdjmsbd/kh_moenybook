@@ -93,7 +93,8 @@ public class AccountBook extends HttpServlet {
 				today = null;
 			}
 			
-			MemberVO user = (MemberVO)request.getSession().getAttribute("user");
+			//MemberVO user = (MemberVO)request.getSession().getAttribute("user");
+			MemberVO user = new MemberVO("a", "a", "");
 			List<AccountBookVO> abList = null;
 			if(today != null) {
 				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
