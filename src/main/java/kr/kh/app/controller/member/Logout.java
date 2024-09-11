@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.MemberService;
-import kr.kh.app.service.MemberServiceImp;
 
 @WebServlet("/logout")
 public class Logout extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	private MemberService memberService = new MemberServiceImp();
+	private MemberService memberService = new MemberService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
