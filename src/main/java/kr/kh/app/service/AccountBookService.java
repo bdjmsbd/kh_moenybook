@@ -88,4 +88,25 @@ public class AccountBookService {
 		return list;
 	}
 
+<<<<<<< Updated upstream
+=======
+	public int totalAmount(List<AccountBookVO> ab_list, int accountBook_type) {
+		int sum = 0;
+		
+		if(ab_list == null) {
+			return 0;
+		}
+		for(AccountBookVO accountbook : ab_list) {
+			if(accountbook.getAb_at_num() == accountBook_type) sum += accountbook.getAb_amount(); 
+		}
+		
+		return sum;
+	}
+
+	public List<AccountBookVO> getExportList(MemberVO user) {
+		if(user == null) return null;
+		return accountBookDao.selectExportList(user.getMe_id());
+	}
+
+>>>>>>> Stashed changes
 }

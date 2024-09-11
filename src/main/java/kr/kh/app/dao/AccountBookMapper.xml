@@ -28,4 +28,26 @@
 	<select id="selectAccountTypeList" resultType="AccountTypeVO">
 		select * from account_type
 	</select>
+<<<<<<< Updated upstream
+=======
+	
+	<select id="selectAccountBookListFromDate" resultType="AccountBookVO">
+		select * from accountbook
+		where 
+		ab_me_id = #{me_id} and 
+		ab_at_num = #{isIncome} and
+		ab_date >= #{searchBegin} and #{searchEnd} >= ab_date;
+	</select>
+	
+	<select id="selectExportList" resultType="AccountBookVO">
+		select
+			sum(ab_amount) as ex_sum,
+			ab_pp_num
+		from accountbook
+		where
+			ab_me_id = #{me_id}
+			and ab_at_num = 2
+		group by ab_pp_num
+	</select>
+>>>>>>> Stashed changes
 </mapper>

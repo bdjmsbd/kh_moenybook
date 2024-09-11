@@ -23,4 +23,10 @@ public interface AccountBookDAO {
 
 	List<AccountBookVO> selectAccountBookListFromDate(@Param("me_id")String me_id, @Param("searchBegin")String searchBegin, @Param("searchEnd")String searchEnd, @Param("isIncome")int isIncome);
 
+<<<<<<< Updated upstream
 }
+=======
+	List<AccountBookVO> selectExportList(@Param("me_id")String me_id);
+
+}
+>>>>>>> Stashed changes
