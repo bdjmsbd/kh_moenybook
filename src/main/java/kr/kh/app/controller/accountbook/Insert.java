@@ -2,7 +2,6 @@ package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.AccountBookVO;
-import kr.kh.app.model.vo.AccountTypeVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.model.vo.PaymentPurposeVO;
 import kr.kh.app.model.vo.PaymentTypeVO;
@@ -24,7 +22,6 @@ public class Insert extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private MemberService memberService = new MemberService();
 	private AccountBookService accountBookService = new AccountBookService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,6 +49,15 @@ public class Insert extends HttpServlet {
 		String ab_regularityStr = request.getParameter("ab_regularity");
 		String ab_periodStr = request.getParameter("ab_period");
 		if(ab_periodStr == null) ab_periodStr = "0";
+		
+//		System.out.println("ab_at_numStr :"+ ab_at_numStr);
+//		System.out.println("ab_pp_numStr :"+ ab_pp_numStr);
+//		System.out.println("ab_pt_numStr :"+ ab_pt_numStr);
+//		System.out.println("ab_dateStr :"+ ab_dateStr);
+//		System.out.println("ab_amountStr :"+ ab_amountStr);
+//		System.out.println("ab_detail :"+ ab_detail);
+//		System.out.println("ab_regularityStr :"+ ab_regularityStr);
+//		System.out.println("ab_periodStr :"+ ab_periodStr);
 
 		try {
 			
@@ -71,6 +77,7 @@ public class Insert extends HttpServlet {
 					Integer.parseInt(ab_amountStr.trim()), ab_detail, Integer.parseInt(ab_regularityStr.trim()),
 					Integer.parseInt(ab_periodStr.trim()));
 			
+//			System.out.println(newAB);
 			
 			accountBookService.insertAccountBook(newAB);
 

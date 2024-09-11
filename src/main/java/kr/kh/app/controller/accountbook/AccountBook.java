@@ -77,7 +77,7 @@ public class AccountBook extends HttpServlet {
 			
 			cal.setYear(year);
 			cal.setMonth(month);
-			cal.setNowDay(day);
+			cal.setDay(day);
 			cal.setFirstDay(firstDay);
 			cal.setLastDate(lastDate);
 			cal.setStartBlankCnt(startBlankCnt);

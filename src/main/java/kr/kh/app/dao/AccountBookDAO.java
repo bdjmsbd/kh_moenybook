@@ -22,4 +22,6 @@ public interface AccountBookDAO {
 
 	List<AccountTypeVO> selectAccountTypeList();
 
+	List<AccountBookVO> selectAccountBookListFromDate(@Param("me_id")String me_id, @Param("searchBegin")String searchBegin, @Param("searchEnd")String searchEnd, @Param("isIncome")int isIncome);
+
 }

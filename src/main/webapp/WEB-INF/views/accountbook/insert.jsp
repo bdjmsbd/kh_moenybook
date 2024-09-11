@@ -19,15 +19,16 @@
 			<div class="form-group">
 				<div class="form_toggle row-vh d-flex flex-row justify-content-between">
 					<div class="form_radio_btn radio_male btn-income">
-						<input id="radio-1" type="radio" name='ab_at_num' id='at_num'
-							value='1' checked> <label for="radio-1">수입</label>
+						<input id="radio-1" type="radio" name='ab_at_num' id='at_num' value='1' checked> 
+						<label for="radio-1">수입</label>
 					</div>
 					<div class="form_radio_btn btn-expense">
-						<input id="radio-2" type="radio" name='ab_at_num' id='at_num'
-							value='2'> <label for="radio-2">지출</label>
+						<input id="radio-2" type="radio" name='ab_at_num' id='at_num' value='2'> 
+						<label for="radio-2">지출</label>
 					</div>
 				</div>
 			</div>
+	
 			<div class="form-group">
 				<c:set var="now" value="<%=new java.util.Date()%>" />
 				<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nowDate" />

@@ -13,12 +13,13 @@
 <div class="d-flex account-book-container">
 	<div class="calendar-wrapper">
 		<div class="mt-3 mb-3 p-3 d-flex justify-content-between">
-			<span>
-				<a class="btn btn-outline-dark btn-sm" href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month-1}"/>">이전달</a>
+			<span><a class="btn btn-outline-dark btn-sm"
+				href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month-1}"/>">이전달</a>
 			</span> 
 			<span class="fw-bold fs-3">${cal.year}년 ${cal.month+1}월</span> 
 			<span>
-				<a class="btn btn-outline-dark btn-sm" href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month+1}"/>">다음달</a>
+				<a class="btn btn-outline-dark btn-sm"
+				href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month+1}"/>">다음달</a>
 			</span>
 		</div>
 		
@@ -35,9 +36,9 @@
 			<c:forEach begin="1" end="${cal.tdCnt}" step="7" var="i">
 				<tr>
 					<c:forEach begin="${i }" end="${i + 6}" step="1" var="j">
-					<td class="text-center"> <!-- ${cal.nowDay == j} -->
+					<td class="text-center">
 						<c:choose>
-							<c:when test="${cal.nowDay == j}">
+							<c:when test="${cal.day == j}">
 								<c:set var="cls" value="selected" />
 							</c:when>
 							<c:otherwise>
@@ -49,13 +50,13 @@
 							<c:if test="${(j > cal.startBlankCnt) && (j <= cal.startBlankCnt + cal.lastDate)}">
 								<c:choose>
 									<c:when test="${j % 7 == 0 }">
-										<span class="text-primary ${cls}">${j - cal.startBlankCnt}</span>
+										<span class="text-primary ${cls}">${j - cal.startBlankCnt }</span>
 									</c:when>
 									<c:when test="${j % 7 == 1 }">
-										<span class="text-danger ${cls}">${j - cal.startBlankCnt}</span>
+										<span class="text-danger ${cls}">${j - cal.startBlankCnt }</span>
 									</c:when>
 									<c:otherwise>
-										<span class="${cls}"> ${j - cal.startBlankCnt}</span>
+										<span class="${cls}"> ${j - cal.startBlankCnt }</span>
 									</c:otherwise>
 								</c:choose>
 							</c:if>
@@ -66,8 +67,7 @@
 			</c:forEach>
 		</table>
 	</div>
-	<div style=" width: 50px">
-	</div>
+	<div style="width: 50px;"></div>
 	<div class="list-wrapper">
 		<h3>${cal.year} /
 		<c:choose>
@@ -75,8 +75,8 @@
 			<c:otherwise>${cal.month+1}</c:otherwise>
 		</c:choose>/
 		<c:choose>
-			<c:when test="${cal.nowDay < 10}">${'0' + cal.day}</c:when>
-			<c:otherwise>${cal.nowDay}</c:otherwise>
+			<c:when test="${cal.day < 10}">${'0' + cal.day}</c:when>
+			<c:otherwise>${cal.day}</c:otherwise>
 		</c:choose>
 		</h3>
 		<table class="table table-hover">
