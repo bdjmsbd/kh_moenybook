@@ -113,10 +113,6 @@ function openInsert(){
 		}
 	})
 }
-
-function closeForm() {
-	console.log('hi');
-}
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

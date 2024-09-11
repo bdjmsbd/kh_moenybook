@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.kh.app.dao.AccountBookDAO">
+	<select id="selectPaymentPurposeList" resultType="PaymentPurposeVO">
+		select * from payment_purpose
+	</select>
+	<select id="selectPaymentTypeList" resultType="PaymentTypeVO">
+		select * from payment_type
+	</select>
+	<insert id="insertAccountBook">
+		insert into accountbook
+		(ab_at_num, ab_pp_num, ab_pt_num, ab_me_id, ab_date, ab_amount, ab_detail, ab_regularity, ab_period)
+		values 
+		(#{ab.ab_at_num},#{ab.ab_pp_num},#{ab.ab_pt_num},#{ab.ab_me_id},#{ab.ab_date},#{ab.ab_amount},#{ab.ab_detail},#{ab.ab_regularity},#{ab.ab_period})
+	</insert>
+	
+	<select id="selectAccountBookList" resultType="AccountBookVO">
+		SELECT at_name, ab_amount, ab_detail, pp_name, pt_name
+		FROM accountbook.accountbook
+		join payment_purpose on ab_pp_num = pp_num
+		join payment_type on ab_pt_num = pt_num
+		join account_type on ab_at_num = at_num
+		where ab_me_id = #{me_id} and ab_date like concat(#{date}, '%')
+	</select>
+	<select id="selectAccountTypeList" resultType="AccountTypeVO">
+		select * from account_type
+	</select>
+</mapper>

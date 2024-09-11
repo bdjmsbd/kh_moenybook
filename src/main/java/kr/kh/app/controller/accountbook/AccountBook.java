@@ -2,8 +2,8 @@ package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -95,7 +95,10 @@ public class AccountBook extends HttpServlet {
 			
 			MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 			List<AccountBookVO> abList = null;
-			if(today != null) abList = accountBookService.getAccountBookList(user, today);
+			if(today != null) {
+				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				abList = accountBookService.getAccountBookList(user, today.format(format));
+			}
 			
 			request.setAttribute("cal", cal);
 			request.setAttribute("abList", abList);
