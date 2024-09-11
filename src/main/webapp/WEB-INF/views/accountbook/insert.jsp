@@ -15,7 +15,7 @@
 
 <div class="modal-body">
 	<form action="<c:url value="/accountbook/insert"/>" method="post" id="form">
-		<div class="container" style="max-width: 400px; ">
+		<div class="container" style="max-width: 490px; margin-left: -10px;">
 			<div class="form-group">
 				<div class="form_toggle row-vh d-flex flex-row justify-content-between">
 					<div class="form_radio_btn radio_male btn-income">
