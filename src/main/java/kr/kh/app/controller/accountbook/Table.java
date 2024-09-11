@@ -28,6 +28,9 @@ public class Table extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		// dummy 생성 함수
+		// accountBookService.dummyGen();
+		
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		String searchDate = request.getParameter("searchDate");
 		//String date = request.getParameter("searchDate");

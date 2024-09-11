@@ -7,7 +7,8 @@
 <%@page import="java.util.Date"%>
 
 
-<link rel="stylesheet" href="<c:url value="/resources/css/accountbook_table.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/accountbook_table.css"/>">
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
@@ -48,26 +49,28 @@
 		</table>
 	</div>
 	<div class="right-content-container">
-	<div class="form-box" style="border: 1px solid;">
-		<form action="<c:url value="/accountbook/search"/>">
-		    <label>유형 선택 :</label>
-		    <div class="checkbox-group">
-		        <input type="radio" id="both" class="form-check-input" value="0" name="at_num" checked>
-		        <label for="both" class="form-check-label">둘다</label>
-		        <input type="radio" id="income" class="form-check-input" value="1" name="at_num">
-		        <label for="income" class="form-check-label">수입</label>
-		        <input type="radio" id="expense" class="form-check-input" value="2" name="at_num">
-		        <label for="expense" class="form-check-label">지출</label>
-		    </div>
-			<div class="form-group mt-2">
-				<label for="begin-date">시작일:</label> <input type="date"
-					class="form-control" id="begin" name="search_begin"> <label
-					for="end-date">종료일:</label> <input type="date" class="form-control"
-					id="end" name="search_end">
-			</div>
-			<button type="submit" class="btn btn-info mr-3 mb-2">조회</button>
-		</form>
-	</div>
+		<div class="form-box" style="border: 1px solid;">
+			<form action="<c:url value="/accountbook/search"/>">
+				<label>유형 선택 :</label>
+				<div class="checkbox-group">
+					<input type="radio" id="both" class="form-check-input" value="0"
+						name="at_num" checked> <label for="both"
+						class="form-check-label">둘다</label> <input type="radio"
+						id="income" class="form-check-input" value="1" name="at_num">
+					<label for="income" class="form-check-label">수입</label> <input
+						type="radio" id="expense" class="form-check-input" value="2"
+						name="at_num"> <label for="expense"
+						class="form-check-label">지출</label>
+				</div>
+				<div class="form-group mt-2">
+					<label for="begin-date">시작일:</label> <input type="date"
+						class="form-control" id="begin" name="search_begin"> <label
+						for="end-date">종료일:</label> <input type="date"
+						class="form-control" id="end" name="search_end">
+				</div>
+				<button type="submit" class="btn btn-info mr-3 mb-2">조회</button>
+			</form>
+		</div>
 		<div class="d-flex justify-content-between mt-2">
 			<a class="btn btn-primary mr-2" onclick=searchDate(-1)
 				href="javascript:void(0);"> 이전 달</a> <a class="btn btn-primary mr-2"
@@ -94,8 +97,8 @@
 <script>
 
 function searchDate(changeMonth) {
-	
-	if(changeMonth == 0) { 
+	console.log(${curDate})
+	if(changeMonth == 0 || ${curDate} == null) { 
 		// 0일 경우, 이번 달로 넘어오도록
 		nowDate = new Date();
 	}else {		

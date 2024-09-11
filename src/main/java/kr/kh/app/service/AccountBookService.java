@@ -1,7 +1,8 @@
 package kr.kh.app.service;
 
 import java.io.InputStream;
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,60 @@ public class AccountBookService {
 		}
 		
 		return sum;
+	}
+	
+	public void dummyGen() {
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		String id = "a"; // 아이디
+		
+		for(int i=1; i<500; i++) {
+			int at = 1;
+			int pp = (int)(Math.random() * 3) +1;
+			int pt = 1;
+			int amount = ((int)(Math.random() * 100) + 1) * 500;
+			String month = Integer.toString((int)(Math.random() * 12) +1); 
+			month = (month.length()==1)?"0"+month:month;
+			String day = Integer.toString((int)(Math.random() * 28) +1); 
+			day = (day.length()==1)?"0"+day:day;
+			String date = "2024-"+ month + "-" + day;
+			
+			String detail = "더미데이터"+ Integer.toString(i);
+			
+			try {
+				AccountBookVO ab = new AccountBookVO(1, pp, pt, id, formatter.parse(date), amount, detail, 0, 0);
+				accountBookDao.insertAccountBook(ab);
+				
+				System.out.println("더미데이터 생성 " + ab.getAb_detail());
+				
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		for(int i=500; i<=1000; i++) {
+			int at = 2;
+			int pp = (int)(Math.random() * 7) +4;
+			int pt = (int)(Math.random() * 4) +2;
+			int amount = ((int)(Math.random() * 100) + 1) * 500;
+			String month = Integer.toString((int)(Math.random() * 12) +1); 
+			month = (month.length()==1)?"0"+month:month;
+			String day = Integer.toString((int)(Math.random() * 28) +1); 
+			day = (day.length()==1)?"0"+day:day;
+			String date = "2024-"+ month + "-" + day;
+			String detail = "더미데이터"+ Integer.toString(i);
+			try {
+				AccountBookVO ab = new AccountBookVO(1, pp, pt, id, formatter.parse(date), amount, detail, 0, 0);
+				accountBookDao.insertAccountBook(ab);
+				
+				System.out.println("더미데이터 생성 " + ab.getAb_detail());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
