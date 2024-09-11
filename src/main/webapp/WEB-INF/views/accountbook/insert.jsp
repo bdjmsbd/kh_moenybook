@@ -14,8 +14,7 @@
 </div>
 
 <div class="modal-body">
-	<form action="<c:url value="/accountbook/insert"/>" method="post"
-		id="form">
+	<form action="<c:url value="/accountbook/insert"/>" method="post" id="form">
 		<div class="form-group">
 			<div
 				class="form_toggle row-vh d-flex flex-row justify-content-between">
@@ -107,7 +106,7 @@
 				placeholder='메모'></textarea>
 		</div>
 
-		<button type="submit" class="col-12 btn-submit">가계부 등록</button>
+		<button type="submit" class="col-12 btn btn-submit">가계부 등록</button>
 	</form>
 </div>
 <script>
