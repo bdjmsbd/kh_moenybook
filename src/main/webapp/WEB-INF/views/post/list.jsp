@@ -92,6 +92,7 @@
 	</c:if>
 	<div class="clearfix">
 		<a class="btn btn-outline-success text-right" href="<c:url value="/post/add?co_num=${co.co_num}"/>">글쓰기</a>
+		<a href="<c:url value="/post/board"/>">글쓰기</a>
 	</div>
 </div>
 <div class="container">
