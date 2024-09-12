@@ -85,9 +85,9 @@
 			</form>
 		</div>
 		<div class="mt-3 w-100 btn-group">
-			<a class="btn btn-outline-light text-dark" onclick=searchDate(-1) href="javascript:void(0);">이전 달</a>
-			<a class="btn btn-outline-light text-dark" onclick=searchDate(0) href="javascript:void(0);">이번 달</a>
-			<a class="btn btn-outline-light text-dark" onclick=searchDate(+1) href="javascript:void(0);">다음 달</a>
+			<a class="btn btn-primary" onclick=searchDate(-1) href="javascript:void(0);">이전 달</a>
+			<a class="btn btn-primary" onclick=searchDate(0) href="javascript:void(0);">이번 달</a>
+			<a class="btn btn-primary" onclick=searchDate(+1) href="javascript:void(0);">다음 달</a>
 		</div>
 		<hr>
 		<div class="total-amount border mt-3 p-2">
