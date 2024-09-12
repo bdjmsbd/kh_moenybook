@@ -27,14 +27,22 @@ INSERT INTO payment_type(pt_name, pt_at_num) VALUES('기타', 2);
 # 지출 목적 추가
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('월급',1);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('용돈',1);
-INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('기타지출', 1);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('기타 수입', 1);
 
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('식비/외식비', 2);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('생필품비', 2);
-INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('문화비', 2);
-INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('교통비', 2);
-INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('전기요금', 2);
-INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('수도요금', 2);
-INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('가스요금', 2);
-INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('핸드폰', 2);
-INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('인터넷', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('교육/문화비', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('교통/유류비', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('미용/의료비', 2);
+INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('통신비', 2);
 INSERT INTO payment_purpose(pp_name, pp_at_num) VALUES('기타 지출', 2);
+
+-- INSERT INTO `accountbook`.`member` (`me_id`, `me_pw`, `me_email`, `me_authority`, `me_fail`, `me_report`, `me_ms_name`) VALUES ('abc123', 'abc123', 'abc123@a.com', 'ADMIN', '0', '0', '사용');
+ INSERT INTO `accountbook`.`member` (`me_id`, `me_pw`, `me_email`, `me_authority`, `me_fail`, `me_report`, `me_ms_name`) VALUES ('a', 'a', 'a@a.com', 'ADMIN', '0', '0', '사용');
+-- INSERT INTO `accountbook`.`accountbook` (`ab_at_num`, `ab_pp_num`, `ab_pt_num`, `ab_me_id`, `ab_date`, `ab_amount`, `ab_regularity`, `ab_period`, `ab_detail`) vALUES ('2', '1', '1', 'a', '2024-08-10', '50000', '1', '1', 'qwe');
+-- insert into 
+-- 		accountbook
+-- 		(ab_at_num, ab_pp_num, ab_pt_num, ab_me_id, ab_date, ab_amount, ab_detail, ab_regularity, ab_period)
+-- 		values 
+-- 		(2,12,5,'abc123','2024-09-11',3000,'',0,0);
+-- 	

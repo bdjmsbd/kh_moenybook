@@ -11,6 +11,7 @@
 
 	<typeAliases>
 		<package name="kr.kh.app.model.vo" />
+		<package name="kr.kh.app.model.dto" />
 	</typeAliases>
 
 	<environments default="development">
@@ -29,5 +30,6 @@
 	<mappers>
 		<mapper resource="kr/kh/app/dao/MemberMapper.xml" />
 		<mapper resource="kr/kh/app/dao/AccountBookMapper.xml" />
+		<mapper resource="kr/kh/app/dao/PostMapper.xml" />
 	</mappers>
 </configuration>

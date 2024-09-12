@@ -15,7 +15,7 @@ import kr.kh.app.service.MemberService;
 public class CheckId extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	MemberService memberService = new MemberService();
+	private MemberService memberService = new MemberService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

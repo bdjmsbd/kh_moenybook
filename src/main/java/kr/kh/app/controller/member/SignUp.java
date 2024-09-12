@@ -51,11 +51,5 @@ public class SignUp extends HttpServlet {
 		}
 		
 		req.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(req, resp);
-		
-		
-		
-		
-		
 	}
-
 }
