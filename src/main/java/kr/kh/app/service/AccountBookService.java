@@ -69,7 +69,8 @@ public class AccountBookService {
 		return accountBookDao.selectAccountTypeList();
 	}
 
-	public List<AccountBookVO> getAccountBookList(MemberVO user, String searchType, String searchBegin, String searchEnd) {
+	public List<AccountBookVO> getAccountBookList(MemberVO user, String searchType, String searchBegin,
+			String searchEnd) {
 
 		if (user == null)
 			return null;
@@ -89,16 +90,16 @@ public class AccountBookService {
 
 		// 0: 수입/지출 모두 조회, 1: 수입만 조회, 2: 지출만 조회
 		switch (searchType) {
-			case "0":
-				list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 1));
-				list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 2));
-				break;
-			case "1":
-				list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 1));
-				break;
-			case "2":
-				list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 2));
-				break;
+		case "0":
+			list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 1));
+			list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 2));
+			break;
+		case "1":
+			list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 1));
+			break;
+		case "2":
+			list.addAll(accountBookDao.selectAccountBookListFromDate(user.getMe_id(), searchBegin, searchEnd, 2));
+			break;
 		}
 
 		System.out.println(list);
@@ -264,7 +265,8 @@ public class AccountBookService {
 			int nom_month = Integer.parseInt(now_yyyy_MM.substring(5, 7));
 
 			// 해당 월의 마지막 날을 객체로 생성
-			LocalDate nowDate = LocalDate.of(now_year, nom_month, 1).withDayOfMonth(LocalDate.of(now_year, nom_month, 1).lengthOfMonth());
+			LocalDate nowDate = LocalDate.of(now_year, nom_month, 1)
+					.withDayOfMonth(LocalDate.of(now_year, nom_month, 1).lengthOfMonth());
 
 			if (search_date.isAfter(nowDate)) {
 				// System.out.println(searchDate + " is after " + nowDate);
@@ -275,6 +277,11 @@ public class AccountBookService {
 			if (period == 3) {
 
 				LocalDate tmp_searchDate = search_date;
+
+				if (isSameMonth(tmp_searchDate, nowDate)) {
+					// 동일한 달이므로 처음 등록한 날이므로 추가 등록할 필요가 없다.
+					continue;
+				}
 
 				while (!isSameMonth(tmp_searchDate, nowDate)) {
 					tmp_searchDate = tmp_searchDate.plusMonths(1);
@@ -297,8 +304,8 @@ public class AccountBookService {
 				Date tmp_date = convertLocalDateToDate(tmp_searchDate);
 
 				tmp.setAb_date(tmp_date);
-				tmp.setAb_detail("[정기 " + (tmp.getAb_at_num() == 1 ? "수입" : "지출") + "]" + "[등록일: " + search_date_str + "]");
-				System.out.println(tmp);
+				tmp.setAb_detail(
+						"[정기 " + (tmp.getAb_at_num() == 1 ? "수입" : "지출") + "]" + "[등록일: " + search_date_str + "]");
 				tmpList.add(tmp.clone());
 
 				continue;
@@ -309,24 +316,33 @@ public class AccountBookService {
 
 				// step일을 추가
 				LocalDate tmp_searchDate = search_date;
-
-				// 같은 년월이 나올 때 까지
-				do {
+				
+				if (isSameMonth(tmp_searchDate, nowDate)) { 
+					// 같은 달이면 기간만큼만 더해준다.
 					tmp_searchDate = tmp_searchDate.plusDays(step);
-				} while (!isSameMonth(tmp_searchDate, search_date));
-
+					// 더해줬을 때 다음 달로 넘어간다면. 저장할 필요X
+					if(!isSameMonth(tmp_searchDate, nowDate)) {
+						continue;
+					}
+				} 
+				else {
+					// 같은 년월이 나올 때 까지
+					do {
+						tmp_searchDate = tmp_searchDate.plusDays(step);
+					} while (!isSameMonth(tmp_searchDate, nowDate));
+				}
 				do {
 					// LocalDate를 Date로 변환
 					Date tmp_date = convertLocalDateToDate(tmp_searchDate);
 
 					tmp.setAb_date(tmp_date);
-					tmp.setAb_detail("[정기 " + (tmp.getAb_at_num() == 1 ? "수입" : "지출") + "]" + "[등록일: " + search_date_str + "]");
-					System.out.println(tmp);
+					tmp.setAb_detail(
+							"[정기 " + (tmp.getAb_at_num() == 1 ? "수입" : "지출") + "]" + "[등록일: " + search_date_str + "]");
 					tmpList.add(tmp.clone());
 
 					tmp_searchDate = tmp_searchDate.plusDays(step);
 
-				} while (isSameMonth(tmp_searchDate, search_date));
+				} while (isSameMonth(tmp_searchDate, nowDate));
 			}
 		}
 
@@ -351,7 +367,8 @@ public class AccountBookService {
 		return date1.getYear() == date2.getYear() && date1.getMonth() == date2.getMonth();
 	}
 
-	public static List<AccountBookVO> add_accountBookList(List<AccountBookVO> ab_list, List<AccountBookVO> regularity_list, String now_yyyy_MM_dd) {
+	public static List<AccountBookVO> add_accountBookList(List<AccountBookVO> ab_list,
+			List<AccountBookVO> regularity_list, String now_yyyy_MM_dd) {
 
 		if (now_yyyy_MM_dd.length() == 7) { // yyyy-MM이라면 달 검색 한 것.
 
@@ -360,9 +377,12 @@ public class AccountBookService {
 			for (AccountBookVO tmp : regularity_list) {
 				Date tmpDate = tmp.getAb_date();
 				String tmpDateStr = sdf.format(tmpDate);
-
+				System.out.println(tmpDate);
+				System.out.println(tmpDateStr);
 				if (tmpDateStr.equals(now_yyyy_MM_dd)) {
-					ab_list.add(tmp);
+					System.out.println("hey~");
+					ab_list.add(tmp.clone());
+					System.out.println(ab_list);
 				}
 			}
 		} else { // yyyy-MM-dd 일 검색.
@@ -380,29 +400,42 @@ public class AccountBookService {
 		return ab_list;
 	}
 
-	public List<DayAmountDTO> addRegularityListFromAmount(List<DayAmountDTO> amount_list, List<AccountBookVO> regularity_list) {
-		
-		for(AccountBookVO tmpAb : regularity_list) {
+	public List<DayAmountDTO> addRegularityListFromAmount(List<DayAmountDTO> amount_list,
+			List<AccountBookVO> regularity_list) {
+
+		System.out.println(amount_list);
+		System.out.println(regularity_list);
+		for (AccountBookVO tmpAb : regularity_list) {
 			boolean res = false;
-			
-			for(DayAmountDTO tmpAmount : amount_list) {
-				if(tmpAmount.getDate().equals(tmpAb.getAb_date())) {
-					if(tmpAb.getAb_at_num()==1) {
-						tmpAmount.setTotalIncome(tmpAmount.getTotalIncome()+tmpAb.getAb_amount());
-					}
-					else {
-						tmpAmount.setTotalExpense(tmpAmount.getTotalExpense()+tmpAb.getAb_amount());
+
+			for (DayAmountDTO tmpAmount : amount_list) {
+				if (tmpAmount.getDate().equals(tmpAb.getAb_date())) {
+					if (tmpAb.getAb_at_num() == 1) {
+						System.out.println("a");
+						tmpAmount.setTotalIncome(tmpAmount.getTotalIncome() + tmpAb.getAb_amount());
+					} else {
+						System.out.println("b");
+						tmpAmount.setTotalExpense(tmpAmount.getTotalExpense() + tmpAb.getAb_amount());
 					}
 					res = true;
 					break;
 				}
 			}
-			if(!res) {
-				// DayAmountDTO
+			if (!res) {
+				// DayAmountDTO 
+				DayAmountDTO da;
+				if (tmpAb.getAb_at_num() == 1) {
+					System.out.println("c");
+					da = new DayAmountDTO(tmpAb.getAb_date(), tmpAb.getAb_amount(), 0);
+				} else {
+					System.out.println("d");
+					da = new DayAmountDTO(tmpAb.getAb_date(), 0, tmpAb.getAb_amount());
+				}
+				amount_list.add(da);
 			}
 		}
-		
-		return null;
+
+		return amount_list;
 	}
 
 }

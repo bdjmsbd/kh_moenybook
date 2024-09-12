@@ -28,5 +28,11 @@ public class DayAmountDTO {
     
     this.day = dom;
 	}
+
+	public DayAmountDTO(Date date, int totalIncome, int totalExpense) {
+		this.date = date;
+		this.totalIncome = totalIncome;
+		this.totalExpense = totalExpense;
+	}
 	
 }

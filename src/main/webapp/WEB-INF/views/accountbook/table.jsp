@@ -72,6 +72,7 @@ ${curDate}
 				<c:forEach items="${ab_list }" var="ab">
 					<%-- ${comments[n].name} --%>
 					<tr>
+					<c:if test="${searchType eq '0' || searchType eq ab.ab_at_num }">
 						<td>${at_list[ab.ab_at_num-1].at_name}</td>
 						<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
 						<td>${ab.ab_amount}</td>
@@ -88,6 +89,7 @@ ${curDate}
 						<a class="btn btn-outline-dark accountbook-update" href="<c:url value="/accountbook/update?ab_num=${ab.ab_num}"/>">수정</a>
 						<a class="btn btn-outline-dark accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
 						</td>
+					</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
