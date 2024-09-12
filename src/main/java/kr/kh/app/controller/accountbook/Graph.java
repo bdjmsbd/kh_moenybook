@@ -18,7 +18,7 @@ import kr.kh.app.model.vo.PaymentPurposeVO;
 import kr.kh.app.model.vo.PaymentTypeVO;
 import kr.kh.app.service.AccountBookService;
 
-@WebServlet("/graph")
+@WebServlet("/graph/export")
 public class Graph extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

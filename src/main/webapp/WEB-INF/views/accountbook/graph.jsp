@@ -9,16 +9,17 @@
 <h1 class="text-center mb-5">카테고리별 소비내역 그래프</h1>
 
 <div class="w-75 h-75 m-auto">
-	<canvas width="600" height="600" id="chart" style="display: block; box-sizing: border-box;"></canvas>
+	<c:choose>
+		<c:when test="${user ne null }"><canvas width="600" height="600" id="chart" style="display: block; box-sizing: border-box;"></canvas></c:when>
+		<c:otherwise>
+			<p class="text-center">내역을 보려면 로그인해주세요</p>
+			<a href="<c:url value="/login"/>" class="btn btn-dark m-auto w-25">로그인</a>
+		</c:otherwise>
+	</c:choose>
 </div>
 
-
-<c:forEach items="${ab_list}" var="ab">
-	<p>${ab}</p>
-</c:forEach>
-
 <script>
-let stat = document.getElementById('chart');
+let chart = document.getElementById('chart');
 
 const data = {
 	labels: [
@@ -46,7 +47,7 @@ const data = {
 	}
 };
 
-let config = new Chart(stat, {
+let config = new Chart(chart, {
     type: 'doughnut',
     data: data
 });
