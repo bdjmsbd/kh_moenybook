@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.AccountBookService;
 
+/**
+ * Servlet implementation class delete
+ */
 @WebServlet("/accountbook/delete")
 public class Delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;

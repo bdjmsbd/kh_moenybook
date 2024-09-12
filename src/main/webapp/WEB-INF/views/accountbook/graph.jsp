@@ -23,24 +23,24 @@ let chart = document.getElementById('chart');
 
 const data = {
 	labels: [
-		<c:forEach items="${pp_list}" var="pp">
-			<c:if test="${pp.pp_at_num eq 2}">'${pp.pp_name}',</c:if>
-		</c:forEach>
+	 <c:forEach items="${pp_list}" var="pp">
+	 	<c:if test="${pp.pp_at_num eq 2}">'${pp.pp_name}',</c:if>
+	 </c:forEach>
 	],
 	datasets: [{
-		data: [
-		 	<c:forEach items="${ex_list}" var="ab">
-		 		${ab.ex_sum},
-			</c:forEach>
-		],
-		 backgroundColor: [
-			'rgb(255, 99, 132)',
-			'rgb(75, 192, 192)',
-			'rgb(255, 205, 86)',
-			'rgb(179, 117, 255)',
-			'rgb(54, 162, 235)',
-			'rgb(201, 203, 207)'
-		 ]
+	  data: [
+	  	<c:forEach items="${ex_list}" var="ab">
+	  		${ab.ex_sum},
+		</c:forEach>
+	  ],
+	  backgroundColor: [
+	  	'rgb(255, 99, 132)',
+	      'rgb(75, 192, 192)',
+	      'rgb(255, 205, 86)',
+	      'rgb(179, 117, 255)',
+	      'rgb(54, 162, 235)',
+	      'rgb(201, 203, 207)'
+	  ]
 	}],
 	options: {
 	    responsive: true,

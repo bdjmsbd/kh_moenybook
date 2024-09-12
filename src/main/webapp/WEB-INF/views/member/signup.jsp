@@ -104,7 +104,6 @@
 	});
 
 	function checkId() {
-
 		var res = false;
 		var id = $('[name=id]').val();
 
@@ -119,7 +118,6 @@
 			},
 			error : function(xhr) {
 				console.log(xhr);
-
 			}
 		});
 		return res;

@@ -7,10 +7,30 @@
 <%@page import="java.util.Date"%>
 
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <style>
-.table-box {height: 70vh;}
+.total-amount, .form-box{
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.summary {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+.summary:last-child {
+    border-bottom: none;
+}
+.label {
+    font-weight: bold;
+}
+.value {
+    text-align: right;
+}
 
 .checkbox-group {
 	display: flex;
@@ -49,15 +69,24 @@
 
 @media all and (max-width: 1024px) {
 	.wrapper.d-flex {flex-direction: column;}
-	.table-box {width: 100% !important; max-height: 50vh;}
+	.table-box {width: 100% !important;}
 	.right-content-container {width: 100% !important;}
 }
 </style>
 
 <h1 class="text-center mb-5">표</h1>
-<p style="font-size: 1.5em;"><strong>${curDate}${searchPeriod}</strong> 의 수입/지출 내역</p>
+<p style="font-size: 1.5em;"><strong>
+	<c:choose>
+		<c:when test="${curDate eq null || curDate eq ''}">
+		${searchBegin} ~ ${searchEnd} 
+		</c:when>
+		<c:otherwise>
+		${curDate}
+		</c:otherwise> 
+	</c:choose></strong>의 수입/지출 내역</p>
+
 <div class="d-flex wrapper" style="gap: 3em;">
-	<div class="table-box overflow-auto w-75">
+	<div class="table-box w-75">
 		<table class="table table-striped text-center">
 			<thead>
 				<tr>
@@ -66,8 +95,9 @@
 					<th>금액</th>
 					<th>수단</th>
 					<th>메모</th>
-					<th>날짜</th>
+					<th class="init-sort">날짜</th>
 					<th>정기결제</th>
+					<th>제어</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -81,17 +111,21 @@
 								<td><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
 								<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
 								<td>${ab.ab_detail }</td>
-								<td><fmt:formatDate value="${ab.ab_date}"
-										pattern="yyyy-MM-dd" /></td>
-								<td><c:if test="${ab.ab_period eq 1}"> 매주 </c:if> <c:if
-										test="${ab.ab_period eq 2}"> 격주 </c:if> <c:if
-										test="${ab.ab_period eq 3}"> 매달 </c:if></td>
+								<td><fmt:formatDate value="${ab.ab_date}" pattern="yyyy-MM-dd" /></td>
+								<td>
+									<c:if test="${ab.ab_period eq 1}">매주</c:if>
+									<c:if test="${ab.ab_period eq 2}">격주</c:if>
+									<c:if test="${ab.ab_period eq 3}">매달</c:if>
+								</td>
+								<td>
+									<button class="btn btn-primary pt-0 pb-0">삭제</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="7" class="text-center">
+							<td colspan="8" class="text-center">
 								내역을 보려면 로그인해주세요
 								<a href="<c:url value="/login"/>" class="w-25 m-auto btn btn-primary" style="margin-top: 1em !important;">로그인</a>
 							</td>
@@ -114,10 +148,10 @@
 					<label for="expense" class="form-check-label btn text-dark">지출</label>
 				</div>
 				<div class="form-group mt-2">
-					<label for="begin-date">시작일:</label>
-					<input type="date" class="form-control" id="begin" name="search_begin">
-					<label for="end-date">종료일:</label>
-					<input type="date" class="form-control" id="end" name="search_end">
+					<label for="begin-date">시작일:</label> 
+					<input type="date" class="form-control" id="begin" name="search_begin" <c:if test="${searchBegin ne null && searchBegin ne ''}">value="${searchBegin }" </c:if> > 
+					<label for="end-date">종료일:</label> 
+					<input type="date" class="form-control" id="end" name="search_end" <c:if test="${searchEnd ne null && searchEnd ne ''}">value="${searchEnd }" </c:if>>
 				</div>
 				<button type="submit" class="btn w-100 btn-primary">조회</button>
 			</form>
@@ -128,20 +162,22 @@
 			<a class="btn btn-outline-light text-dark" onclick=searchDate(+1) href="javascript:void(0);">다음 달</a>
 		</div>
 		<hr>
-		<div class="total-amount mt-3">
+		<div class="total-amount border mt-3 p-2">
 			<div class="d-flex">
-				<div class="border btn p-2 w-50 mr-1">
-					<strong class="btn border p-0 mb-2">수입</strong>
-					<div><fmt:formatNumber value="${totalIncome}" pattern="#,###"/></div>
+				<div class="w-50 mr-1">
+					<strong class="btn border p-0 mb-2 d-block">수입</strong>
+					<div class="text-right"><fmt:formatNumber value="${totalIncome}" pattern="#,###"/></div>
 				</div>
-				<div class="border btn p-2 w-50 ml-1">
-					<strong class="btn border p-0 mb-2">지출</strong>
-					<div><fmt:formatNumber value="${totalExpense}" pattern="#,###"/></div>
+				<div class="w-50 ml-1">
+					<strong class="btn border p-0 mb-2 d-block">지출</strong>
+					<div class="text-right"><fmt:formatNumber value="${totalExpense}" pattern="#,###"/></div>
 				</div>
 			</div>
-			<div class="border btn p-2 mt-2">
-				<strong class="btn border p-0 mb-2">수입-지출</strong>
-				<div><fmt:formatNumber value="${totalIncome-totalExpense}" pattern="#,###"/></div>
+			<div class="mt-2">
+				<strong class="btn border p-0 mb-2 d-block">수입-지출</strong>
+				<div class="text-right">
+					<h4><fmt:formatNumber value="${totalIncome-totalExpense}" pattern="#,###"/></h4>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -149,8 +185,25 @@
 
 <script>
 
+function openUpdate(){
+	$.ajax({
+		url: '<c:url value="/accountbook/insert" />',
+		type: 'get',
+		data: {
+			date: '${selected}'
+		},
+		success: function(data){
+			$('.modal').addClass('show');
+			$('.modal-content').html(data);
+			console.log(data.date);
+		},
+		error : function(xhr){
+			console.log(xhr);
+		}
+	})
+}
+
 function searchDate(changeMonth) {
-	
 	try {
 		
 		if(changeMonth == 0) { 
@@ -158,15 +211,15 @@ function searchDate(changeMonth) {
 			nowDate = new Date();
 		}else {		
 			// 검색한 날짜를 Date 포맷으로 변경
-			nowDate = new Date(curDate);
+			nowDate = new Date("${curDate}");
 		}
+			searchDate = new Date(nowDate.setMonth(nowDate.getMonth() + changeMonth));
 		
 		// 검색할 날짜에 대한 새로운 Date 변수
-		searchDate = new Date(nowDate.setMonth(nowDate.getMonth() + changeMonth));
     } catch (error) {
         // 오류가 발생했을 때 실행할 코드
        searchDate = new Date();
-        alert('올바른 날짜를 입력해주세요. \n이번 달로 넘어갑니다.')
+       alert('올바른 날짜를 입력해주세요. \n이번 달로 넘어갑니다.')
     }
 	
 	// 연도, 월, 일 추출
@@ -179,6 +232,20 @@ function searchDate(changeMonth) {
 	location.href = "<c:url value="/table?searchDate="/>" + searchDateStr;
 	
 }
+
+$('.accountbook-delete').click(function(e){
+	if ('${user.me_id}' == null || '${user.me_id}' == ab_me_id) {
+		return false;
+	}
+	if (confirm('정말 삭제하시겠습니까?'))
+		return true;
+	else
+		return false;
+})
+
+$(document).ready(function(){
+    $('.table').DataTable({});
+});
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

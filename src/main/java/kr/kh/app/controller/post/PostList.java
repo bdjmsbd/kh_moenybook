@@ -33,7 +33,7 @@ public class PostList extends HttpServlet {
 		
 		List<PostVO> list = postService.getPostList(cri);
 		PageMaker pm = postService.getPostPageMaker(cri);
-
+		
 		request.setAttribute("co", community);
 		request.setAttribute("list", list);
 		request.setAttribute("pm", pm);

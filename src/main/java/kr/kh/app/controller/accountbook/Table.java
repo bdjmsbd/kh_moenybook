@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -29,12 +31,15 @@ public class Table extends HttpServlet {
 
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		String searchDate = request.getParameter("searchDate");
+		//String date = request.getParameter("searchDate");
 		
 		if(searchDate == null) {
 			Date now = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 			searchDate = sdf.format(now);
 		}else {
+			// CalendarDTO cal = new CalendarDTO();
+			
 			String year = searchDate.substring(0,4);
 			String month = searchDate.substring(5,7);
 			

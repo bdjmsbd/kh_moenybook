@@ -17,9 +17,8 @@
 	<form action="<c:url value="/member/deletemember"/>" method="post"
 		id="form">
 		<div class="form-group">
-			<label for="pw">비밀번호:</label> <input type="password"
-				class="form-control" id="pw" name="pw">
+			<label for="pw">비밀번호:</label> <input type="password" class="form-control" id="pw" name="pw">
 		</div>
-		<button type="submit" class="col-12 btn-submit">탈퇴</button>
+		<button type="submit" class="col-12 btn-submit btn">탈퇴</button>
 	</form>
 </div>

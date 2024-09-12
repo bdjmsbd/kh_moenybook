@@ -4,8 +4,16 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<h1 class="text-center mb-5">하루 소비</h1>
-
+<div class="container" style="min-height: calc(100vh - 0px);">
+<h1 class="text-center mb-5">커뮤니티 목록</h1>
+<ul class="list-group">
+	<c:forEach items="${list}" var="co">
+		<li class="list-group-item" style="text-align: center; ">
+			<a href="<c:url value="/post/list?co_num=${co.co_num}"/>">${co.co_name}</a>
+		</li>
+	</c:forEach>
+</ul>
+</div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <jsp:include page="/WEB-INF/views/common/footer.sub.jsp" />

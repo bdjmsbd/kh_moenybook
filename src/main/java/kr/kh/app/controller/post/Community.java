@@ -14,8 +14,8 @@ import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.service.PostService;
 import kr.kh.app.service.PostServiceImp;
 
-@WebServlet("/board")
-public class Board extends HttpServlet {
+@WebServlet("/community")
+public class Community extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PostService postService = new PostServiceImp();
 
@@ -23,7 +23,7 @@ public class Board extends HttpServlet {
 		//등록된 커뮤니티 목록을 가져와서 화면에 전달
     	List<CommunityVO> list = postService.getCommunityList();
     	request.setAttribute("list", list);
-    	request.getRequestDispatcher("/WEB-INF/views/post/board.jsp").forward(request, response);
+    	request.getRequestDispatcher("/WEB-INF/views/post/community.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -35,4 +35,5 @@ public interface PostDAO {
 	List<AccountTypeVO> selectPaymentTypeList();
 
 	void insertAccountBook(@Param("ab") AccountBookVO newAB);
+
 }

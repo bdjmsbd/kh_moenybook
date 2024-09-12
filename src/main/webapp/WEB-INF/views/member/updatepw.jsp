@@ -23,6 +23,6 @@
 			<label for="newpw2">새 비밀번호 확인:</label> <input type="password"
 				class="form-control" id="newpw2" name="newpw2">
 		</div>
-		<button type="submit" class="col-12 btn-submit">수정</button>
+		<button type="submit" class="col-12 btn-submit btn">수정</button>
 	</form>
 </div>

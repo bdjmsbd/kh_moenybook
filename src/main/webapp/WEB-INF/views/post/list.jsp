@@ -7,7 +7,7 @@
 
 <div class="container" style="min-height: calc(100vh - 240px)">
 	<h1 class="text-center mb-5">${co.co_name} 게시글 목록</h1>
-	<table class="table table-striped">
+	<table class="table table-striped text-center">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -91,19 +91,20 @@
 		</ul>
 	</c:if>
 	<div class="clearfix">
-		<a class="btn btn-outline-success text-right" href="<c:url value="/post/add?co_num=${co.co_num}"/>">글쓰기</a>
-		<a href="<c:url value="/post/board"/>">글쓰기</a>
+		<a class="btn btn-outline-success left" href="<c:url value="/community"/>">이전 목록</a>
+		<a class="btn btn-outline-success float-right" href="<c:url value="/post/add?co_num=${co.co_num}"/>">글쓰기</a>
 	</div>
 </div>
-<div class="container">
+<div class="container" style="min-height: calc(100vh - 240px)">
 	<form action="">
-		<div class="input-group mb-3">
-			<select class="form-control" name="type">
+		<div class="input-group mb-3" style="max-width: 400px;">
+			<select class="form-control w-25" name="type" style="flex: unset !important;">
 				<option value="all" <c:if test="${pm.cri.type == 'all' }">selected</c:if>>전체</option>
 				<option value="title" <c:if test="${pm.cri.type == 'title'}">selected</c:if>>제목</option>
 				<option value="writer" <c:if test="${pm.cri.type == 'writer'}">selected</c:if>>작성자</option>
 			</select>
 		    <input type="text" class="form-control" placeholder="검색어를 입력하세요." name="search" value="${pm.cri.search}">
+		    
 		    <div class="input-group-append">
 				<button type="submit" class="btn btn-outline-success">검색</button>
 		    </div>

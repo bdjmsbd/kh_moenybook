@@ -28,12 +28,15 @@ public class Graph extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		String searchDate = request.getParameter("searchDate");
+		//String date = request.getParameter("searchDate");
 		
 		if(searchDate == null) {
 			Date now = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 			searchDate = sdf.format(now);
 		}else {
+			// CalendarDTO cal = new CalendarDTO();
+			
 			String year = searchDate.substring(0,4);
 			String month = searchDate.substring(5,7);
 			

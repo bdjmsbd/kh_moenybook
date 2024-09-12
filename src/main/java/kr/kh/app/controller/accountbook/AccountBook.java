@@ -98,7 +98,6 @@ public class AccountBook extends HttpServlet {
 				today = null;
 			}
 			
-			//MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 			List<AccountBookVO> ab_list = null;
 			if(today != null) {
 				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -112,7 +111,7 @@ public class AccountBook extends HttpServlet {
 			tmp_month =(tmp_month.length()==1)?"0"+(tmp_month):tmp_month;
 			String date_amount = Integer.toString(year)+ "-" + tmp_month; // yyyy-MM
 			
-			System.out.println("달력에서 출력할 날" + date_amount);
+			//System.out.println("달력에서 출력할 날" + date_amount);
 			
 			List<DayAmountDTO> amount_list = accountBookService.getAmountList(user, date_amount);
 			System.out.println(amount_list);
@@ -120,6 +119,7 @@ public class AccountBook extends HttpServlet {
 			request.setAttribute("pp_list", pp_list);
 			request.setAttribute("pt_list", pt_list);
 			request.setAttribute("at_list", at_list);
+			request.setAttribute("amount_list", amount_list);
 			
 			request.setAttribute("cal", cal);
 			request.setAttribute("ab_list", ab_list);
