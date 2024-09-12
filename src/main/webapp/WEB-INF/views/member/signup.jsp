@@ -14,23 +14,21 @@
 		<div class="input-group mb-3">
 			<input type="text" class="form-control" id="id" name="id">
 			<div class="input-group-append">
-				<button type="button"
-					class="input-group-text btn btn-outline-success btn-dup mb-3">
-					아이디 중복 검사</button>
+				<button type="button" class="input-group-text btn btn-outline-success btn-dup mb-3">아이디 중복 검사</button>
 			</div>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="pw">비밀번호:</label>
-		<input type="password" class="form-control" id="pw" name="pw">
+		<label for="pw">비밀번호:</label> <input type="password"
+			class="form-control" id="pwd" name="pwd">
 	</div>
 	<div class="form-group">
-		<label for="pw2">비밀번호 확인:</label>
-		<input type="password" class="form-control" id="pw2" name="pw2">
+		<label for="pwd2">비밀번호 확인:</label> <input type="password"
+			class="form-control" id="pwd2" name="pwd2">
 	</div>
 	<div class="form-group">
-		<label for="email">이메일:</label>
-		<input type="text" class="form-control" id="email" name="email">
+		<label for="email">이메일:</label> <input type="text"
+			class="form-control" id="email" name="email">
 	</div>
 	<button type="submit" class="btn btn-outline-success col-12">회원가입</button>
 </form>
@@ -39,49 +37,49 @@
 	var flag = false;
 
 	$('#form').validate({
-		rules : {
-			id : {
-				required : true,
-				regex : /^\w{6,13}$/
+			rules : {
+				id : {
+					required : true,
+					regex : /^\w{6,13}$/
+				},
+				pwd : {
+					required : true,
+					regex : /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[^\w])([^\w]{1}|[\w]{1}){6,15}$/
+				},
+				pwd2 : {
+					equalTo : pwd
+				},
+				email : {
+					required : true,
+					email : true
+				}
 			},
-			pw : {
-				required : true,
-				regex : /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[^\w])([^\w]{1}|[\w]{1}){6,15}$/
+			messages : {
+				id : {
+					required : '필수 항목입니다.',
+					regex : '아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.'
+				},
+				pwd : {
+					required : '필수 항목입니다.',
+					regex : '영어 대소문자, 숫자, 특수문자가 꼭 들어가야 하며, 6~15자이어야 합니다.'
+				},
+				pwd2 : {
+					required : '필수 항목입니다.',
+					equalTo : '비번이 일치하지 않습니다.'
+				},
+				email : {
+					required : '필수 항목입니다.',
+					email : '올바른 이메일 형식이 아닙니다'
+				}
 			},
-			pw2 : {
-				equalTo : pw
-			},
-			email : {
-				required : true,
-				email : true
+			submitHandler : function() {
+				if (!flag) {
+					alert('아이디 중복 검사를 하세요.');
+					return false;
+				}
+				return checkId();
 			}
-		},
-		messages : {
-			id : {
-				required : '필수 항목입니다.',
-				regex : '아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.'
-			},
-			pw : {
-				required : '필수 항목입니다.',
-				regex : '영어 대소문자, 숫자, 특수문자가 꼭 들어가야 하며, 6~15자이어야 합니다.'
-			},
-			pw2 : {
-				required : '필수 항목입니다.',
-				equalTo : '비번이 일치하지 않습니다.'
-			},
-			email : {
-				required : '필수 항목입니다.',
-				email : '올바른 이메일 형식이 아닙니다'
-			}
-		},
-		submitHandler : function() {
-			if (!flag) {
-				alert('아이디 중복 검사를 하세요.');
-				return false;
-			}
-			return checkId();
-		}
-	});
+		});
 
 	$.validator.addMethod('regex', function(value, element, regex) {
 		var re = new RegExp(regex);

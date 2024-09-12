@@ -22,6 +22,5 @@
 	<button type="submit" class="btn btn-outline-success col-12">로그인</button>
 </form>
 
-
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <jsp:include page="/WEB-INF/views/common/footer.sub.jsp" />

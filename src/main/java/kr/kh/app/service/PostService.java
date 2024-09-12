@@ -1,32 +1,31 @@
 package kr.kh.app.service;
 
-import java.io.InputStream;
+import java.util.List;
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import kr.kh.app.model.vo.CommunityVO;
+import kr.kh.app.model.vo.MemberVO;
+import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.pagination.Criteria;
+import kr.kh.app.pagination.PageMaker;
 
-import kr.kh.app.dao.PostDAO;
+public interface PostService {
 
-public class PostService {
-	
-	private static PostDAO postDao;
-	
-	public PostService() {
-		String resource = "kr/kh/app/config/mybatis-config.xml";
-		InputStream inputStream;
-		SqlSession session;
-		try {
+	List<CommunityVO> getCommunityList();
 
-			inputStream = Resources.getResourceAsStream(resource);
-			SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			session = sessionFactory.openSession(true);
-			postDao = session.getMapper(PostDAO.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
+	CommunityVO getCommunity(String num);
+
+	List<PostVO> getPostList(Criteria cri);
+
+	PageMaker getPostPageMaker(Criteria cri);
+
+	boolean insertPost(PostVO post);
+
+	void updatePostView(String po_num);
+
+	PostVO getPost(String po_num);
+
+	boolean updatePost(PostVO post, MemberVO user);
+
+	int deletePost(String po_num, MemberVO user);
+
 }
