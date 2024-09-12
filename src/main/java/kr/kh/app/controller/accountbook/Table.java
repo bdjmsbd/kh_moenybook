@@ -27,27 +27,22 @@ public class Table extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AccountBookService accountBookService = new AccountBookService();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// dummy 생성 함수
+		// accountBookService.dummyGen();
 
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		String searchDate = request.getParameter("searchDate");
-		//String date = request.getParameter("searchDate");
-		
-		if(searchDate == null) {
+		// String date = request.getParameter("searchDate");
+
+		if (searchDate == null) {
 			Date now = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 			searchDate = sdf.format(now);
-		}else {
-			// CalendarDTO cal = new CalendarDTO();
-			
-			String year = searchDate.substring(0,4);
-			String month = searchDate.substring(5,7);
-			
-			System.out.println("year :" + year);
-			System.out.println("month :" + month);
-			
 		}
-		
+
 		List<AccountBookVO> ab_list = accountBookService.getAccountBookList(user, searchDate);
 		List<AccountTypeVO> at_list = accountBookService.getAccountTypeList();
 		List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
@@ -65,6 +60,8 @@ public class Table extends HttpServlet {
 			request.setAttribute("totalIncome", totalIncome);
 			request.setAttribute("totalExpense", totalExpense);
 		}
+		
+		request.setAttribute("searchType", "0");
 		request.setAttribute("curDate", searchDate);
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);

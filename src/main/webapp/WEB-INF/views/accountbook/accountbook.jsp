@@ -1,73 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <style>
-.account-book-container {
-	gap: 2em;
-}
-
-.account-book-container .calendar-wrapper, .account-book-container .list-wrapper
-	{
-	width: 50%;
-}
-
-@media all and (max-width: 1024px) {
-	.account-book-container {
-		flex-direction: column;
-	}
-	.account-book-container .calendar-wrapper, .account-book-container .list-wrapper
-		{
-		width: 100%;
-	}
-}
-
-.calendar td {
-	position: relative;
-}
-
-.calendar td a {
-	color: inherit;
-}
-
-.calendar td .selected {
-	font-weight: 900;
-}
-
-.calendar td .selected::before {
-	content: '';
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 2rem;
-	height: 2rem;
-	border: 1px solid;
-	border-radius: 50%;
+.btn-amount {
+	display: inline-flex;
+	justify-content: center; 
+    width: 100%;
+    height: 20px;
+    font-size: 10px;
+    border: 1px solid #ccc;  /* 버튼 경계 색상 */
+    align-items: center;
 }
 </style>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <div class="d-flex account-book-container">
 	<div class="calendar-wrapper">
 		<div class="mt-3 mb-3 p-3 d-flex justify-content-between">
 			<span><a class="btn btn-outline-dark btn-sm"
 				href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month-1}"/>">이전달</a>
-			</span> <span class="fw-bold fs-3">${cal.year}년 ${cal.month+1}월</span> <span>
+			</span> 
+			<span class="fw-bold fs-3">${cal.year}년 ${cal.month+1}월</span> 
+			<span>
 				<a class="btn btn-outline-dark btn-sm"
 				href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month+1}"/>">다음달</a>
 			</span>
 		</div>
-
-		<table class="table text-center table-bordered calendar">
+		
+		<table class="table text-left table-bordered calendar">
 			<tr class="table-light text-center fs-5 tr-h">
 				<th class="text-danger">일</th>
 				<th>월</th>
@@ -80,80 +46,129 @@
 			<c:forEach begin="1" end="${cal.tdCnt}" step="7" var="i">
 				<tr>
 					<c:forEach begin="${i }" end="${i + 6}" step="1" var="j">
-						<td><c:if test="${selected ne null }">
+					<td class="text-center">
+						<c:if test="${selected ne null }">
+							<c:choose>
+								<c:when test="${selected.dayOfMonth == (j - cal.startBlankCnt)}">
+									<c:set var="cls" value="selected" />
+								</c:when>
+								<c:otherwise>
+									<c:set var="cls" value="" />
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+						
+						
+							<c:if test="${(j > cal.startBlankCnt) && (j <= cal.startBlankCnt + cal.lastDate)}">
 								<c:choose>
-									<c:when
-										test="${selected.dayOfMonth == (j - cal.startBlankCnt)}">
-										<c:set var="cls" value="selected" />
+									<c:when test="${j % 7 == 0 }">
+										<a href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}&searchType=0"/>">
+										<span class="text-primary ${cls}">${j - cal.startBlankCnt }</span><br></a>
+										<c:forEach  items="${amount_list }" var="amount" >
+										<c:if test="${(j - cal.startBlankCnt) eq amount.day}">
+											<span><c:if test="${amount.totalIncome ne 0}"> 
+												<a class="btn btn-primary btn-amount" href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}&searchType=1"/>">
+												<fmt:formatNumber value="${amount.totalIncome}" type="number" groupingUsed="true"/>
+												</a> 
+											</c:if></span><br>
+											<span><c:if test="${amount.totalExpense ne 0}">  
+												<a class="btn btn-danger btn-amount" href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}&searchType=2"/>">
+												<fmt:formatNumber value="${amount.totalExpense}" type="number" groupingUsed="true"/>
+												</a>
+											</c:if></span>
+										</c:if>
+										</c:forEach>
+										
+									</c:when>
+									<c:when test="${j % 7 == 1 }">
+										<a href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}&searchType=0"/>">
+										<span class="text-danger ${cls}">${j - cal.startBlankCnt } </span><br></a>
+										<c:forEach  items="${amount_list }" var="amount" >
+										<c:if test="${(j - cal.startBlankCnt) eq amount.day}">
+											<span><c:if test="${amount.totalIncome ne 0}"> 
+												<a class="btn btn-primary btn-amount" href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}&searchType=1"/>">
+												<fmt:formatNumber value="${amount.totalIncome}" type="number" groupingUsed="true"/>
+												</a> 
+											</c:if></span><br>
+											<span><c:if test="${amount.totalExpense ne 0}"> 
+												<a class="btn btn-danger btn-amount" href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}&searchType=2"/>">
+												<fmt:formatNumber value="${amount.totalExpense}" type="number" groupingUsed="true"/>
+												</a>
+											</c:if></span>
+										</c:if>
+										</c:forEach>
 									</c:when>
 									<c:otherwise>
-										<c:set var="cls" value="" />
+										<a href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}&searchType=0"/>">
+										<span class="${cls}"> ${j - cal.startBlankCnt } </span><br></a>
+										<c:forEach  items="${amount_list }" var="amount" >
+										<c:if test="${(j - cal.startBlankCnt) eq amount.day}">
+											<span><c:if test="${amount.totalIncome ne 0}"> 
+												<a class="btn btn-primary btn-amount" href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}&searchType=1"/>">
+												<fmt:formatNumber value="${amount.totalIncome}" type="number" groupingUsed="true"/>
+												</a> 
+											</c:if></span><br>
+											<span><c:if test="${amount.totalExpense ne 0}"> 
+												 <a class="btn btn-danger btn-amount" href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}&searchType=2"/>">
+												 <fmt:formatNumber value="${amount.totalExpense}" type="number" groupingUsed="true"/>
+												 </a>
+											</c:if></span>
+										</c:if>
+										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</c:if> <a
-							href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month}&day=${j - cal.startBlankCnt}"/>">
-								<c:if
-									test="${(j > cal.startBlankCnt) && (j <= cal.startBlankCnt + cal.lastDate)}">
-									<c:choose>
-										<c:when test="${j % 7 == 0 }">
-											<span class="text-primary ${cls}">${j - cal.startBlankCnt }</span>
-										</c:when>
-										<c:when test="${j % 7 == 1 }">
-											<span class="text-danger ${cls}">${j - cal.startBlankCnt }</span>
-										</c:when>
-										<c:otherwise>
-											<span class="${cls}">${j - cal.startBlankCnt }</span>
-										</c:otherwise>
-									</c:choose>
-								</c:if>
-						</a></td>
-					</c:forEach>
+							</c:if>
+						
+					</td>
+				</c:forEach>
 				</tr>
 			</c:forEach>
+			
 		</table>
 	</div>
-
-	<div class="list-wrapper">
-		<h3>${selected }</h3>
-		<div class="overflow-auto mt-3 mb-5" style="max-height: 70vh;">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th></th>
-						<th class="text-center" colspan="2">상세</th>
-						<th class="text-center">금액</th>
-						<th class="text-center">수단</th>
-						<th class="text-center">용도</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${ab_list}" var="ab">
-						<tr>
-							<td class="text-center">${at_list[ab.ab_at_num-1].at_name}</td>
-							<td colspan=2>${ab.ab_detail }</td>
-							<td class="text-right"><fmt:formatNumber value="${ab.ab_amount }" pattern="#,###"/></td>
-							<td class="text-center">${pt_list[ab.ab_pt_num-1].pt_name}</td>
-							<td class="text-center">${pp_list[ab.ab_pp_num-1].pp_name}</td>
-						</tr>
-					</c:forEach>
+	<div class="list-wrapper ml-3">
+		<h3>${selected } 내역</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>유형</th>
+					<th>분류</th>
+					<th>금액</th>
+					<th>결제 방식</th>
+					<th>메모</th>
+					<th>정기결제</th>
+					<th>제어</th>
 					
-					<c:if test="${ab_list.size() eq 0 || ab_list eq null }">
-						<tr>
-							<td class="text-center" colspan="6">내역이 없습니다</td>
-						</tr>
-					</c:if>
-				</tbody>
-			</table>
-		</div>
-
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${ab_list }" var="ab">
+					<%-- ${comments[n].name} --%>
+					<tr>
+						<c:if test="${searchType eq '0' || ab.ab_at_num eq searchType}">
+						<td>${at_list[ab.ab_at_num-1].at_name}</td>
+						<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
+						<td>${ab.ab_amount}</td>
+						<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
+						<td>${ab.ab_detail }</td>
+						<td>
+						<c:if test="${ab.ab_period eq 1}"> 매주 </c:if> 
+						<c:if test="${ab.ab_period eq 2}"> 격주 </c:if> 
+						<c:if test="${ab.ab_period eq 3}"> 매달 </c:if>
+						</td>
+						<td style=" display: flex; gap: 1px;">
+						<a class="btn btn-outline-dark accountbook-update" href="<c:url value="/accountbook/update?ab_num=${ab.ab_num}"/>">수정</a>
+						<a class="btn btn-outline-dark accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
+						</td>
+						</c:if>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		
 		<c:choose>
-			<c:when test="${user ne null }">
-				<div class="btn btn-dark d-block" data-toggle="modal"
-					data-target="#modal" onclick="openInsert();">내역 등록</div>
-			</c:when>
-			<c:otherwise>
-				<a href="<c:url value="/login"/>" class="btn btn-dark">로그인</a>
-			</c:otherwise>
+			<c:when test="${user ne null }"><div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openInsert();">내역 등록</div></c:when>
+			<c:otherwise><a href="<c:url value="/login"/>" class="btn btn-dark">로그인</a></c:otherwise>
 		</c:choose>
 	</div>
 </div>
@@ -165,23 +180,23 @@
 </div>
 
 <script>
-	function openInsert() {
-		$.ajax({
-			url : '<c:url value="/accountbook/insert" />',
-			type : 'get',
-			data : {
-				date : '${selected}'
-			},
-			success : function(data) {
-				$('.modal').addClass('show');
-				$('.modal-content').html(data);
-				console.log(data.date);
-			},
-			error : function(xhr) {
-				console.log(xhr);
-			}
-		})
-	}
+function openInsert(){
+	$.ajax({
+		url: '<c:url value="/accountbook/insert" />',
+		type: 'get',
+		data: {
+			date: '${selected}'
+		},
+		success: function(data){
+			$('.modal').addClass('show');
+			$('.modal-content').html(data);
+			console.log(data.date);
+		},
+		error : function(xhr){
+			console.log(xhr);
+		}
+	})
+}
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

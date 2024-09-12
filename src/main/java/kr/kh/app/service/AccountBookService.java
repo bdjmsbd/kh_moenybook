@@ -73,13 +73,6 @@ public class AccountBookService {
 		if(searchType == null) return null;
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-00");
-		
-//		// 문자열을 LocalDate로 변환
-//    LocalDate date = LocalDate.parse(searchEnd, formatter);
-//    
-//    // 날짜 1일 증가
-//    LocalDate nextDay = date.plusDays(1);
-//    searchEnd = nextDay.format(formatter);
     
 		List<AccountBookVO> list = new ArrayList<AccountBookVO>();
 		

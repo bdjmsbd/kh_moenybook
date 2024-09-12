@@ -1,18 +1,36 @@
 @charset "UTF-8";
 
-.account-book-container {gap: 2em;}
-.account-book-container .calendar-wrapper,
-.account-book-container .list-wrapper {width: 50%;}
-
-@media all and (max-width: 1024px){
-	.account-book-container {flex-direction: column;}
-	.account-book-container .calendar-wrapper,
-	.account-book-container .list-wrapper {width: 100%;}
+.account-book-container {
+	gap: 2em;
 }
 
-.calendar td {position: relative;}
-.calendar td a {color: inherit;}
-.calendar td .selected {font-weight: 900;}
+.account-book-container .calendar-wrapper, .account-book-container .list-wrapper
+	{
+	width: 50%;
+}
+
+@media all and (max-width: 1024px) {
+	.account-book-container {
+		flex-direction: column;
+	}
+	.account-book-container .calendar-wrapper, .account-book-container .list-wrapper
+		{
+		width: 100%;
+	}
+}
+
+.calendar td {
+	position: relative;
+}
+
+.calendar td a {
+	color: inherit;
+}
+
+.calendar td .selected {
+	font-weight: 900;
+}
+
 .calendar td .selected::before {
 	content: '';
 	position: absolute;
