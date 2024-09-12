@@ -26,7 +26,6 @@ public class Update extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		try {
 			MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 			String ab_numStr = request.getParameter("ab_num");

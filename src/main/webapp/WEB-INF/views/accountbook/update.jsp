@@ -6,10 +6,11 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 
+<link rel="stylesheet" href="<c:url value="/resources/css/insert.css"/>">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>
 
 <div class="modal-header">
-	<h4 class="modal-title">내역 등록</h4>
+	<h4 class="modal-title">내역 수정</h4>
 	<button type="button" class="close" data-dismiss="modal">×</button>
 </div>
 
@@ -26,7 +27,7 @@
 				<div class="form_radio_btn btn-expense"> 
 				<input id="radio-2" type="radio" name='ab_at_num' id='at_num' value='2'
 				<c:choose> <c:when test="${ab.ab_at_num eq '2'}"> checked </c:when> 
-				<c:otherwise> disabled </c:otherwise> </c:choose> > > 
+				<c:otherwise> disabled </c:otherwise> </c:choose> >
 				<label for="radio-2">지출</label>
 				</div>
 			</div>

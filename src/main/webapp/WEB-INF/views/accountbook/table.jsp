@@ -54,7 +54,7 @@
 						<c:if test="${ab.ab_period eq 3}"> 매달 </c:if>
 						</td>
 						<td style=" display: flex; gap: 1px;">
-						<a class="btn btn-outline-dark accountbook-update" href="<c:url value="/accountbook/update?ab_num=${ab.ab_num}"/>">수정</a>
+						<a class="btn btn-outline-dark accountbook-update" href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})">수정</a>
 						<a class="btn btn-outline-dark accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
 						</td>
 					</tr>
@@ -112,17 +112,16 @@
 
 <script>
 
-function openUpdate(){
+function openUpdate(num){
 	$.ajax({
-		url: '<c:url value="/accountbook/insert" />',
+		url: '<c:url value="/accountbook/update"/>',
 		type: 'get',
 		data: {
-			date: '${selected}'
+			ab_num : num
 		},
 		success: function(data){
 			$('.modal').addClass('show');
 			$('.modal-content').html(data);
-			console.log(data.date);
 		},
 		error : function(xhr){
 			console.log(xhr);

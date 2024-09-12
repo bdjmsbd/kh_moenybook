@@ -70,5 +70,8 @@ header nav ul li a {color: inherit !important; display: block; height: 100%; pad
 	color: #fff;
 }
 
+/* table */
+table th {text-align: center;}
+
 /* modal */
 .modal-body > * {max-width: 100% !important;}

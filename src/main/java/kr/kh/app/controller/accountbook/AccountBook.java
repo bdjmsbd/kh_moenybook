@@ -128,12 +128,11 @@ public class AccountBook extends HttpServlet {
 			List<DayAmountDTO> amount_list = accountBookService.getAmountList(user, date_month);
 			
 			// 람다 표현식을 사용한 Comparator 정의
-      Comparator<DayAmountDTO> sortedList = (a1, a2) -> a1.getDate().compareTo(a2.getDate());
-      // 정렬 수행
-      amount_list.sort(sortedList); 
-      
-			
-      System.out.println(ab_list);
+			Comparator<DayAmountDTO> sortedList = (a1, a2) -> a1.getDate().compareTo(a2.getDate());
+			// 정렬 수행
+			amount_list.sort(sortedList); 
+  
+  			//System.out.println(ab_list);
 			for(DayAmountDTO tmp : amount_list) {
 				tmp.initDay();
 			}

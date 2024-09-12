@@ -21,11 +21,6 @@
 		<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openDropCheck();">회원 탈퇴</div>
 	</div>
 </form>
-<div id="modal" class="modal">
-	<div class="modal-dialog">
-		<div class="modal-content"></div>
-	</div>
-</div>
 <script>
 function openUpdatePW(){
 	$.ajax({

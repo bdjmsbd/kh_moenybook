@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.container {
+    max-width: 100vw;
+    padding: 3em;
+}
+
+.calendar-wrapper {width: 50%;}
+.list-wrapper {width: 45%;}
+
+.calendar-wrapper table td {height: 100px;}
+.calendar-wrapper table td a {color: inherit;}
+.calendar-wrapper table td .selected {font-weight: 900; text-decoration: underline;}
+
+.calendar-wrapper table .btn-amount {
+	display: inline-flex;
+	justify-content: center; 
+    width: 100%;
+    height: 20px;
+    font-size: 10px;
+    align-items: center;
+}
+
+
+@media all and (max-width: 1024px) {
+	.account-book-container {flex-direction: column; gap: 3em;}
+	.calendar-wrapper,
+	.list-wrapper {width: 100%;}
+
+	.calendar-wrapper {overflow-x: auto;}
+}
