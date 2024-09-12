@@ -54,7 +54,7 @@
 						<c:if test="${ab.ab_period eq 3}"> 매달 </c:if>
 						</td>
 						<td style=" display: flex; gap: 1px;">
-						<a class="btn btn-outline-dark accountbook-update" href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})">수정</a>
+						<a class="btn btn-outline-dark accountbook-update" href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})" data-toggle="modal" data-target="#modal">수정</a>
 						<a class="btn btn-outline-dark accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
 						</td>
 					</tr>
