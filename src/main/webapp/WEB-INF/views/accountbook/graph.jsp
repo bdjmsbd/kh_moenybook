@@ -43,7 +43,7 @@ const data = {
 	  ]
 	}],
 	options: {
-	    responsive: false,
+	    responsive: true,
 	}
 };
 

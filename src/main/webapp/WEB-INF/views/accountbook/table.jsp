@@ -55,10 +55,10 @@
 </style>
 
 <h1 class="text-center mb-5">표</h1>
-<h2>검색 &lt; ${curDate}${searchPeriod} &gt;</h2>
+<p style="font-size: 1.5em;"><strong>${curDate}${searchPeriod}</strong> 의 수입/지출 내역</p>
 <div class="d-flex wrapper" style="gap: 3em;">
 	<div class="table-box overflow-auto w-75">
-		<table class="table table-striped">
+		<table class="table table-striped text-center">
 			<thead>
 				<tr>
 					<th>유형</th>
@@ -78,7 +78,7 @@
 							<tr>
 								<td>${at_list[ab.ab_at_num-1].at_name}</td>
 								<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
-								<td>${ab.ab_amount}</td>
+								<td><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
 								<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
 								<td>${ab.ab_detail }</td>
 								<td><fmt:formatDate value="${ab.ab_date}"
