@@ -24,7 +24,7 @@ public class DayAmountDTO {
     int dom = calendar.get(Calendar.DAY_OF_MONTH);
 
     // 결과 출력
-    System.out.println("일(day): " + dom);
+    //System.out.println("일(day): " + dom);
     
     this.day = dom;
 	}

@@ -1,6 +1,8 @@
 package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -26,9 +28,9 @@ import kr.kh.app.service.AccountBookService;
 public class AccountBook extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private AccountBookService accountBookService = new AccountBookService();
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int year = 0;
@@ -39,10 +41,10 @@ public class AccountBook extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		try {
 			LocalDate today = LocalDate.now();
-			
+
 			// 년도, 월 중 하나라도 지정(넘겨져 오지)되지 않으면 오늘날짜 기준으로 월달력 출력
 			if (request.getParameter("year") == null ||
-				request.getParameter("month") == null) {
+					request.getParameter("month") == null) {
 				year = today.getYear();
 				month = today.getMonthValue() - 1;
 			} else {
@@ -60,12 +62,12 @@ public class AccountBook extends HttpServlet {
 					year = year + 1;
 				}
 			}
-			
-			if(month == today.getMonthValue() - 1 && request.getParameter("day") == null) //처음 들어갔을 때
+
+			if (month == (today.getMonthValue() - 1) && request.getParameter("day") == null) // 처음 들어갔을 때
 				day = today.getDayOfMonth();
-			else if(request.getParameter("day") != null && !request.getParameter("day").equals(day))
+			else if (request.getParameter("day") != null && !request.getParameter("day").equals(day))
 				day = Integer.parseInt(request.getParameter("day"));
-			
+
 			// 출력하고자 달의 1일 객체 + 1일 요일 + 마지막 날짜
 			Calendar firstDate = Calendar.getInstance();
 			firstDate.set(Calendar.YEAR, year);
@@ -83,7 +85,7 @@ public class AccountBook extends HttpServlet {
 			int tdCnt = startBlankCnt + lastDate + endBlankCnt;
 
 			CalendarDTO cal = new CalendarDTO();
-			
+
 			cal.setYear(year);
 			cal.setMonth(month);
 			cal.setDay(day);
@@ -92,18 +94,22 @@ public class AccountBook extends HttpServlet {
 			cal.setStartBlankCnt(startBlankCnt);
 			cal.setEndBlankCnt(endBlankCnt);
 			cal.setTdCnt(tdCnt);
-			
+
+			System.out.println("today.getMonthValue() - 1 " + (today.getMonthValue() - 1));
+			System.out.println("month" + (month));
 			if (day != 0) {
 				today = LocalDate.of(year, month + 1, day);
-			} else if(day == 0 && today.getMonthValue() - 1 != month) {
+			} else if (day == 0 && today.getMonthValue() - 1 != month) {
 				today = null;
 			}
-			
+			System.out.println("--");
+			System.out.println(day);
+			System.out.println("--");
 			// MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 			List<AccountBookVO> ab_list = null;
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM");
 
 			if (today != null) {
-				DateTimeFormatter format;
 				if (request.getParameter("year") == null || request.getParameter("month") == null) {
 					format = DateTimeFormatter.ofPattern("yyyy-MM");
 					searchType = "0";
@@ -112,29 +118,38 @@ public class AccountBook extends HttpServlet {
 				}
 				ab_list = accountBookService.getAccountBookList(user, today.format(format));
 			}
-			
 			List<AccountTypeVO> at_list = accountBookService.getAccountTypeList();
 			List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
 			List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
-			
-			String tmp_month = Integer.toString(month+1);
-			tmp_month =(tmp_month.length()==1)?"0"+(tmp_month):tmp_month;
+
+			String tmp_month = Integer.toString(month + 1);
+			tmp_month = (tmp_month.length() == 1) ? "0" + (tmp_month) : tmp_month;
 			// String tmp_day = Integer.toString(day);
 			// tmp_day = (tmp_day.length()==1)?"0"+(tmp_day):tmp_day;
-			String date_month = Integer.toString(year)+ "-" + tmp_month; // yyyy-MM
-			// String date_day = Integer.toString(year)+ "-" + tmp_month+ "-" + tmp_day; // yyyy-MM-dd
-			
-			System.out.println("달력에서 출력할 날 : " + date_month);
-			
+			String date_month = Integer.toString(year) + "-" + tmp_month; // yyyy-MM
+			// String date_day = Integer.toString(year)+ "-" + tmp_month+ "-" + tmp_day; //
+			// yyyy-MM-dd
+
+		
+
+			List<AccountBookVO> regularity_list = accountBookService.getAccountBookListWithRegularity(user, date_month);
+
+			if (ab_list != null && regularity_list != null) {
+				ab_list = AccountBookService.add_accountBookList(ab_list, regularity_list, today.format(format));
+			}
+
 			List<DayAmountDTO> amount_list = accountBookService.getAmountList(user, date_month);
 			
-			// 람다 표현식을 사용한 Comparator 정의
-      Comparator<DayAmountDTO> sortedList = (a1, a2) -> a1.getDate().compareTo(a2.getDate());
-      // 정렬 수행
-      amount_list.sort(sortedList); 
-      
+			if (amount_list != null && regularity_list != null) {
+				amount_list = accountBookService.addRegularityListFromAmount(amount_list, regularity_list);
+			}
 			
-			for(DayAmountDTO tmp : amount_list) {
+			// 람다 표현식을 사용한 Comparator 정의
+			Comparator<DayAmountDTO> sortedList = (a1, a2) -> a1.getDate().compareTo(a2.getDate());
+			// 정렬 수행
+			amount_list.sort(sortedList);
+
+			for (DayAmountDTO tmp : amount_list) {
 				tmp.initDay();
 			}
 
@@ -144,15 +159,15 @@ public class AccountBook extends HttpServlet {
 			request.setAttribute("pp_list", pp_list);
 			request.setAttribute("pt_list", pt_list);
 			request.setAttribute("at_list", at_list);
-			
+
 			request.setAttribute("cal", cal);
 			request.setAttribute("ab_list", ab_list);
 			request.setAttribute("selected", today);
-			
+
 			request.getRequestDispatcher("/WEB-INF/views/accountbook/accountbook.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			request.setAttribute("msg", "달력 생성중 에러 발생!");
 			request.setAttribute("url", "/main");
 			request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);

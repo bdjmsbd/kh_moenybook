@@ -28,10 +28,10 @@ public class Delete extends HttpServlet {
 		
 		if(res) {
 			request.setAttribute("msg", "삭제 성공!");
-			request.setAttribute("url", "/table");
+			request.setAttribute("url", "/");
 		}else {
 			request.setAttribute("msg", "삭제 실패!");
-			request.setAttribute("url", "/table");
+			request.setAttribute("url", "/");
 		}
 		
 		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);

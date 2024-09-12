@@ -44,6 +44,8 @@
 			ab_me_id = #{me_id} and ab_date like concat(#{date},'%')
 		GROUP BY
 			ab_date;
+			
+			
 	</select> 
 	<delete id="deleteAccountBook">
 		delete from accountbook where ab_me_id = #{me_id} and ab_num = #{ab_num}
@@ -66,4 +68,11 @@
 		where
 			ab_num = #{ab.ab_num}
 	</update>
+	<select id="getAccountBookListWithRegularity" resultType="AccountBookVO">
+		SELECT *
+		FROM
+			accountbook
+		WHERE
+			ab_me_id = #{me_id} and ab_regularity != 0
+	</select> 
 </mapper>

@@ -25,12 +25,14 @@ public interface AccountBookDAO {
 
 	List<AccountBookVO> selectAccountBookListFromDate(@Param("me_id")String me_id, @Param("searchBegin")String searchBegin, @Param("searchEnd")String searchEnd, @Param("isIncome")int isIncome);
 
-	List<DayAmountDTO> getAmountList(@Param("me_id")String me_id, @Param("date")String date_amount);
+	List<DayAmountDTO> getAmountList(@Param("me_id")String me_id, @Param("date")String date_month);
 
 	int deleteAccountBook(@Param("me_id")String me_id, @Param("ab_num")String ab_numStr);
 
 	AccountBookVO selectAccountBook(@Param("me_id")String me_id, @Param("ab_num")String ab_numStr);
 
 	int updateAccountBook(@Param("ab")AccountBookVO newAB);
+
+	List<AccountBookVO> getAccountBookListWithRegularity(@Param("me_id")String me_id);
 
 }

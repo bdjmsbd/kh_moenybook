@@ -2,14 +2,12 @@ package kr.kh.app.model.vo;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class AccountBookVO 
-{
+public class AccountBookVO implements Cloneable{
 
 	private int ab_num;
 	private int ab_at_num;
@@ -38,10 +36,20 @@ public class AccountBookVO
 			this.ab_detail = (ab_detail == null) ? "" : ab_detail;
 
 		} catch (Exception e) {
+			System.err.println("가계부 생성자 만드는 과정에서 문제 발생");
 			e.printStackTrace();
 		}
+
 	}
 
-
+	//객체 복제 메서드
+	@Override
+	public AccountBookVO clone() {
+		try {
+			return (AccountBookVO) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException("Clone not supported", e);
+		}
+	}
 
 }

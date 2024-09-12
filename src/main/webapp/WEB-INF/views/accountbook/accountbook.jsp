@@ -197,6 +197,16 @@ function openInsert(){
 		}
 	})
 }
+
+$('.accountbook-delete').click(function(e){
+	if (${user.me_id == null || user.me_id == ab_me_id}) {
+		return false;
+	}
+	if (confirm('정말 삭제하시겠습니까?'))
+		return true;
+	else
+		return false;
+})
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
