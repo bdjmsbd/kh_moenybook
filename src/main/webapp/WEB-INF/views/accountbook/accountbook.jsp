@@ -116,7 +116,7 @@
 		</table>
 		
 		<c:choose>
-			<c:when test="${user ne null }"><div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openInsert();">내역 등록</div></c:when>
+			<c:when test="${user ne null }"><div class="btn btn-dark d-block" data-toggle="modal" data-target="#modal" onclick="openInsert();">내역 등록</div></c:when>
 			<c:otherwise>
 				<a href="<c:url value="/login"/>" class="btn btn-dark">로그인</a>
 			</c:otherwise>

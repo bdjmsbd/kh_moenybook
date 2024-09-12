@@ -165,16 +165,16 @@
 		<div class="total-amount border mt-3 p-2">
 			<div class="d-flex">
 				<div class="w-50 mr-1">
-					<strong class="btn border p-0 mb-2">수입</strong>
+					<strong class="btn border p-0 mb-2 d-block">수입</strong>
 					<div class="text-right"><fmt:formatNumber value="${totalIncome}" pattern="#,###"/></div>
 				</div>
 				<div class="w-50 ml-1">
-					<strong class="btn border p-0 mb-2">지출</strong>
+					<strong class="btn border p-0 mb-2 d-block">지출</strong>
 					<div class="text-right"><fmt:formatNumber value="${totalExpense}" pattern="#,###"/></div>
 				</div>
 			</div>
 			<div class="mt-2">
-				<strong class="btn border p-0 mb-2">수입-지출</strong>
+				<strong class="btn border p-0 mb-2 d-block">수입-지출</strong>
 				<div class="text-right">
 					<h4><fmt:formatNumber value="${totalIncome-totalExpense}" pattern="#,###"/></h4>
 				</div>
