@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.dto.CalendarDTO;
+import kr.kh.app.model.dto.DayAmountDTO;
 import kr.kh.app.model.vo.AccountBookVO;
+import kr.kh.app.model.vo.AccountTypeVO;
 import kr.kh.app.model.vo.MemberVO;
+import kr.kh.app.model.vo.PaymentPurposeVO;
+import kr.kh.app.model.vo.PaymentTypeVO;
 import kr.kh.app.service.AccountBookService;
 
 @WebServlet("/accountbook")
@@ -95,14 +99,30 @@ public class AccountBook extends HttpServlet {
 			}
 			
 			//MemberVO user = (MemberVO)request.getSession().getAttribute("user");
-			List<AccountBookVO> abList = null;
+			List<AccountBookVO> ab_list = null;
 			if(today != null) {
 				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				abList = accountBookService.getAccountBookList(user, today.format(format));
+				ab_list = accountBookService.getAccountBookList(user, today.format(format));
 			}
+			List<AccountTypeVO> at_list = accountBookService.getAccountTypeList();
+			List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
+			List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
+			
+			String tmp_month = Integer.toString(month+1);
+			tmp_month =(tmp_month.length()==1)?"0"+(tmp_month):tmp_month;
+			String date_amount = Integer.toString(year)+ "-" + tmp_month; // yyyy-MM
+			
+			System.out.println("달력에서 출력할 날" + date_amount);
+			
+			List<DayAmountDTO> amount_list = accountBookService.getAmountList(user, date_amount);
+			System.out.println(amount_list);
+
+			request.setAttribute("pp_list", pp_list);
+			request.setAttribute("pt_list", pt_list);
+			request.setAttribute("at_list", at_list);
 			
 			request.setAttribute("cal", cal);
-			request.setAttribute("abList", abList);
+			request.setAttribute("ab_list", ab_list);
 			request.setAttribute("selected", today);
 			request.getRequestDispatcher("/WEB-INF/views/accountbook/accountbook.jsp").forward(request, response);
 		} catch (Exception e) {

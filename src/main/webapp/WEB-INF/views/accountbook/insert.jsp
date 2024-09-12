@@ -68,8 +68,8 @@
 				name="ab_date" id="date" value="<c:choose><c:when test="${date ne null}">${date }</c:when><c:otherwise>${nowDate }</c:otherwise></c:choose>">
 		</div>
 		<div class="form-group">
-			<label for="amount">금액</label> <input type="number"
-				class="form-control" name="ab_amount" id="amount">
+			<label for="amount">금액</label> 
+			<input type="number" class="form-control" step="100" name="ab_amount" id="amount">
 		</div>
 		<div class="form-group">
 			<label for="">분류</label> 

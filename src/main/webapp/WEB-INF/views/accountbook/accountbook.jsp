@@ -78,13 +78,19 @@
 							<c:if test="${(j > cal.startBlankCnt) && (j <= cal.startBlankCnt + cal.lastDate)}">
 								<c:choose>
 									<c:when test="${j % 7 == 0 }">
-										<span class="text-primary ${cls}">${j - cal.startBlankCnt }</span>
+										<span class="text-primary ${cls}">${j - cal.startBlankCnt }
+										
+										</span>
 									</c:when>
 									<c:when test="${j % 7 == 1 }">
-										<span class="text-danger ${cls}">${j - cal.startBlankCnt }</span>
+										<span class="text-danger ${cls}">${j - cal.startBlankCnt }
+										
+										</span>
 									</c:when>
 									<c:otherwise>
-										<span class="${cls}"> ${j - cal.startBlankCnt }</span>
+										<span class="${cls}"> ${j - cal.startBlankCnt }
+										
+										</span>
 									</c:otherwise>
 								</c:choose>
 							</c:if>
