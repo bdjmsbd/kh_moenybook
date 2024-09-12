@@ -80,7 +80,7 @@ header nav ul li a {color: inherit !important; display: block; height: 100%; pad
 
 /* basic ele */
 .btn {
-	display: block;
+	display: inline-block;
 	border-radius: 10px;
 }
 

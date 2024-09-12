@@ -91,13 +91,13 @@
 		</ul>
 	</c:if>
 	<div class="clearfix">
-		<a class="btn btn-outline-success text-right" href="<c:url value="/post/add?co_num=${co.co_num}"/>">글쓰기</a>
+		<a class="btn btn-outline-success float-right" href="<c:url value="/post/add?co_num=${co.co_num}"/>">글쓰기</a>
 	</div>
 </div>
 <div class="container" style="min-height: calc(100vh - 240px)">
 	<form action="">
-		<div class="input-group mb-3">
-			<select class="form-control" name="type">
+		<div class="input-group mb-3" style="max-width: 400px;">
+			<select class="form-control w-25" name="type" style="flex: unset !important;">
 				<option value="all" <c:if test="${pm.cri.type == 'all' }">selected</c:if>>전체</option>
 				<option value="title" <c:if test="${pm.cri.type == 'title'}">selected</c:if>>제목</option>
 				<option value="writer" <c:if test="${pm.cri.type == 'writer'}">selected</c:if>>작성자</option>
