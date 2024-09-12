@@ -66,8 +66,15 @@
 			<label for="">주기 여부</label> <select class="form-control"
 				name="ab_regularity" id="regularity"
 				onchange="addPeriod(this.value)">
-				<option value="0">일회성</option>
-				<option value="1">정기성</option>
+				<c:choose>
+					<c:when test="${ab.ab_regularity eq 1}">
+						<option value="1" selected>일회성</option>
+					</c:when>
+					<c:otherwise>
+						<option value="0">일회성</option>
+						<option value="1">정기성</option>
+					</c:otherwise>
+				</c:choose>
 			</select>
 		</div>
 		<div class="form-group period-box" style="display: none">
