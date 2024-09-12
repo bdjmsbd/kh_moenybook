@@ -84,12 +84,6 @@ public class AccountBook extends HttpServlet {
 			cal.setEndBlankCnt(endBlankCnt);
 			cal.setTdCnt(tdCnt);
 			
-			// 사용자의 가계부 정보 가져오기
-//			List<AccountBookVO> list = accountBookService.getAccountBookList(user);
-//			
-//
-//			request.setAttribute("list", list);
-			
 			request.setAttribute("cal", cal);
 			request.getRequestDispatcher("/WEB-INF/views/accountbook/accountbook.jsp").forward(request, response);
 		} catch (Exception e) {

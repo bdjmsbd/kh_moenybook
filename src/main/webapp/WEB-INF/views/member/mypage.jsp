@@ -4,35 +4,69 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<div class="container" style="min-height: calc(100vh - 240px)">
-	<h1 class="text-center mb-5">마이페이지(미완)</h1>
-	<c:if test="${user == null}">
-		<div class="form-group">
-			<label>비밀번호 확인 : </label>
-			<input type="password" class="form-control" id="pw" name="me_pw">
-		</div>
-		<button type="submit" class="btn btn-outline-success col-12">확인</button>
-	</c:if>
-	<c:if test="${user != null }">
-		<div class="form-group">
-			<label>아이디 : </label>
-			<div class="form-control">${user.me_id}</div>
-		</div>
-		<div class="form-group">
-			<label>닉네임 : </label>
-			<div class="form-control">${user1.mp_nickname}</div>
-		</div>
-		<div class="form-group">
-			<label>이메일 : </label>
-			<div class="form-control">${user.me_email}</div>
-		</div>
-	</c:if>
-	<c:if test="${user.me_id == post.po_me_id}">
-		<a href="<c:url value="/post/update?po_num=${post.po_num}"/>" class="btn btn-outline-dark">수정</a>
-		<a href="<c:url value="/post/delete?po_num=${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
-		<a href="<c:url value="/post/list?co_num=${post.po_co_num}"/>" class="btn btn-outline-danger">목록</a>
-	</c:if>
+<h1 class="text-center mb-5">MyPage</h1>
+<form action="<c:url value="/mypage"/>" method="post" id="form">
+	<div class="form-group">
+		<label for="id">아이디:</label> <input type="text" class="form-control"
+			id="id" name="me_id" readonly="readonly" value="${user.me_id }">
+	</div>
+	<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openUpdatePW();">비밀번호 번경</div>
+	<div class="form-group">
+		<label for="id">이메일:</label> <input type="text" class="form-control"
+			id="id" name="me_id" readonly="readonly" value="${user.me_email }">
+	</div>
+	<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openUpdateEmail();">이메일 변경</div>
+	<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openDropCheck();">회원 탈퇴</div>
+</form>
+<div id="modal" class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content"></div>
+	</div>
 </div>
+<script>
+function openUpdatePW(){
+	$.ajax({
+		url: '<c:url value="/member/updatepw" />',
+		type: 'get',
+		success: function(data){
+			$('.modal').addClass('show');
+			$('.modal-content').html(data);
+			console.log(data);
+		},
+		error : function(xhr){
+			console.log(xhr);
+		}
+	})
+}
+function openUpdateEmail(){
+	$.ajax({
+		url: '<c:url value="/member/updateemail" />',
+		type: 'get',
+		success: function(data){
+			$('.modal').addClass('show');
+			$('.modal-content').html(data);
+			console.log(data);
+		},
+		error : function(xhr){
+			console.log(xhr);
+		}
+	})
+}
+function openDropCheck(){
+	$.ajax({
+		url: '<c:url value="/member/deletemember" />',
+		type: 'get',
+		success: function(data){
+			$('.modal').addClass('show');
+			$('.modal-content').html(data);
+			console.log(data);
+		},
+		error : function(xhr){
+			console.log(xhr);
+		}
+	})
+}
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <jsp:include page="/WEB-INF/views/common/footer.sub.jsp" />

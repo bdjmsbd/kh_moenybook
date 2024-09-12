@@ -14,7 +14,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.MemberDAO;
-import kr.kh.app.model.vo.MemberProfilVO;
 import kr.kh.app.model.vo.MemberVO;
 
 public class MemberService {
@@ -106,6 +105,19 @@ public class MemberService {
 
 	public void updateMemberCookie(MemberVO user) {
 		memberDao.updateMemberCookie(user);
+	}
+
+	public boolean updateMemberPw(MemberVO user, String newpw) {
+		return memberDao.updateMemberPw(user, newpw);
+	}
+
+	public void deletmemeber(MemberVO user) {
+		memberDao.deleteMember(user);
+		
+	}
+
+	public boolean updateMemberEmail(MemberVO user, String newemail) {
+		return memberDao.updateMemberEmail(user, newemail);
 	}
 
 }

@@ -16,7 +16,7 @@
 	<nav id="gnb">
 		<ul>
 			<li>
-				<a href="<c:url value="/" />">하루소비</a>
+				<a href="<c:url value="/test" />">하루소비</a>
 			</li>
 			<li>
 				<a href="<c:url value="/table?searchDate=${nowDate}" />">가계부(표)</a>
@@ -60,4 +60,3 @@
 		}
 	</script>
 </header>
-<section id="body" class="container">
