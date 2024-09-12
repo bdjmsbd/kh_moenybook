@@ -12,33 +12,25 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <style>
-.table-box {height: 70vh;}
-
-
 .total-amount, .form-box{
-        width: 300px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .summary {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 0;
-        border-bottom: 1px solid #ddd;
-    }
-    .summary:last-child {
-        border-bottom: none;
-    }
-    .label {
-        font-weight: bold;
-    }
-    .value {
-        text-align: right;
-    }
-
-
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.summary {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+.summary:last-child {
+    border-bottom: none;
+}
+.label {
+    font-weight: bold;
+}
+.value {
+    text-align: right;
+}
 
 .checkbox-group {
 	display: flex;
@@ -77,22 +69,24 @@
 
 @media all and (max-width: 1024px) {
 	.wrapper.d-flex {flex-direction: column;}
-	.table-box {width: 100% !important; max-height: 50vh;}
+	.table-box {width: 100% !important;}
 	.right-content-container {width: 100% !important;}
 }
 </style>
 
 <h1 class="text-center mb-5">표</h1>
-<p style="font-size: 1.5em;"><strong><c:choose>
-	<strong><c:when test="${curDate eq null || curDate eq ''}">
-	${searchBegin} ~ ${searchEnd} 
-	</c:when>
-	<c:otherwise>
-	${curDate}
-	</c:otherwise> 
+<p style="font-size: 1.5em;"><strong>
+	<c:choose>
+		<c:when test="${curDate eq null || curDate eq ''}">
+		${searchBegin} ~ ${searchEnd} 
+		</c:when>
+		<c:otherwise>
+		${curDate}
+		</c:otherwise> 
 	</c:choose></strong>의 수입/지출 내역</p>
+
 <div class="d-flex wrapper" style="gap: 3em;">
-	<div class="table-box overflow-auto w-75">
+	<div class="table-box w-75">
 		<table class="table table-striped text-center">
 			<thead>
 				<tr>
@@ -104,7 +98,6 @@
 					<th class="init-sort">날짜</th>
 					<th>정기결제</th>
 					<th>제어</th>
-					
 				</tr>
 			</thead>
 			<tbody>
@@ -118,17 +111,21 @@
 								<td><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
 								<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
 								<td>${ab.ab_detail }</td>
-								<td><fmt:formatDate value="${ab.ab_date}"
-										pattern="yyyy-MM-dd" /></td>
-								<td><c:if test="${ab.ab_period eq 1}"> 매주 </c:if> <c:if
-										test="${ab.ab_period eq 2}"> 격주 </c:if> <c:if
-										test="${ab.ab_period eq 3}"> 매달 </c:if></td>
+								<td><fmt:formatDate value="${ab.ab_date}" pattern="yyyy-MM-dd" /></td>
+								<td>
+									<c:if test="${ab.ab_period eq 1}">매주</c:if>
+									<c:if test="${ab.ab_period eq 2}">격주</c:if>
+									<c:if test="${ab.ab_period eq 3}">매달</c:if>
+								</td>
+								<td>
+									<button class="btn btn-primary pt-0 pb-0">삭제</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="7" class="text-center">
+							<td colspan="8" class="text-center">
 								내역을 보려면 로그인해주세요
 								<a href="<c:url value="/login"/>" class="w-25 m-auto btn btn-primary" style="margin-top: 1em !important;">로그인</a>
 							</td>
@@ -165,43 +162,24 @@
 			<a class="btn btn-outline-light text-dark" onclick=searchDate(+1) href="javascript:void(0);">다음 달</a>
 		</div>
 		<hr>
-		<div class="total-amount mt-3">
+		<div class="total-amount border mt-3 p-2">
 			<div class="d-flex">
-				<div class="border btn p-2 w-50 mr-1">
+				<div class="w-50 mr-1">
 					<strong class="btn border p-0 mb-2">수입</strong>
-					<div><fmt:formatNumber value="${totalIncome}" pattern="#,###"/></div>
+					<div class="text-right"><fmt:formatNumber value="${totalIncome}" pattern="#,###"/></div>
 				</div>
-				<div class="border btn p-2 w-50 ml-1">
+				<div class="w-50 ml-1">
 					<strong class="btn border p-0 mb-2">지출</strong>
-					<div><fmt:formatNumber value="${totalExpense}" pattern="#,###"/></div>
+					<div class="text-right"><fmt:formatNumber value="${totalExpense}" pattern="#,###"/></div>
 				</div>
 			</div>
-			<div class="border btn p-2 mt-2">
+			<div class="mt-2">
 				<strong class="btn border p-0 mb-2">수입-지출</strong>
-				<div><fmt:formatNumber value="${totalIncome-totalExpense}" pattern="#,###"/></div>
+				<div class="text-right">
+					<h4><fmt:formatNumber value="${totalIncome-totalExpense}" pattern="#,###"/></h4>
+				</div>
 			</div>
 		</div>
-		<div class="container total-amount mt-3">
-		<c:if test="${searchType eq '0' || searchType eq '1' }">		
-        <div class="summary">
-            <div class="label">수입</div>
-            <div class="value">${totalIncome}</div>
-        </div>
-		</c:if>
-		<c:if test="${searchType eq '0' || searchType eq '2' }">	
-        <div class="summary">
-            <div class="label">지출</div>
-            <div class="value">${totalExpense}</div>
-        </div>
-		</c:if>
-		<c:if test="${searchType eq '0'}">	
-        <div class="summary">
-            <div class="label">수입-지출</div>
-            <div class="value">${totalIncome-totalExpense}</div>
-        </div>
-		</c:if>
-   		</div>
-	
 	</div>
 </div>
 
@@ -226,7 +204,6 @@ function openUpdate(){
 }
 
 function searchDate(changeMonth) {
-	
 	try {
 		
 		if(changeMonth == 0) { 
@@ -255,12 +232,9 @@ function searchDate(changeMonth) {
 	location.href = "<c:url value="/table?searchDate="/>" + searchDateStr;
 	
 }
-</script>
-
-<script>
 
 $('.accountbook-delete').click(function(e){
-	if (${user.me_id == null || user.me_id == ab_me_id}) {
+	if ('${user.me_id}' == null || '${user.me_id}' == ab_me_id) {
 		return false;
 	}
 	if (confirm('정말 삭제하시겠습니까?'))
@@ -268,8 +242,9 @@ $('.accountbook-delete').click(function(e){
 	else
 		return false;
 })
+
 $(document).ready(function(){
-    $('.table').dataTable();
+    $('.table').DataTable({});
 });
 </script>
 
