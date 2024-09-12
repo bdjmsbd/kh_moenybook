@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -24,10 +23,13 @@ import kr.kh.app.model.vo.AccountTypeVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.model.vo.PaymentPurposeVO;
 import kr.kh.app.model.vo.PaymentTypeVO;
+import kr.kh.app.model.vo.PostVO;
 
 public class AccountBookService {
 
 	private AccountBookDAO accountBookDao;
+
+	private PostService postService = new PostServiceImp();
 
 	public AccountBookService() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
@@ -76,15 +78,6 @@ public class AccountBookService {
 			return null;
 		if (searchType == null)
 			return null;
-
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-00");
-
-//		// 문자열을 LocalDate로 변환
-//    LocalDate date = LocalDate.parse(searchEnd, formatter);
-//    
-//    // 날짜 1일 증가
-//    LocalDate nextDay = date.plusDays(1);
-//    searchEnd = nextDay.format(formatter);
 
 		List<AccountBookVO> list = new ArrayList<AccountBookVO>();
 
@@ -139,7 +132,7 @@ public class AccountBookService {
 
 		String id = user.getMe_id(); // 아이디
 
-		for (int i = 1; i < 150; i++) {
+		for (int i = 1; i < 100; i++) {
 			int at = 1;
 			int pp = (int) (Math.random() * 3) + 1;
 			int pt = 1;
@@ -156,15 +149,15 @@ public class AccountBookService {
 				AccountBookVO ab = new AccountBookVO(at, pp, pt, id, formatter.parse(date), amount, detail, 0, 0);
 				accountBookDao.insertAccountBook(ab);
 
-				System.out.println("더미데이터 생성 " + ab.getAb_detail());
+				System.out.println("[더미데이터 " + ab.getAb_detail() + "]");
 
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				System.err.println("더미 데이터 생성 중 에러");
 				e.printStackTrace();
 			}
 		}
 
-		for (int i = 150; i <= 500; i++) {
+		for (int i = 100; i <= 500; i++) {
 			int at = 2;
 			int pp = (int) (Math.random() * 7) + 4;
 			int pt = (int) (Math.random() * 4) + 2;
@@ -181,16 +174,54 @@ public class AccountBookService {
 
 				System.out.println("더미데이터 생성 " + ab.getAb_detail());
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				System.err.println("더미 데이터 생성 중 에러");
 				e.printStackTrace();
 			}
 		}
+
+		for (int i = 500; i <= 600; i++) {
+			int at = 2;
+			int pp = (int) (Math.random() * 7) + 4;
+			int pt = (int) (Math.random() * 4) + 2;
+			int amount = ((int) (Math.random() * 100) + 1) * 500;
+			String month = Integer.toString((int) (Math.random() * 5) + 1);
+			month = (month.length() == 1) ? "0" + month : month;
+			String day = Integer.toString((int) (Math.random() * 28) + 1);
+			day = (day.length() == 1) ? "0" + day : day;
+			String date = "2025-" + month + "-" + day;
+			String detail = "더미데이터" + Integer.toString(i);
+			try {
+				AccountBookVO ab = new AccountBookVO(at, pp, pt, id, formatter.parse(date), amount, detail, 0, 0);
+				accountBookDao.insertAccountBook(ab);
+
+				System.out.println("더미데이터 생성 " + ab.getAb_detail());
+			} catch (ParseException e) {
+				System.err.println("더미 데이터 생성 중 에러");
+				e.printStackTrace();
+			}
+		}
+
+		for (int i = 1; i <= 4; i++) {
+
+			for (int j = 1; j <= 100; j++) {
+				String title = "더미데이터 <" + j + ">";
+				String content = "더미데이터 <" + (i*j<10?"00":i*j<100?"0":"") + i * j + ">";
+
+				PostVO post = new PostVO(i, title, content, user.getMe_id());
+
+				postService.insertPost(post);
+				
+				System.err.println("더미 데이터 생성 중 에러");
+			}
+		}
+
 	}
 
 	public List<DayAmountDTO> getAmountList(MemberVO user, String date_amount) {
-		if(user == null) return null;
-		
-		return accountBookDao.getAmountList(user.getMe_id(),date_amount);
+		if (user == null)
+			return null;
+
+		return accountBookDao.getAmountList(user.getMe_id(), date_amount);
 	}
 
 	public boolean deleteAccountBook(MemberVO user, String ab_numStr) {
@@ -228,9 +259,10 @@ public class AccountBookService {
 
 		return true;
 	}
-	
+
 	public List<AccountBookVO> getExportList(MemberVO user) {
-		if(user == null) return null;
+		if (user == null)
+			return null;
 		return accountBookDao.selectExportList(user.getMe_id());
 	}
 
@@ -322,16 +354,15 @@ public class AccountBookService {
 
 				// step일을 추가
 				LocalDate tmp_searchDate = search_date;
-				
-				if (isSameMonth(tmp_searchDate, nowDate)) { 
+
+				if (isSameMonth(tmp_searchDate, nowDate)) {
 					// 같은 달이면 기간만큼만 더해준다.
 					tmp_searchDate = tmp_searchDate.plusDays(step);
 					// 더해줬을 때 다음 달로 넘어간다면. 저장할 필요X
-					if(!isSameMonth(tmp_searchDate, nowDate)) {
+					if (!isSameMonth(tmp_searchDate, nowDate)) {
 						continue;
 					}
-				} 
-				else {
+				} else {
 					// 같은 년월이 나올 때 까지
 					do {
 						tmp_searchDate = tmp_searchDate.plusDays(step);
@@ -428,7 +459,7 @@ public class AccountBookService {
 				}
 			}
 			if (!res) {
-				// DayAmountDTO 
+				// DayAmountDTO
 				DayAmountDTO da;
 				if (tmpAb.getAb_at_num() == 1) {
 					System.out.println("c");
