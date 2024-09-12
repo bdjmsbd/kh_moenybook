@@ -30,18 +30,26 @@ public class PostAdd extends HttpServlet {
 		
 		String title = request.getParameter("po_title");
 		String content = request.getParameter("po_content");
-		String co_num = request.getParameter("po_co_num");
+		String co_num_str = request.getParameter("po_co_num");
 		
-		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
-		PostVO post = new PostVO(co_num, title, content, user.getMe_id());
+		PostVO post = new PostVO();
+		int co_num = 0;
+		try {
+			co_num = Integer.parseInt(co_num_str);
+			MemberVO user = (MemberVO)request.getSession().getAttribute("user");
+			post = new PostVO(co_num, title, content, user.getMe_id());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		boolean res = postService.insertPost(post);
 		
 		if(res) {
 			request.setAttribute("msg", "게시글을 등록했습니다.");
-			request.setAttribute("url", "/post/list?co_num="+co_num);
+			request.setAttribute("url", "/post/list?co_num=" + co_num);
 		}else {
 			request.setAttribute("msg", "게시글을 등록하지 못했습니다.");
-			request.setAttribute("url", "/post/insert?co_num="+co_num);
+			request.setAttribute("url", "/post/insert?co_num=" + co_num);
 		}
 		
 		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);

@@ -25,12 +25,15 @@ public class PostList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String num = request.getParameter("co_num");
 		CommunityVO community = postService.getCommunity(num);
+		
 		String page = request.getParameter("page");
 		String search = request.getParameter("search");
 		String type = request.getParameter("type");
 		Criteria cri = new PostCriteria(num, page, search, type, 5);
+		
 		List<PostVO> list = postService.getPostList(cri);
 		PageMaker pm = postService.getPostPageMaker(cri);
+
 		request.setAttribute("co", community);
 		request.setAttribute("list", list);
 		request.setAttribute("pm", pm);

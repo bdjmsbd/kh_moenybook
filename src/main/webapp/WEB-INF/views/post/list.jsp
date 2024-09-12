@@ -94,7 +94,7 @@
 		<a class="btn btn-outline-success text-right" href="<c:url value="/post/add?co_num=${co.co_num}"/>">글쓰기</a>
 	</div>
 </div>
-<div class="container" style="min-height: calc(100vh - 240px)">
+<div class="container">
 	<form action="">
 		<div class="input-group mb-3">
 			<select class="form-control" name="type">

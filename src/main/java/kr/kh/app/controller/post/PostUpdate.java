@@ -28,7 +28,15 @@ public class PostUpdate extends HttpServlet {
 		//제목, 게시글 번호, 내용을 가져옴
 		String title = request.getParameter("po_title");
 		String content = request.getParameter("po_content");
-		String po_num = request.getParameter("po_num");
+		String po_num_str = request.getParameter("po_num");
+		
+		int po_num = 0;
+		try {
+			po_num = Integer.parseInt(po_num_str);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		//로그인한 회원 정보를 가져옴
 		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 		//제목, 게시글번호, 내용을 이용해서 객체를 생성

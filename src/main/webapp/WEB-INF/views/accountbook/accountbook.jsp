@@ -69,26 +69,25 @@
 	</div>
 	<div style="width: 50px;"></div>
 	<div class="list-wrapper">
-		<h3>${cal.year} /
-		<c:choose>
-			<c:when test="${cal.month+1 < 10}">${'0' + cal.month+1}</c:when>
-			<c:otherwise>${cal.month+1}</c:otherwise>
-		</c:choose>/
-		<c:choose>
-			<c:when test="${cal.day < 10}">${'0' + cal.day}</c:when>
-			<c:otherwise>${cal.day}</c:otherwise>
-		</c:choose>
-		</h3>
+		<h3>${selected }</h3>
 		<table class="table table-hover">
+			<c:forEach items="${ab_list}" var="ab">
 			<tr>
-				<td colspan=2>더미 1</td>
-				<td>85,000</td>
-				<td></td>
-				<td>신용카드</td>
+				<td>${at_list[ab.ab_at_num-1].at_name}</td>
+				<td colspan=2>${ab.ab_detail }</td>
+				<td>${ab.ab_amount }</td>
+				<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
+				<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
 			</tr>
+			</c:forEach>
 		</table>
 		
-		<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openInsert();">내역 등록</div>
+		<c:choose>
+			<c:when test="${user ne null }"><div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openInsert();">내역 등록</div></c:when>
+			<c:otherwise>
+				<a href="<c:url value="/login"/>" class="btn btn-dark">로그인</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
 

@@ -20,34 +20,14 @@ public class PostVO {
 	private int po_up;
 	private int po_down;
 
-	public PostVO(int co_num, String title, String content, String id) {
-		try {
-
-			this.po_co_num = co_num;
-			this.po_title = title;
-			this.po_content = content;
-			this.po_me_id = id;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public PostVO(String po_num, String title, String content) {
-		try {
-			this.po_num = Integer.parseInt(po_num);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public PostVO(int po_num, String title, String content) {
+		this.po_num = po_num;
 		this.po_title = title;
 		this.po_content = content;
 	}
 
-	public PostVO(String co_num, String title, String content, String me_id) {
-		try {
-			this.po_co_num = Integer.parseInt(co_num);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+	public PostVO(int co_num, String title, String content, String me_id) {
+		this.po_co_num = co_num;
 		this.po_title = title;
 		this.po_content = content;
 		this.po_me_id = me_id;

@@ -39,5 +39,4 @@ public class CheckId extends HttpServlet {
 		
 	}
 
-
 }

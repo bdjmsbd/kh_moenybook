@@ -1,6 +1,8 @@
 package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,29 +28,43 @@ public class Search extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String searchExpense = request.getParameter("expense");
-		String searchIncome = request.getParameter("income");
+		String searchType = request.getParameter("at_num");
 		String searchBegin = request.getParameter("search_begin");
 		String searchEnd = request.getParameter("search_end");
 		
-		System.out.println("searchExpense :" +searchExpense);
-		System.out.println("searchIncome :" +searchIncome);
+		System.out.println("searchType :" +searchType);
 		System.out.println("searchBegin :" +searchBegin);
 		System.out.println("searchEnd :" +searchEnd);
 		
-		if(searchBegin == null ||  searchBegin.trim().equals("")) searchBegin = "1900-01-01"; //임시
-		if(searchEnd == null ||  searchEnd.trim().equals("")) searchEnd = "2024-12-31";
 		
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
+		List<AccountBookVO> list;
+		if(searchBegin == null ||  searchBegin.trim().equals("") || searchBegin.equals("NaN") || 
+				searchEnd == null ||  searchEnd.trim().equals("") || searchEnd.equals("NaN")){
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+			String searchDate = sdf.format(date);
+			list = accountBookService.getAccountBookList(user, searchDate);
+			
+			request.setAttribute("curDate", searchDate);
+ 		}
+		else {
+			list = accountBookService.getAccountBookList(user, searchType, searchBegin, searchEnd);
+			request.setAttribute("searchBegin", searchBegin);
+			request.setAttribute("searchEnd", searchEnd);
+		}
 		
-		List<AccountBookVO> list = accountBookService.getAccountBookList(user, searchExpense, searchIncome, searchBegin, searchEnd);
 		//System.out.println(list);
 
 		List<AccountTypeVO> at_list = accountBookService.getAccountTypeList();
 		List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
 		List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
+		int totalIncome = accountBookService.totalAmount(list, 1);
+		int totalExpense = accountBookService.totalAmount(list, 2);
 		
-		request.setAttribute("searchPeriod", searchBegin+"~"+searchEnd);
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("totalIncome", totalIncome);
+		request.setAttribute("totalExpense", totalExpense);
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);
 		request.setAttribute("at_list", at_list);
