@@ -98,7 +98,7 @@ public class AccountBookService {
 		}
 		
 		System.out.println(list);
-		// 람다 표현식을 사용한 Comparator 정의
+				// 람다 표현식을 사용한 Comparator 정의
         Comparator<AccountBookVO> sortedList = (ab1, ab2) -> ab1.getAb_date().compareTo(ab2.getAb_date());
 
         // 정렬 수행

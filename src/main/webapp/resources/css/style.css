@@ -57,7 +57,7 @@ header nav ul li a {color: inherit !important; display: block; height: 100%; pad
 
 /* basic ele */
 .btn {
-	display: block;
+	display: inline-block;
 	border-radius: 10px;
 }
 
@@ -69,6 +69,9 @@ header nav ul li a {color: inherit !important; display: block; height: 100%; pad
 	background: #184DA0;
 	color: #fff;
 }
+
+/* table */
+table th {text-align: center;}
 
 /* modal */
 .modal-body > * {max-width: 100% !important;}

@@ -39,4 +39,11 @@
 		</c:choose>
 	</ul>
 </nav>
+
+<div id="modal" class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content"></div>
+	</div>
+</div>
+
 <section id="body" class="container">

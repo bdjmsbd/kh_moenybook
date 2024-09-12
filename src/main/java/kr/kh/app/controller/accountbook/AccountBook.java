@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -35,7 +36,7 @@ public class AccountBook extends HttpServlet {
 		int day = 0;
 
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
-		
+		String searchType = request.getParameter("searchType");
 		try {
 			LocalDate today = LocalDate.now();
 			
@@ -98,32 +99,56 @@ public class AccountBook extends HttpServlet {
 				today = null;
 			}
 			
-			//MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 			List<AccountBookVO> ab_list = null;
-			if(today != null) {
-				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+			if (today != null) {
+				DateTimeFormatter format;
+				if (request.getParameter("year") == null || request.getParameter("month") == null) {
+					format = DateTimeFormatter.ofPattern("yyyy-MM");
+					searchType = "0";
+				} else {
+					format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				}
 				ab_list = accountBookService.getAccountBookList(user, today.format(format));
 			}
+			
 			List<AccountTypeVO> at_list = accountBookService.getAccountTypeList();
 			List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
 			List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
 			
 			String tmp_month = Integer.toString(month+1);
 			tmp_month =(tmp_month.length()==1)?"0"+(tmp_month):tmp_month;
-			String date_amount = Integer.toString(year)+ "-" + tmp_month; // yyyy-MM
+			// String tmp_day = Integer.toString(day);
+			// tmp_day = (tmp_day.length()==1)?"0"+(tmp_day):tmp_day;
+			String date_month = Integer.toString(year)+ "-" + tmp_month; // yyyy-MM
+			// String date_day = Integer.toString(year)+ "-" + tmp_month+ "-" + tmp_day; // yyyy-MM-dd
 			
-			System.out.println("달력에서 출력할 날" + date_amount);
+			//System.out.println("달력에서 출력할 날" + date_amount);
 			
-			List<DayAmountDTO> amount_list = accountBookService.getAmountList(user, date_amount);
-			System.out.println(amount_list);
+			List<DayAmountDTO> amount_list = accountBookService.getAmountList(user, date_month);
+			
+			// 람다 표현식을 사용한 Comparator 정의
+      Comparator<DayAmountDTO> sortedList = (a1, a2) -> a1.getDate().compareTo(a2.getDate());
+      // 정렬 수행
+      amount_list.sort(sortedList); 
+      
+			
+			for(DayAmountDTO tmp : amount_list) {
+				tmp.initDay();
+			}
+
+			request.setAttribute("amount_list", amount_list);
+			request.setAttribute("searchType", searchType);
 
 			request.setAttribute("pp_list", pp_list);
 			request.setAttribute("pt_list", pt_list);
 			request.setAttribute("at_list", at_list);
+			request.setAttribute("amount_list", amount_list);
 			
 			request.setAttribute("cal", cal);
 			request.setAttribute("ab_list", ab_list);
 			request.setAttribute("selected", today);
+			
 			request.getRequestDispatcher("/WEB-INF/views/accountbook/accountbook.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

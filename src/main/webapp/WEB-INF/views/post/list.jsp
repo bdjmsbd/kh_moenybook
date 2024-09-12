@@ -7,7 +7,7 @@
 
 <div class="container" style="min-height: calc(100vh - 240px)">
 	<h1 class="text-center mb-5">${co.co_name} 게시글 목록</h1>
-	<table class="table table-striped">
+	<table class="table table-striped text-center">
 		<thead>
 			<tr>
 				<th>번호</th>

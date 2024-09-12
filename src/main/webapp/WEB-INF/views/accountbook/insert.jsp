@@ -5,39 +5,8 @@
 
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<style>
-.form_radio_btn {
-	width: 47%;
-	height: 45px;
-	border: 1px solid #EAE7E7;
-	border-radius: 10px;
-}
 
-.form_radio_btn input[type="radio"] {
-	display: none;
-}
-
-.form_radio_btn label{
-	display: block;
-	border-radius: 10px;
-	margin: 0 auto;
-	text-align: center;
-	height: -webkit-fill-available;
-	line-height: 45px;
-}
-
-/* Checked */
-.form_radio_btn input[type="radio"]:checked+label{
-	background: #184DA0;
-	color: #fff;
-}
-
-/* Disabled */
-.form_radio_btn input[type="radio"] + label {
-	background: #F9FAFC;
-	color: #666;
-}
-</style>
+<link rel="stylesheet" href="<c:url value="/resources/css/insert.css"/>">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>
 
 <div class="modal-header">
@@ -48,15 +17,14 @@
 <div class="modal-body">
 	<form action="<c:url value="/accountbook/insert"/>" method="post" id="form">
 		<div class="form-group">
-			<div
-				class="form_toggle row-vh d-flex flex-row justify-content-between">
+			<div class="form_toggle row-vh d-flex flex-row justify-content-between">
 				<div class="form_radio_btn radio_male btn-income">
-					<input id="radio-1" type="radio" name='ab_at_num' id='at_num'
-						value='1' checked> <label for="radio-1">수입</label>
+					<input id="radio-1" type="radio" name="ab_at_num" id="at_num"
+						value="1" checked> <label for="radio-1">수입</label>
 				</div>
 				<div class="form_radio_btn btn-expense">
-					<input id="radio-2" type="radio" name='ab_at_num' id='at_num'
-						value='2'> <label for="radio-2">지출</label>
+					<input id="radio-2" type="radio" name="ab_at_num" id="at_num"
+						value="2"> <label for="radio-2">지출</label>
 				</div>
 			</div>
 		</div>
@@ -134,8 +102,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<textarea class="form-control mt-3" name="ab_detail" id="detail"
-				placeholder='메모'></textarea>
+			<textarea class="form-control mt-3" name="ab_detail" id="detail" placeholder="메모"></textarea>
 		</div>
 
 		<button type="submit" class="col-12 btn btn-dark btn-submit">가계부 등록</button>

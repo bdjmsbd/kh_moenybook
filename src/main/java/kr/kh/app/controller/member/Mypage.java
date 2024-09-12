@@ -14,11 +14,9 @@ public class Mypage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 		
 		request.setAttribute("user", user);
-	
 		request.getRequestDispatcher("/WEB-INF/views/member/mypage.jsp").forward(request, response);
 	}
 

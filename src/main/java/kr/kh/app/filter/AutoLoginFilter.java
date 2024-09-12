@@ -19,7 +19,9 @@ import kr.kh.app.service.MemberService;
 
 @WebFilter("/*")
 public class AutoLoginFilter extends HttpFilter implements Filter {
-       
+	
+	private static final long serialVersionUID = 1L;
+	
 	private MemberService memberService = new MemberService();
     
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -34,6 +36,8 @@ public class AutoLoginFilter extends HttpFilter implements Filter {
 			return;
 		}
 		
+		//로그인이 안됐을 때(null일때)
+		
 		//쿠키 정보를 가져옴(AL)
 		Cookie cookie = getCookie(hrequest, "AL");
 		
@@ -42,6 +46,8 @@ public class AutoLoginFilter extends HttpFilter implements Filter {
 			return;
 		}
 		
+		//쿠키 정보가 있으면 
+	
 		//쿠키에 있는 세션값을 가져옴
 		String sid = cookie.getValue();
 		//서비스에게 세션값을 주면서 일치하는 회원 정보를 달라고 요청

@@ -7,22 +7,20 @@
 <h1 class="text-center mb-5">MyPage</h1>
 <form action="<c:url value="/mypage"/>" method="post" id="form">
 	<div class="form-group">
-		<label for="id">아이디:</label> <input type="text" class="form-control"
-			id="id" name="me_id" readonly="readonly" value="${user.me_id }">
+		<label for="id">아이디:</label> <input type="text" class="form-control" id="id" name="me_id" readonly="readonly" value="${user.me_id }">
 	</div>
-	<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openUpdatePW();">비밀번호 변경</div>
+	<div class="d-flex justify-content-center">
+		<div class="btn btn-dark m-auto" data-toggle="modal" data-target="#modal" onclick="openUpdatePW();">비밀번호 변경</div>
+	</div>
 	<div class="form-group mt-3">
 		<label for="id">이메일:</label> <input type="text" class="form-control"
 			id="id" name="me_id" readonly="readonly" value="${user.me_email }">
 	</div>
-	<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openUpdateEmail();">이메일 변경</div>
-	<div class="btn btn-dark mt-3" data-toggle="modal" data-target="#modal" onclick="openDropCheck();">회원 탈퇴</div>
-</form>
-<div id="modal" class="modal">
-	<div class="modal-dialog">
-		<div class="modal-content"></div>
+	<div class="d-flex justify-content-center" style="gap: 1em;">
+		<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openUpdateEmail();">이메일 변경</div>
+		<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openDropCheck();">회원 탈퇴</div>
 	</div>
-</div>
+</form>
 <script>
 function openUpdatePW(){
 	$.ajax({

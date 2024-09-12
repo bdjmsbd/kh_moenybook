@@ -8,71 +8,9 @@
 
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/table.css"/>">
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
-<style>
-.total-amount, .form-box{
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.summary {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-.summary:last-child {
-    border-bottom: none;
-}
-.label {
-    font-weight: bold;
-}
-.value {
-    text-align: right;
-}
-
-.checkbox-group {
-	display: flex;
-	gap: 10px; /* 체크박스와 레이블 사이의 간격 */
-	align-items: center;
-}
-
-.checkbox-group input[type="radio"] {
-	position: absolute;
-	opacity: 0; /* 기본 체크박스 숨기기 */
-}
-
-.checkbox-group label {
-	display: flex;
-	align-items: center;
-	padding: 5px 5px;
-	background-color: #F9FAFC;
-	cursor: pointer;
-	transition: background-color 0.3s, border-color 0.3s;
-	font-size: 16px;
-	font-family: Arial, sans-serif;
-	position: relative;
-	width: 30%;
-	justify-content: center;
-}
-
-.checkbox-group input[type="radio"]:checked+label {
-	background-color: #007bff;
-	color: var(--white) !important;
-}
-
-.checkbox-group input[type="radio"]:checked+label::before {
-	background: #F9FAFC;
-	color: #666;
-}
-
-@media all and (max-width: 1024px) {
-	.wrapper.d-flex {flex-direction: column;}
-	.table-box {width: 100% !important;}
-	.right-content-container {width: 100% !important;}
-}
-</style>
 
 <h1 class="text-center mb-5">표</h1>
 <p style="font-size: 1.5em;"><strong>
@@ -95,43 +33,32 @@
 					<th>금액</th>
 					<th>수단</th>
 					<th>메모</th>
-					<th class="init-sort">날짜</th>
+					<th>날짜</th>
 					<th>정기결제</th>
 					<th>제어</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:choose>
-					<c:when test="${user ne null }">
-						<c:forEach items="${ab_list }" var="ab">
-							<%-- ${comments[n].name} --%>
-							<tr>
-								<td>${at_list[ab.ab_at_num-1].at_name}</td>
-								<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
-								<td><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
-								<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
-								<td>${ab.ab_detail }</td>
-								<td><fmt:formatDate value="${ab.ab_date}" pattern="yyyy-MM-dd" /></td>
-								<td>
-									<c:if test="${ab.ab_period eq 1}">매주</c:if>
-									<c:if test="${ab.ab_period eq 2}">격주</c:if>
-									<c:if test="${ab.ab_period eq 3}">매달</c:if>
-								</td>
-								<td>
-									<button class="btn btn-primary pt-0 pb-0">삭제</button>
-								</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td colspan="8" class="text-center">
-								내역을 보려면 로그인해주세요
-								<a href="<c:url value="/login"/>" class="w-25 m-auto btn btn-primary" style="margin-top: 1em !important;">로그인</a>
-							</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
+				<c:forEach items="${ab_list }" var="ab">
+					<%-- ${comments[n].name} --%>
+					<tr>
+						<td>${at_list[ab.ab_at_num-1].at_name}</td>
+						<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
+						<td><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
+						<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
+						<td>${ab.ab_detail }</td>
+						<td><fmt:formatDate value="${ab.ab_date}" pattern="yyyy-MM-dd" /></td>
+						<td>
+						<c:if test="${ab.ab_period eq 1}"> 매주 </c:if> 
+						<c:if test="${ab.ab_period eq 2}"> 격주 </c:if> 
+						<c:if test="${ab.ab_period eq 3}"> 매달 </c:if>
+						</td>
+						<td style=" display: flex; gap: 1px;">
+						<a class="btn btn-outline-dark accountbook-update" href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})">수정</a>
+						<a class="btn btn-outline-dark accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -165,16 +92,16 @@
 		<div class="total-amount border mt-3 p-2">
 			<div class="d-flex">
 				<div class="w-50 mr-1">
-					<strong class="btn border p-0 mb-2">수입</strong>
+					<strong class="btn border p-0 mb-2 d-block">수입</strong>
 					<div class="text-right"><fmt:formatNumber value="${totalIncome}" pattern="#,###"/></div>
 				</div>
 				<div class="w-50 ml-1">
-					<strong class="btn border p-0 mb-2">지출</strong>
+					<strong class="btn border p-0 mb-2 d-block">지출</strong>
 					<div class="text-right"><fmt:formatNumber value="${totalExpense}" pattern="#,###"/></div>
 				</div>
 			</div>
 			<div class="mt-2">
-				<strong class="btn border p-0 mb-2">수입-지출</strong>
+				<strong class="btn border p-0 mb-2 d-block">수입-지출</strong>
 				<div class="text-right">
 					<h4><fmt:formatNumber value="${totalIncome-totalExpense}" pattern="#,###"/></h4>
 				</div>
@@ -185,17 +112,16 @@
 
 <script>
 
-function openUpdate(){
+function openUpdate(num){
 	$.ajax({
-		url: '<c:url value="/accountbook/insert" />',
+		url: '<c:url value="/accountbook/update"/>',
 		type: 'get',
 		data: {
-			date: '${selected}'
+			ab_num : num
 		},
 		success: function(data){
 			$('.modal').addClass('show');
 			$('.modal-content').html(data);
-			console.log(data.date);
 		},
 		error : function(xhr){
 			console.log(xhr);
