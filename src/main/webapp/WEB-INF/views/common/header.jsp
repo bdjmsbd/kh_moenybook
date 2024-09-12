@@ -12,8 +12,8 @@
 			<li><a href="<c:url value="/" />">하루소비</a></li>
 			<li><a href="<c:url value="/table" />">가계부(표)</a></li>
 			<li><a href="<c:url value="/accountbook" />">가계부(달력)</a></li>
-			<li><a href="<c:url value="/graph" />">가계부(그래프)</a></li>
-			<li><a href="<c:url value="/board" />">게시판</a></li>
+			<li><a href="<c:url value="/graph/export" />">가계부(그래프)</a></li>
+			<li><a href="<c:url value="/community" />">게시판</a></li>
 			<li><a href="<c:url value="/accountbook/insert" />">임시</a></li>
 		</ul>
 	</nav>
@@ -39,4 +39,11 @@
 		</c:choose>
 	</ul>
 </nav>
+
+<div id="modal" class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content"></div>
+	</div>
+</div>
+
 <section id="body" class="container">

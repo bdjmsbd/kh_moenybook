@@ -1,6 +1,7 @@
 package kr.kh.app.controller.accountbook;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.AccountBookService;
 
-/**
- * Servlet implementation class delete
- */
 @WebServlet("/accountbook/delete")
 public class Delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,12 +24,19 @@ public class Delete extends HttpServlet {
 		
 		boolean res = accountBookService.deleteAccountBook(user, ab_numStr);
 		
+		String url = request.getHeader("Referer");
+		
+		
 		if(res) {
 			request.setAttribute("msg", "삭제 성공!");
-			request.setAttribute("url", "/");
-		}else {
+		} else {
 			request.setAttribute("msg", "삭제 실패!");
-			request.setAttribute("url", "/");
+		}
+		
+		if(url.contains("/table")) {
+			request.setAttribute("url", "/table");
+		} else if(url.contains("/accountbook")) {
+			request.setAttribute("url", "/accountbook");
 		}
 		
 		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);

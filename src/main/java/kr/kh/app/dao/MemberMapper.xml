@@ -24,5 +24,21 @@
 		select * from member
 		where me_cookie = #{sid} and me_limit > now()
 	</select>
-
+	<delete id="deleteMember">
+		delete from member where me_id = #{user.me_id}
+	</delete>
+	<update id="updateMemberPw">
+		update member
+		set 
+			me_pw = #{newpw}
+		where
+			me_id = #{user.me_id}
+	</update>
+	<update id="updateMemberEmail">
+		update member
+		set 
+			me_email = #{newemail}
+		where
+			me_id = #{user.me_id}
+	</update>
 </mapper>

@@ -6,66 +6,37 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 
-
-<link rel="stylesheet" href="<c:url value="/resources/css/accountbook_table.css"/>">
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<link href="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/4/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="<c:url value="/resources/css/table.css"/>">
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<style>
-.total-amount, .form-box {
-	width: 300px;
-	padding: 20px;
-	background-color: #fff;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-.summary {
-	display: flex;
-	justify-content: space-between;
-	padding: 10px 0;
-	border-bottom: 1px solid #ddd;
-}
 
-.summary:last-child {
-	border-bottom: none;
-}
-
-.label {
-	font-weight: bold;
-}
-
-.value {
-	text-align: right;
-}
-</style>
 <h1 class="text-center mb-5">표</h1>
-<h3>검색 &lt;
-<c:choose>
-<c:when test="${curDate eq null || curDate eq ''}">
-${searchBegin} ~ ${searchEnd} 
-</c:when>
-<c:otherwise>
-${curDate}
-</c:otherwise> 
-</c:choose> 
-&gt;</h3>
-<div class="d-flex container">
-	<div class="table-box d-flex justify-content-between mr-3">
+<p style="font-size: 1.5em;"><strong>
+	<c:choose>
+		<c:when test="${curDate eq null || curDate eq ''}">
+		${searchBegin} ~ ${searchEnd} 
+		</c:when>
+		<c:otherwise>
+		${curDate}
+		</c:otherwise> 
+	</c:choose></strong>의 수입/지출 내역</p>
 
-		<table class="table table-striped">
+<div class="d-flex wrapper" style="gap: 3em;">
+	<div class="table-box w-75">
+		<table class="table table-striped text-center">
 			<thead>
 				<tr>
 					<th>유형</th>
 					<th>분류</th>
 					<th>금액</th>
-					<th>결제 방식</th>
+					<th>수단</th>
 					<th>메모</th>
 					<th>날짜</th>
 					<th>정기결제</th>
 					<th>제어</th>
-					
 				</tr>
 			</thead>
 			<tbody>
@@ -75,19 +46,18 @@ ${curDate}
 					<c:if test="${searchType eq '0' || searchType eq ab.ab_at_num }">
 						<td>${at_list[ab.ab_at_num-1].at_name}</td>
 						<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
-						<td>${ab.ab_amount}</td>
+						<td class="text-right"><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
 						<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
 						<td>${ab.ab_detail }</td>
-						<td><fmt:formatDate value="${ab.ab_date}"
-								pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${ab.ab_date}" pattern="yyyy-MM-dd" /></td>
 						<td>
 						<c:if test="${ab.ab_period eq 1}"> 매주 </c:if> 
 						<c:if test="${ab.ab_period eq 2}"> 격주 </c:if> 
 						<c:if test="${ab.ab_period eq 3}"> 매달 </c:if>
 						</td>
-						<td style=" display: flex; gap: 1px;">
-						<a class="btn btn-outline-dark accountbook-update" href="<c:url value="/accountbook/update?ab_num=${ab.ab_num}"/>">수정</a>
-						<a class="btn btn-outline-dark accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
+						<td>
+							<a class="btn btn-outline-dark accountbook-update p-1" href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})"  data-toggle="modal" data-target="#modal">수정</a>
+							<a class="btn btn-outline-dark accountbook-delete p-1" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
 						</td>
 					</c:if>
 					</tr>
@@ -95,17 +65,17 @@ ${curDate}
 			</tbody>
 		</table>
 	</div>
-	<div class="ml-5 right-content-container">
-		<div class="form-box">
+	<div class="right-content-container w-25">
+		<div class="form-box p-3 border" style="border: 1px solid;">
 			<form action="<c:url value="/accountbook/search"/>">
 				<label>유형 선택 :</label>
-				<div class="form-group checkbox-group">
-					<input type="radio" id="both" class="form-check-input" value="0" name="at_num" <c:if test="${searchType eq null || searchType eq '0'}">checked</c:if>> 
-					<label for="both" class="form-check-label">둘다</label> 
-					<input type="radio" id="income" class="form-check-input" value="1" name="at_num" <c:if test="${searchType eq '1'}">checked</c:if>>
-					<label for="income" class="form-check-label">수입</label> 
-					<input type="radio" id="expense" class="form-check-input" value="2" name="at_num" <c:if test="${searchType eq '2'}">checked</c:if>> 
-					<label for="expense" class="form-check-label">지출</label>
+				<div class="checkbox-group">
+					<input type="radio" id="both" class="form-check-input" value="0" name="at_num" checked>
+					<label for="both" class="form-check-label btn">둘다</label>
+					<input type="radio" id="income" class="form-check-input" value="1" name="at_num">
+					<label for="income" class="form-check-label btn">수입</label>
+					<input type="radio" id="expense" class="form-check-input" value="2" name="at_num">
+					<label for="expense" class="form-check-label btn">지출</label>
 				</div>
 				<div class="form-group mt-2">
 					<label for="begin-date">시작일:</label> 
@@ -113,51 +83,48 @@ ${curDate}
 					<label for="end-date">종료일:</label> 
 					<input type="date" class="form-control" id="end" name="search_end" <c:if test="${searchEnd ne null && searchEnd ne ''}">value="${searchEnd }" </c:if>>
 				</div>
-				<button type="submit" class="btn btn-info mr-3 mb-2">조회</button>
+				<button type="submit" class="btn w-100 btn-primary">조회</button>
 			</form>
 		</div>
-		<div class="ml-3 mr-3 d-flex mt-5 justify-content-between">
-			<a class="btn btn-primary mr-2" onclick=searchDate(-1) href="javascript:void(0);"> 이전 달</a> 
-			<a class="btn btn-primary mr-2" onclick=searchDate(0) href="javascript:void(0);"> 이번 달</a> 
-			<a class="btn btn-primary mr-2" onclick=searchDate(+1) href="javascript:void(0);"> 다음 달</a>
+		<div class="mt-3 w-100 btn-group">
+			<a class="btn btn-primary" onclick=searchDate(-1) href="javascript:void(0);">이전 달</a>
+			<a class="btn btn-primary" onclick=searchDate(0) href="javascript:void(0);">이번 달</a>
+			<a class="btn btn-primary" onclick=searchDate(+1) href="javascript:void(0);">다음 달</a>
 		</div>
-		<div class="container total-amount mt-3">
-		<c:if test="${searchType eq '0' || searchType eq '1' }">		
-        <div class="summary">
-            <div class="label">수입</div>
-            <div class="value">${totalIncome}</div>
-        </div>
-		</c:if>
-		<c:if test="${searchType eq '0' || searchType eq '2' }">	
-        <div class="summary">
-            <div class="label">지출</div>
-            <div class="value">${totalExpense}</div>
-        </div>
-		</c:if>
-		<c:if test="${searchType eq '0'}">	
-        <div class="summary">
-            <div class="label">수입-지출</div>
-            <div class="value">${totalIncome-totalExpense}</div>
-        </div>
-		</c:if>
-   		</div>
-	
+		<hr>
+		<div class="total-amount border mt-3 p-2">
+			<div class="d-flex">
+				<div class="w-50 mr-1">
+					<strong class="btn border p-0 mb-2 d-block">수입</strong>
+					<div class="text-right"><fmt:formatNumber value="${totalIncome}" pattern="#,###"/></div>
+				</div>
+				<div class="w-50 ml-1">
+					<strong class="btn border p-0 mb-2 d-block">지출</strong>
+					<div class="text-right"><fmt:formatNumber value="${totalExpense}" pattern="#,###"/></div>
+				</div>
+			</div>
+			<div class="mt-2">
+				<strong class="btn border p-0 mb-2 d-block">수입-지출</strong>
+				<div class="text-right">
+					<h4><fmt:formatNumber value="${totalIncome-totalExpense}" pattern="#,###"/></h4>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
 <script>
 
-function openUpdate(){
+function openUpdate(num){
 	$.ajax({
-		url: '<c:url value="/accountbook/insert" />',
+		url: '<c:url value="/accountbook/update"/>',
 		type: 'get',
 		data: {
-			date: '${selected}'
+			ab_num : num
 		},
 		success: function(data){
 			$('.modal').addClass('show');
 			$('.modal-content').html(data);
-			console.log(data.date);
 		},
 		error : function(xhr){
 			console.log(xhr);
@@ -166,7 +133,6 @@ function openUpdate(){
 }
 
 function searchDate(changeMonth) {
-	
 	try {
 		
 		if(changeMonth == 0) { 
@@ -195,12 +161,9 @@ function searchDate(changeMonth) {
 	location.href = "<c:url value="/table?searchDate="/>" + searchDateStr;
 	
 }
-</script>
-
-<script>
 
 $('.accountbook-delete').click(function(e){
-	if (${user.me_id == null || user.me_id == ab_me_id}) {
+	if ('${user.me_id}' == null || '${user.me_id}' == ab_me_id) {
 		return false;
 	}
 	if (confirm('정말 삭제하시겠습니까?'))
@@ -208,8 +171,9 @@ $('.accountbook-delete').click(function(e){
 	else
 		return false;
 })
+
 $(document).ready(function(){
-    $('.table').dataTable();
+    $('.table').DataTable({});
 });
 </script>
 

@@ -22,6 +22,7 @@ public class Insert extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	private MemberService memberService = new MemberService();
 	private AccountBookService accountBookService = new AccountBookService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,6 +33,7 @@ public class Insert extends HttpServlet {
 
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);
+		if(request.getParameter("date") != null) request.setAttribute("date", request.getParameter("date"));
 		request.getRequestDispatcher("/WEB-INF/views/accountbook/insert.jsp").forward(request, response);
 	}
 

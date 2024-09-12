@@ -24,7 +24,9 @@ public interface AccountBookDAO {
 
 	List<AccountBookVO> selectAccountBookListFromDate(@Param("me_id")String me_id, @Param("searchBegin")String searchBegin, @Param("searchEnd")String searchEnd, @Param("isIncome")int isIncome);
 
-	List<DayAmountDTO> getAmountList(@Param("me_id")String me_id, @Param("date")String date_month);
+	List<AccountBookVO> selectExportList(@Param("me_id")String me_id);
+	
+	List<DayAmountDTO> getAmountList(@Param("me_id")String me_id, @Param("date")String date_amount);
 
 	int deleteAccountBook(@Param("me_id")String me_id, @Param("ab_num")String ab_numStr);
 

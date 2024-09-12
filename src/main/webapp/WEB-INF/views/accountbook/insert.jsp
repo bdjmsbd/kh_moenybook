@@ -6,6 +6,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 
+<link rel="stylesheet" href="<c:url value="/resources/css/insert.css"/>">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>
 
 <div class="modal-header">
@@ -16,15 +17,14 @@
 <div class="modal-body">
 	<form action="<c:url value="/accountbook/insert"/>" method="post" id="form">
 		<div class="form-group">
-			<div
-				class="form_toggle row-vh d-flex flex-row justify-content-between">
+			<div class="form_toggle row-vh d-flex flex-row justify-content-between">
 				<div class="form_radio_btn radio_male btn-income">
-					<input id="radio-1" type="radio" name='ab_at_num' id='at_num'
-						value='1' checked> <label for="radio-1">수입</label>
+					<input id="radio-1" type="radio" name="ab_at_num" id="at_num"
+						value="1" checked> <label for="radio-1">수입</label>
 				</div>
 				<div class="form_radio_btn btn-expense">
-					<input id="radio-2" type="radio" name='ab_at_num' id='at_num'
-						value='2'> <label for="radio-2">지출</label>
+					<input id="radio-2" type="radio" name="ab_at_num" id="at_num"
+						value="2"> <label for="radio-2">지출</label>
 				</div>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 			<c:set var="now" value="<%=new java.util.Date()%>" />
 			<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nowDate" />
 			<label for="date">날짜</label> <input type="date" class="form-control"
-				name="ab_date" id="date" value="${nowDate }">
+				name="ab_date" id="date" value="<c:choose><c:when test="${date ne null}">${date }</c:when><c:otherwise>${nowDate }</c:otherwise></c:choose>">
 		</div>
 		<div class="form-group">
 			<label for="amount">금액</label> 
@@ -102,11 +102,10 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<textarea class="form-control mt-3" name="ab_detail" id="detail"
-				placeholder='메모'></textarea>
+			<textarea class="form-control mt-3" name="ab_detail" id="detail" placeholder="메모"></textarea>
 		</div>
 
-		<button type="submit" class="col-12 btn btn-submit">가계부 등록</button>
+		<button type="submit" class="col-12 btn btn-dark btn-submit">가계부 등록</button>
 	</form>
 </div>
 <script>

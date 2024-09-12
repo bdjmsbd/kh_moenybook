@@ -3,5 +3,66 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.app.dao.PostDAO">
+	<select id="selectCommunityList" resultType="CommunityVO">
+		select * from community
+	</select>
+	<select id="selectCommunity" resultType="CommunityVO">
+		select * from community where co_num = #{co_num}
+	</select>
 	
+	<select id="selectPostList" resultType="PostVO">
+		select * from post 
+		where po_co_num = #{cri.co_num}
+		<choose>
+			<when test="cri.type == 'title'">
+				and po_title like concat('%',#{cri.search}, '%')
+			</when>
+			<when test="cri.type == 'writer'">
+				and po_me_id = #{cri.search}
+			</when>
+			<otherwise>
+				and (po_title like concat('%',#{cri.search}, '%')
+				or po_me_id = #{cri.search})
+			</otherwise>
+		</choose>
+		order by po_num desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="selectPostTotalCount" resultType="int">
+		select count(*) from post 
+		where po_co_num = #{cri.co_num}
+		<choose>
+			<when test="cri.type == 'title'">
+				and po_title like concat('%',#{cri.search}, '%')
+			</when>
+			<when test="cri.type == 'writer'">
+				and po_me_id = #{cri.search}
+			</when>
+			<otherwise>
+				and (po_title like concat('%',#{cri.search}, '%')
+				or po_me_id = #{cri.search})
+			</otherwise>
+		</choose>
+	</select>
+	<insert id="insertPost">
+		insert into post(po_co_num, po_title, po_content, po_me_id)
+		values(#{post.po_co_num},#{post.po_title},#{post.po_content},#{post.po_me_id})
+	</insert>
+	<update id="updatePostView">
+		update post set po_view = po_view + 1 where po_num = #{po_num}
+	</update>
+	<select id="selectPost" resultType="PostVO">
+		select * from post where po_num = #{po_num}
+	</select>
+	<update id="updatePost">
+		update post 
+		set
+			po_title = #{post.po_title},
+			po_content = #{post.po_content}
+		where 
+			po_num = #{post.po_num}
+	</update>
+	<delete id="deletePost">
+		delete from post where po_num = #{po_num}
+	</delete>
 </mapper>

@@ -103,6 +103,7 @@ public class AccountBook extends HttpServlet {
 				today = null;
 			}
 			// MemberVO user = (MemberVO)request.getSession().getAttribute("user");
+			
 			List<AccountBookVO> ab_list = null;
 			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
@@ -170,7 +171,6 @@ public class AccountBook extends HttpServlet {
 			request.setAttribute("pp_list", pp_list);
 			request.setAttribute("pt_list", pt_list);
 			request.setAttribute("at_list", at_list);
-
 			request.setAttribute("cal", cal);
 			request.setAttribute("ab_list", ab_list);
 			request.setAttribute("selected", today);
@@ -185,5 +185,4 @@ public class AccountBook extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
 		}
 	}
-
 }

@@ -187,9 +187,10 @@ public class AccountBookService {
 		}
 	}
 
-	public List<DayAmountDTO> getAmountList(MemberVO user, String date_month) {
-
-		return accountBookDao.getAmountList(user.getMe_id(), date_month);
+	public List<DayAmountDTO> getAmountList(MemberVO user, String date_amount) {
+		if(user == null) return null;
+		
+		return accountBookDao.getAmountList(user.getMe_id(),date_amount);
 	}
 
 	public boolean deleteAccountBook(MemberVO user, String ab_numStr) {
@@ -226,6 +227,11 @@ public class AccountBookService {
 		}
 
 		return true;
+	}
+	
+	public List<AccountBookVO> getExportList(MemberVO user) {
+		if(user == null) return null;
+		return accountBookDao.selectExportList(user.getMe_id());
 	}
 
 	public List<AccountBookVO> getAccountBookListWithRegularity(MemberVO user, String now_yyyy_MM) {

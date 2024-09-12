@@ -36,23 +36,17 @@ public class MemberService{
 	}
 
 	public boolean signUp(String id, String pw, String pw_ckh, String email) {
-
-		if (checkRegex(id, "^\\w{6,13}$")) {
-			return false;
-		}
+		if (checkRegex(id, "^\\w{6,13}$")) return false;
 
 		if (checkRegex(pw, "^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[^\\w])([^\\w]{1}|[\\w]{1}){6,15}$")) {
 			return false;
 		}
-
 		if (checkRegex(pw_ckh, "^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[^\\w])([^\\w]{1}|[\\w]{1}){6,15}$")) {
 			return false;
 		}
-
 		if (checkRegex(email, "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$")) {
 			return false;
 		}
-
 		if (!pw.equals(pw_ckh)) {
 			return false;
 		}
@@ -60,51 +54,33 @@ public class MemberService{
 		MemberVO newUser = new MemberVO(id, pw, email);
 		try {
 			memberDao.insertMember(newUser);
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
 			return false;
 		}
-
 		return true;
 	}
 
 	private boolean checkRegex(String str, String regex) {
-
-		if (str == null || str.trim().length() == 0) {
-			return true;
-		}
-
-		if (Pattern.matches(regex, str)) {
-			return false;
-		}
+		if (str == null || str.trim().length() == 0) return false;
+		if (Pattern.matches(regex, str)) return false;
 
 		return true;
-
 	}
 
 	public boolean checkId(String me_id) {
-
 		return memberDao.selectMember(me_id) == null;
 	}
 
 	
 	public MemberVO login(MemberVO member) {
-		if (member == null) {
-			return null;
-		}
+		if (member == null) return null;
 
 		MemberVO user = memberDao.selectMember(member.getMe_id());
-
 		// 가입되지 않은 아이디이면
-		if (user == null) {
-			return null;
-		}
+		if (user == null) return null;
 		// 비번이 같으면
-		if (user.getMe_pw().equals(member.getMe_pw())) {
-			return user;
-		}
+		if (user.getMe_pw().equals(member.getMe_pw())) return user;
 		return null;
 	}
 	
@@ -129,13 +105,27 @@ public class MemberService{
 	}
 	
 	public MemberVO getMemberBySid(String sid) {
-		// TODO Auto-generated method stub
 		return memberDao.selectMemberBySid(sid);
 	}
 
 	public void updateMemberCookie(MemberVO user) {
-		// TODO Auto-generated method stub
+		if(user == null) return;
 		memberDao.updateMemberCookie(user);
+	}
+
+	public void deletmemeber(MemberVO user) {
+		if(user == null) return;
+		memberDao.deleteMember(user);
+	}
+
+	public boolean updateMemberPw(MemberVO user, String newpw) {
+		if(user == null || newpw == null || newpw.trim().length() == 0) return false;
+		return memberDao.updateMemberPw(user, newpw);
+	}
+
+	public boolean updateMemberEmail(MemberVO user, String newemail) {
+		if(user == null || newemail == null || newemail.trim().length() == 0) return false;
+		return memberDao.updateMemberEmail(user, newemail);
 	}
 
 }

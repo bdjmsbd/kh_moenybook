@@ -32,6 +32,12 @@
 		ab_at_num = #{isIncome} and
 		ab_date >= #{searchBegin} and #{searchEnd} >= ab_date;
 	</select>
+	
+	<select id="selectExportList" resultType="AccountBookVO">
+		select sum(ab_amount) as ex_sum from accountbook
+		where ab_me_id = #{me_id} and ab_at_num = 2
+		group by ab_pp_num
+	</select>
 
 	<select id="getAmountList" resultType="DayAmountDTO">
 		SELECT

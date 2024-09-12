@@ -14,4 +14,10 @@ public interface MemberDAO {
 
 	MemberVO selectMemberBySid(@Param("sid")String sid);
 
+	void deleteMember(@Param("user")MemberVO user);
+
+	boolean updateMemberPw(@Param("user")MemberVO user, @Param("newpw")String newpw);
+
+	boolean updateMemberEmail(@Param("user")MemberVO user, @Param("newemail")String newemail);
+
 }
