@@ -5,6 +5,7 @@
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <section id="body" class="container">
+	<h1 class="text-center">하루소비</h1>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <jsp:include page="/WEB-INF/views/common/footer.sub.jsp" />

@@ -78,19 +78,13 @@
 							<c:if test="${(j > cal.startBlankCnt) && (j <= cal.startBlankCnt + cal.lastDate)}">
 								<c:choose>
 									<c:when test="${j % 7 == 0 }">
-										<span class="text-primary ${cls}">${j - cal.startBlankCnt }
-										
-										</span>
+										<span class="text-primary ${cls}">${j - cal.startBlankCnt }</span>
 									</c:when>
 									<c:when test="${j % 7 == 1 }">
-										<span class="text-danger ${cls}">${j - cal.startBlankCnt }
-										
-										</span>
+										<span class="text-danger ${cls}">${j - cal.startBlankCnt }</span>
 									</c:when>
 									<c:otherwise>
-										<span class="${cls}"> ${j - cal.startBlankCnt }
-										
-										</span>
+										<span class="${cls}">${j - cal.startBlankCnt }</span>
 									</c:otherwise>
 								</c:choose>
 							</c:if>
@@ -101,19 +95,22 @@
 			</c:forEach>
 		</table>
 	</div>
+	
 	<div class="list-wrapper">
 		<h3>${selected }</h3>
-		<table class="table table-hover">
-			<c:forEach items="${ab_list}" var="ab">
-			<tr>
-				<td>${at_list[ab.ab_at_num-1].at_name}</td>
-				<td colspan=2>${ab.ab_detail }</td>
-				<td>${ab.ab_amount }</td>
-				<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
-				<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
-			</tr>
-			</c:forEach>
-		</table>
+		<div class="overflow-auto mt-3 mb-3" style="max-height: 70vh;">
+			<table class="table table-hover">
+				<c:forEach items="${ab_list}" var="ab">
+				<tr>
+					<td>${at_list[ab.ab_at_num-1].at_name}</td>
+					<td colspan=2>${ab.ab_detail }</td>
+					<td>${ab.ab_amount }</td>
+					<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
+					<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
+				</tr>
+				</c:forEach>
+			</table>
+		</div>
 		
 		<c:choose>
 			<c:when test="${user ne null }"><div class="btn btn-dark d-block" data-toggle="modal" data-target="#modal" onclick="openInsert();">내역 등록</div></c:when>
