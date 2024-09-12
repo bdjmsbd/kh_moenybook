@@ -17,12 +17,6 @@ public class Mypage extends HttpServlet {
 		
 		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 		
-		//마이페이지로 오기 전 URL을 가져옴
-		String url = request.getHeader("Referer");
-		//URL이 있거나 /mypage이 아니면 세션에 URL을 저장
-		if(url != null && !url.contains("/mypage")) {
-			request.getSession().setAttribute("prevUrl", url);
-		}
 		request.setAttribute("user", user);
 	
 		request.getRequestDispatcher("/WEB-INF/views/member/mypage.jsp").forward(request, response);
