@@ -8,50 +8,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<style>
-.account-book-container {
-	gap: 2em;
-}
-
-.account-book-container .calendar-wrapper, .account-book-container .list-wrapper
-	{
-	width: 50%;
-}
-
-@media all and (max-width: 1024px) {
-	.account-book-container {
-		flex-direction: column;
-	}
-	.account-book-container .calendar-wrapper, .account-book-container .list-wrapper
-		{
-		width: 100%;
-	}
-}
-
-.calendar td {
-	position: relative;
-}
-
-.calendar td a {
-	color: inherit;
-}
-
-.calendar td .selected {
-	font-weight: 900;
-}
-
-.calendar td .selected::before {
-	content: '';
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 2rem;
-	height: 2rem;
-	border: 1px solid;
-	border-radius: 50%;
-}
-</style>
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>

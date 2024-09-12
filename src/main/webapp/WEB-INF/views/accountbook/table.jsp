@@ -8,71 +8,9 @@
 
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
 <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/table.css"/>">
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
-<style>
-.total-amount, .form-box{
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.summary {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-.summary:last-child {
-    border-bottom: none;
-}
-.label {
-    font-weight: bold;
-}
-.value {
-    text-align: right;
-}
-
-.checkbox-group {
-	display: flex;
-	gap: 10px; /* 체크박스와 레이블 사이의 간격 */
-	align-items: center;
-}
-
-.checkbox-group input[type="radio"] {
-	position: absolute;
-	opacity: 0; /* 기본 체크박스 숨기기 */
-}
-
-.checkbox-group label {
-	display: flex;
-	align-items: center;
-	padding: 5px 5px;
-	background-color: #F9FAFC;
-	cursor: pointer;
-	transition: background-color 0.3s, border-color 0.3s;
-	font-size: 16px;
-	font-family: Arial, sans-serif;
-	position: relative;
-	width: 30%;
-	justify-content: center;
-}
-
-.checkbox-group input[type="radio"]:checked+label {
-	background-color: #007bff;
-	color: var(--white) !important;
-}
-
-.checkbox-group input[type="radio"]:checked+label::before {
-	background: #F9FAFC;
-	color: #666;
-}
-
-@media all and (max-width: 1024px) {
-	.wrapper.d-flex {flex-direction: column;}
-	.table-box {width: 100% !important;}
-	.right-content-container {width: 100% !important;}
-}
-</style>
 
 <h1 class="text-center mb-5">표</h1>
 <p style="font-size: 1.5em;"><strong>
