@@ -29,15 +29,15 @@ public class deletemember extends HttpServlet {
 		try {
 			if (user.getMe_pw().equals(pw)) {
 				memberService.deletmemeber(user);
-				request.setAttribute("msg", "회원탈퇴 되었습니다.");
-				request.setAttribute("url", "/logout");
+				request.setAttribute("msg", "회원 탈퇴가 완료되었습니다.");
+				request.setAttribute("url", "/");
 			} else {
 				throw new RuntimeException();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("msg", "회원탈퇴 실패하였습니다.");
-			request.setAttribute("url", "/");
+			request.setAttribute("msg", "회원 탈퇴에 실패하였습니다.");
+			request.setAttribute("url", "/mypage");
 		}
 
 		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);

@@ -19,6 +19,6 @@
 		<label for="newemail">새 이메일:</label>
 		<input type="text" class="form-control" id="newemail" name="newemail">
 	</div>
-	<button type="submit" class="col-12 btn-submit">수정</button>
+	<button type="submit" class="col-12 btn-submit btn">수정</button>
 	</form>
 </div>

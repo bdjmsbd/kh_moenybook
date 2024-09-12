@@ -10,13 +10,13 @@
 		<label for="id">아이디:</label> <input type="text" class="form-control"
 			id="id" name="me_id" readonly="readonly" value="${user.me_id }">
 	</div>
-	<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openUpdatePW();">비밀번호 번경</div>
-	<div class="form-group">
+	<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openUpdatePW();">비밀번호 변경</div>
+	<div class="form-group mt-3">
 		<label for="id">이메일:</label> <input type="text" class="form-control"
 			id="id" name="me_id" readonly="readonly" value="${user.me_email }">
 	</div>
 	<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openUpdateEmail();">이메일 변경</div>
-	<div class="btn btn-dark" data-toggle="modal" data-target="#modal" onclick="openDropCheck();">회원 탈퇴</div>
+	<div class="btn btn-dark mt-3" data-toggle="modal" data-target="#modal" onclick="openDropCheck();">회원 탈퇴</div>
 </form>
 <div id="modal" class="modal">
 	<div class="modal-dialog">
