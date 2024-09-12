@@ -134,11 +134,9 @@ public class AccountBook extends HttpServlet {
       amount_list.sort(sortedList); 
       
 			
-      System.out.println(ab_list);
 			for(DayAmountDTO tmp : amount_list) {
 				tmp.initDay();
 			}
-			System.out.println(amount_list);
 
 			request.setAttribute("amount_list", amount_list);
 			request.setAttribute("searchType", searchType);

@@ -13,29 +13,32 @@
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <style>
-    .total-amount, .form-box{
-        width: 300px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .summary {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 0;
-        border-bottom: 1px solid #ddd;
-    }
-    .summary:last-child {
-        border-bottom: none;
-    }
-    .label {
-        font-weight: bold;
-    }
-    .value {
-        text-align: right;
-    }
-    
+.total-amount, .form-box {
+	width: 300px;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.summary {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.summary:last-child {
+	border-bottom: none;
+}
+
+.label {
+	font-weight: bold;
+}
+
+.value {
+	text-align: right;
+}
 </style>
 <h1 class="text-center mb-5">표</h1>
 <h3>검색 &lt;
