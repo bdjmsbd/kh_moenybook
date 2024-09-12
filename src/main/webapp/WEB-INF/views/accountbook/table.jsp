@@ -59,7 +59,7 @@ ${curDate}
 					<th>금액</th>
 					<th>결제 방식</th>
 					<th>메모</th>
-					<th class="init-sort">날짜</th>
+					<th>날짜</th>
 					<th>정기결제</th>
 					<th>제어</th>
 					
@@ -82,8 +82,8 @@ ${curDate}
 						<c:if test="${ab.ab_period eq 3}"> 매달 </c:if>
 						</td>
 						<td style=" display: flex; gap: 1px;">
-						<a class="btn btn-info accountbook-update" href="<c:url value="/accountbook/update?ab_num=${ab.ab_num}"/>">수정</a>
-						<a class="btn btn-info accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
+						<a class="btn btn-outline-dark accountbook-update" href="<c:url value="/accountbook/update?ab_num=${ab.ab_num}"/>">수정</a>
+						<a class="btn btn-outline-dark accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
 						</td>
 					</tr>
 				</c:forEach>
