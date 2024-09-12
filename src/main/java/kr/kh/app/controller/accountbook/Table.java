@@ -65,6 +65,8 @@ public class Table extends HttpServlet {
 			request.setAttribute("totalIncome", totalIncome);
 			request.setAttribute("totalExpense", totalExpense);
 		}
+		
+		request.setAttribute("searchType", "0");
 		request.setAttribute("curDate", searchDate);
 		request.setAttribute("pp_list", pp_list);
 		request.setAttribute("pt_list", pt_list);

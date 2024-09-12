@@ -33,43 +33,32 @@
 					<th>금액</th>
 					<th>수단</th>
 					<th>메모</th>
-					<th class="init-sort">날짜</th>
+					<th>날짜</th>
 					<th>정기결제</th>
 					<th>제어</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:choose>
-					<c:when test="${user ne null }">
-						<c:forEach items="${ab_list }" var="ab">
-							<%-- ${comments[n].name} --%>
-							<tr>
-								<td>${at_list[ab.ab_at_num-1].at_name}</td>
-								<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
-								<td><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
-								<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
-								<td>${ab.ab_detail }</td>
-								<td><fmt:formatDate value="${ab.ab_date}" pattern="yyyy-MM-dd" /></td>
-								<td>
-									<c:if test="${ab.ab_period eq 1}">매주</c:if>
-									<c:if test="${ab.ab_period eq 2}">격주</c:if>
-									<c:if test="${ab.ab_period eq 3}">매달</c:if>
-								</td>
-								<td>
-									<button class="btn btn-primary pt-0 pb-0">삭제</button>
-								</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td colspan="8" class="text-center">
-								내역을 보려면 로그인해주세요
-								<a href="<c:url value="/login"/>" class="w-25 m-auto btn btn-primary" style="margin-top: 1em !important;">로그인</a>
-							</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
+				<c:forEach items="${ab_list }" var="ab">
+					<%-- ${comments[n].name} --%>
+					<tr>
+						<td>${at_list[ab.ab_at_num-1].at_name}</td>
+						<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
+						<td><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
+						<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
+						<td>${ab.ab_detail }</td>
+						<td><fmt:formatDate value="${ab.ab_date}" pattern="yyyy-MM-dd" /></td>
+						<td>
+						<c:if test="${ab.ab_period eq 1}"> 매주 </c:if> 
+						<c:if test="${ab.ab_period eq 2}"> 격주 </c:if> 
+						<c:if test="${ab.ab_period eq 3}"> 매달 </c:if>
+						</td>
+						<td style=" display: flex; gap: 1px;">
+						<a class="btn btn-outline-dark accountbook-update" href="<c:url value="/accountbook/update?ab_num=${ab.ab_num}"/>">수정</a>
+						<a class="btn btn-outline-dark accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
