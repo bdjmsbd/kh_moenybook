@@ -2,14 +2,12 @@ package kr.kh.app.model.vo;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class AccountBookVO 
-{
+public class AccountBookVO {
 
 	private int ab_num;
 	private int ab_at_num;

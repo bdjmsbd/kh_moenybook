@@ -138,4 +138,19 @@ public class MemberService{
 		memberDao.updateMemberCookie(user);
 	}
 
+	public void deletmemeber(MemberVO user) {
+		// TODO Auto-generated method stub
+		memberDao.deleteMember(user);
+	}
+
+	public boolean updateMemberPw(MemberVO user, String newpw) {
+		// TODO Auto-generated method stub
+		return memberDao.updateMemberPw(user, newpw);
+	}
+
+	public boolean updateMemberEmail(MemberVO user, String newemail) {
+		// TODO Auto-generated method stub
+		return memberDao.updateMemberEmail(user, newemail);
+	}
+
 }

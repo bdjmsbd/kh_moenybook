@@ -22,6 +22,7 @@ public class Insert extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	private MemberService memberService = new MemberService();
 	private AccountBookService accountBookService = new AccountBookService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
