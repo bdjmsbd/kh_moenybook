@@ -12,8 +12,6 @@
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-
-<h1 class="text-center mb-5">표</h1>
 <p style="font-size: 1.5em;"><strong>
 	<c:choose>
 		<c:when test="${curDate eq null || curDate eq ''}">
