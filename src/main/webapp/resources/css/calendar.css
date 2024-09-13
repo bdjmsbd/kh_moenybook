@@ -7,8 +7,7 @@
 
 .calendar-wrapper {width: 50%;}
 .list-wrapper {width: 45%;}
-
-.calendar-wrapper table td {height: 100px;}
+.calendar-wrapper table td {width: 100px; height: 100px;} 
 .calendar-wrapper table td a {color: inherit;}
 .calendar-wrapper table td .selected {font-weight: 900; text-decoration: underline;}
 
