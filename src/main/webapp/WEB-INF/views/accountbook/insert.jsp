@@ -6,6 +6,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 
+<link rel="stylesheet" href="<c:url value="/resources/css/insert.css"/>">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>
 
 <div class="modal-header">
@@ -32,8 +33,7 @@
 		<div class="form-group">
 			<c:set var="now" value="<%=new java.util.Date()%>" />
 			<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nowDate" />
-			<label for="date">날짜</label> <input type="date" class="form-control"
-				name="ab_date" id="date" value="${nowDate }">
+			<label for="date">날짜</label> <input type="date" class="form-control" name="ab_date" id="date" value="${nowDate }">
 		</div>
 		<div class="form-group">
 			<label for="amount">금액</label> 
@@ -106,7 +106,7 @@
 				placeholder='메모'></textarea>
 		</div>
 
-		<button type="submit" class="col-12 btn btn-submit">가계부 등록</button>
+		<button type="submit" class="col-12 btn btn-submit btn-primary">가계부 등록</button>
 	</form>
 </div>
 <script>
