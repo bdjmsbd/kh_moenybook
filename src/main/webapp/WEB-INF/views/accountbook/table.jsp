@@ -7,10 +7,11 @@
 <%@page import="java.util.Date"%>
 
 <jsp:include page="/WEB-INF/views/common/header.sub.jsp" />
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<link href="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/4/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="<c:url value="/resources/css/table.css"/>">
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 
 <h1 class="text-center mb-5">표</h1>
 <p style="font-size: 1.5em;"><strong>
@@ -44,7 +45,7 @@
 					<tr>
 						<td>${at_list[ab.ab_at_num-1].at_name}</td>
 						<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
-						<td><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
+						<td class="text-right"><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
 						<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
 						<td>${ab.ab_detail }</td>
 						<td><fmt:formatDate value="${ab.ab_date}" pattern="yyyy-MM-dd" /></td>
@@ -53,9 +54,9 @@
 						<c:if test="${ab.ab_period eq 2}"> 격주 </c:if> 
 						<c:if test="${ab.ab_period eq 3}"> 매달 </c:if>
 						</td>
-						<td style=" display: flex; gap: 1px;">
-						<a class="btn btn-outline-dark accountbook-update" href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})">수정</a>
-						<a class="btn btn-outline-dark accountbook-delete" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
+						<td>
+							<a class="btn btn-outline-dark accountbook-update p-1" href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})"  data-toggle="modal" data-target="#modal">수정</a>
+							<a class="btn btn-outline-dark accountbook-delete p-1" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -68,11 +69,11 @@
 				<label>유형 선택 :</label>
 				<div class="checkbox-group">
 					<input type="radio" id="both" class="form-check-input" value="0" name="at_num" checked>
-					<label for="both" class="form-check-label btn text-dark">둘다</label>
+					<label for="both" class="form-check-label btn">둘다</label>
 					<input type="radio" id="income" class="form-check-input" value="1" name="at_num">
-					<label for="income" class="form-check-label btn text-dark">수입</label>
+					<label for="income" class="form-check-label btn">수입</label>
 					<input type="radio" id="expense" class="form-check-input" value="2" name="at_num">
-					<label for="expense" class="form-check-label btn text-dark">지출</label>
+					<label for="expense" class="form-check-label btn">지출</label>
 				</div>
 				<div class="form-group mt-2">
 					<label for="begin-date">시작일:</label> 
@@ -84,9 +85,9 @@
 			</form>
 		</div>
 		<div class="mt-3 w-100 btn-group">
-			<a class="btn btn-outline-light text-dark" onclick=searchDate(-1) href="javascript:void(0);">이전 달</a>
-			<a class="btn btn-outline-light text-dark" onclick=searchDate(0) href="javascript:void(0);">이번 달</a>
-			<a class="btn btn-outline-light text-dark" onclick=searchDate(+1) href="javascript:void(0);">다음 달</a>
+			<a class="btn btn-primary" onclick=searchDate(-1) href="javascript:void(0);">이전 달</a>
+			<a class="btn btn-primary" onclick=searchDate(0) href="javascript:void(0);">이번 달</a>
+			<a class="btn btn-primary" onclick=searchDate(+1) href="javascript:void(0);">다음 달</a>
 		</div>
 		<hr>
 		<div class="total-amount border mt-3 p-2">
