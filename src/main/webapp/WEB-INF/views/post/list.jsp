@@ -92,6 +92,7 @@
 	</c:if>
 	<div class="clearfix">
 		<a class="btn btn-outline-success float-right" href="<c:url value="/post/add?co_num=${co.co_num}"/>">글쓰기</a>
+		<a class="btn btn-outline-success float-right mr-1" href="<c:url value="/community"/>">이전 목록</a>
 	</div>
 </div>
 <div class="container" style="min-height: calc(100vh - 240px)">

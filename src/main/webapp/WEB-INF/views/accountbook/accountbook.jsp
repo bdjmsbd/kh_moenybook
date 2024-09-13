@@ -126,7 +126,6 @@
 						<th>메모</th>
 						<th>정기 결제</th>
 						<th></th>
-						
 					</tr>
 				</thead>
 				<tbody>
