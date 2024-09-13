@@ -211,7 +211,7 @@ public class AccountBookService {
 
 				postService.insertPost(post);
 				
-				System.err.println("더미 데이터 생성 중 에러");
+				//System.err.println("더미 데이터 생성 중 에러");
 			}
 		}
 

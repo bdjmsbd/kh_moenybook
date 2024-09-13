@@ -43,7 +43,7 @@
 				<c:forEach items="${ab_list }" var="ab">
 					<%-- ${comments[n].name} --%>
 					<tr>
-					<c:if test="${searchType eq '0' || searchType eq ab.ab_at_num }">
+					<c:if test="${searchType eq 0 || searchType eq ab.ab_at_num }">
 						<td>${at_list[ab.ab_at_num-1].at_name}</td>
 						<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
 						<td class="text-right"><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
@@ -69,13 +69,14 @@
 		<div class="form-box p-3 border" style="border: 1px solid;">
 			<form action="<c:url value="/accountbook/search"/>">
 				<label>유형 선택 :</label>
-				<div class="checkbox-group">
-					<input type="radio" id="both" class="form-check-input" value="0" name="at_num" checked>
-					<label for="both" class="form-check-label btn">둘다</label>
-					<input type="radio" id="income" class="form-check-input" value="1" name="at_num">
-					<label for="income" class="form-check-label btn">수입</label>
-					<input type="radio" id="expense" class="form-check-input" value="2" name="at_num">
-					<label for="expense" class="form-check-label btn">지출</label>
+				<div class="form-group checkbox-group">
+					<input type="radio" id="both" class="form-check-input" value="0" name="at_num" <c:if test="${searchType eq null || searchType eq '0'}">checked</c:if>> 
+					<label for="both" class="form-check-label">둘다</label> 
+					<input type="radio" id="income" class="form-check-input" value="1" name="at_num" <c:if test="${searchType eq '1'}">checked</c:if>>
+					<label for="income" class="form-check-label">수입</label> 
+					<input type="radio" id="expense" class="form-check-input" value="2" name="at_num" <c:if test="${searchType eq '2'}">checked</c:if>> 
+					<label for="expense" class="form-check-label">지출
+					</label>
 				</div>
 				<div class="form-group mt-2">
 					<label for="begin-date">시작일:</label> 
