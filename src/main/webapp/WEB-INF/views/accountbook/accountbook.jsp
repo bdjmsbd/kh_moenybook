@@ -115,7 +115,7 @@
 	</div>
 	<div class="list-wrapper ml-3">
 		<h3>${search } 내역</h3>
-		<div clatedss="overflow-auto mt-3 mb-3" style="max-height: 70vh;">
+		<div class="overflow-auto mt-3 mb-3" style="max-height: 70vh;">
 			<table class="table table-striped">
 				<thead>
 					<tr>
