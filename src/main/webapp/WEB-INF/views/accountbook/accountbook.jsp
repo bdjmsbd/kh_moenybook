@@ -11,12 +11,12 @@
 	<div class="calendar-wrapper">
 		<div class="mt-3 mb-3 p-3 d-flex justify-content-between">
 			<span><a class="btn btn-outline-dark btn-sm"
-				href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month-1}"/>">이전달</a>
+				href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month-1}&btncheck=true"/>">이전달</a>
 			</span> 
 			<span class="fw-bold fs-3">${cal.year}년 ${cal.month+1}월</span> 
 			<span>
 				<a class="btn btn-outline-dark btn-sm"
-				href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month+1}"/>">다음달</a>
+				href="<c:url value="/accountbook?year=${cal.year}&month=${cal.month+1}&btncheck=true"/>">다음달</a>
 			</span>
 		</div>
 		
@@ -114,8 +114,8 @@
 		</table>
 	</div>
 	<div class="list-wrapper ml-3">
-		<h3>${selected } 내역</h3>
-		<div class="overflow-auto mt-3 mb-3" style="max-height: 70vh;">
+		<h3>${search } 내역</h3>
+		<div clatedss="overflow-auto mt-3 mb-3" style="max-height: 70vh;">
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -197,6 +197,16 @@ function openUpdate(num){
 		}
 	})
 }
+
+$('.accountbook-delete').click(function(e){
+	if (${user.me_id == null || user.me_id == ab_me_id}) {
+		return false;
+	}
+	if (confirm('정말 삭제하시겠습니까?'))
+		return true;
+	else
+		return false;
+})
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

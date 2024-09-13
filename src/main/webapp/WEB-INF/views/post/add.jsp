@@ -20,7 +20,7 @@
 			<label for="content">내용 : </label>
 			<textarea class="form-control"name="po_content" id="content"></textarea>
 		</div>
-		<button type="submit" class="btn btn-outline-success col-12">게시글 등록</button>
+		<button type="submit" class="btn btn-primary btn-lg col-12">게시글 등록</button>
 	</form>
 </div>
 

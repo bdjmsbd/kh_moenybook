@@ -14,6 +14,9 @@
 			<li><a href="<c:url value="/accountbook" />">가계부(달력)</a></li>
 			<li><a href="<c:url value="/graph/export" />">가계부(그래프)</a></li>
 			<li><a href="<c:url value="/community" />">게시판</a></li>
+			<c:if test="${user.me_authority eq 'ADMIN' }">
+				<li><a href="<c:url value="/dummyGen" />">*</a></li>
+			</c:if>
 		</ul>
 	</nav>
 
