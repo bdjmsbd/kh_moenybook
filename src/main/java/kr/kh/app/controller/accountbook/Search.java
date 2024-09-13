@@ -32,11 +32,6 @@ public class Search extends HttpServlet {
 		String searchBegin = request.getParameter("search_begin");
 		String searchEnd = request.getParameter("search_end");
 		
-		System.out.println("searchType :" +searchType);
-		System.out.println("searchBegin :" +searchBegin);
-		System.out.println("searchEnd :" +searchEnd);
-		
-		
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		List<AccountBookVO> list;
 		if(searchBegin == null ||  searchBegin.trim().equals("") || searchBegin.equals("NaN") || 
@@ -54,8 +49,6 @@ public class Search extends HttpServlet {
 			request.setAttribute("searchEnd", searchEnd);
 		}
 		
-		//System.out.println(list);
-
 		List<AccountTypeVO> at_list = accountBookService.getAccountTypeList();
 		List<PaymentPurposeVO> pp_list = accountBookService.getPaymentPurposeList();
 		List<PaymentTypeVO> pt_list = accountBookService.getPaymentTypeList();
