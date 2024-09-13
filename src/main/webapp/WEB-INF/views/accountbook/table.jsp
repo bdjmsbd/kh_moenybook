@@ -43,6 +43,7 @@
 				<c:forEach items="${ab_list }" var="ab">
 					<%-- ${comments[n].name} --%>
 					<tr>
+					<c:if test="${searchType eq '0' || searchType eq ab.ab_at_num }">
 						<td>${at_list[ab.ab_at_num-1].at_name}</td>
 						<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
 						<td class="text-right"><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
@@ -58,6 +59,7 @@
 							<a class="btn btn-outline-dark accountbook-update p-1" href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})"  data-toggle="modal" data-target="#modal">수정</a>
 							<a class="btn btn-outline-dark accountbook-delete p-1" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
 						</td>
+					</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>

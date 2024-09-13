@@ -22,5 +22,11 @@ public class DayAmountDTO {
 	    int dom = calendar.get(Calendar.DAY_OF_MONTH);
 	    this.day = dom;
 	}
+
+	public DayAmountDTO(Date date, int totalIncome, int totalExpense) {
+		this.date = date;
+		this.totalIncome = totalIncome;
+		this.totalExpense = totalExpense;
+	}
 	
 }

@@ -41,7 +41,6 @@ public class PostAdd extends HttpServlet {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		boolean res = postService.insertPost(post);
 		
 		if(res) {

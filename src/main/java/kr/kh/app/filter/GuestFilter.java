@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import kr.kh.app.model.vo.MemberVO;
 
-/**
- * Servlet Filter implementation class EncodingFilter
- */
-@WebFilter({ "/accountbook", "/accountbook/delete", "/table", "/accountbook/insert", "/accountbook/search", "/accountbook/update" })
+@WebFilter({ "/accountbook", "/accountbook/delete", "/table", "/accountbook/insert", "/accountbook/search", "/accountbook/update", /*"/graph/export",*/ "/dummyGen" })
 public class GuestFilter extends HttpFilter implements Filter {
 
 	private static final long serialVersionUID = 1L;
