@@ -40,28 +40,30 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${ab_list }" var="ab">
-					<%-- ${comments[n].name} --%>
-					<tr>
-					<c:if test="${searchType eq 0 || searchType eq ab.ab_at_num }">
-						<td>${at_list[ab.ab_at_num-1].at_name}</td>
-						<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
-						<td class="text-right"><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
-						<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
-						<td>${ab.ab_detail }</td>
-						<td><fmt:formatDate value="${ab.ab_date}" pattern="yyyy-MM-dd" /></td>
-						<td>
-						<c:if test="${ab.ab_period eq 1}"> 매주 </c:if> 
-						<c:if test="${ab.ab_period eq 2}"> 격주 </c:if> 
-						<c:if test="${ab.ab_period eq 3}"> 매달 </c:if>
-						</td>
-						<td>
-							<a class="btn btn-outline-dark accountbook-update p-1" href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})"  data-toggle="modal" data-target="#modal">수정</a>
-							<a class="btn btn-outline-dark accountbook-delete p-1" href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
-						</td>
+					<c:forEach items="${ab_list }" var="ab">
+						<%-- ${comments[n].name} --%>
+						<c:if test="${searchType eq 0 || searchType eq ab.ab_at_num }">
+						<tr>
+							<td>${at_list[ab.ab_at_num-1].at_name}</td>
+							<td>${pp_list[ab.ab_pp_num-1].pp_name}</td>
+							<td class="text-right"><fmt:formatNumber
+									value="${ab.ab_amount}" pattern="#,###" /></td>
+							<td>${pt_list[ab.ab_pt_num-1].pt_name}</td>
+							<td>${ab.ab_detail }</td>
+							<td><fmt:formatDate value="${ab.ab_date}"
+									pattern="yyyy-MM-dd" /></td>
+							<td><c:if test="${ab.ab_period eq 1}"> 매주 </c:if> <c:if
+									test="${ab.ab_period eq 2}"> 격주 </c:if> <c:if
+									test="${ab.ab_period eq 3}"> 매달 </c:if></td>
+							<td><a class="btn btn-outline-dark accountbook-update p-1"
+								href="javascript: void(0);" onclick="openUpdate(${ab.ab_num})"
+								data-toggle="modal" data-target="#modal">수정</a> <a
+								class="btn btn-outline-dark accountbook-delete p-1"
+								href="<c:url value="/accountbook/delete?ab_num=${ab.ab_num}"/>">삭제</a>
+							</td>
+						</tr>
 					</c:if>
-					</tr>
-				</c:forEach>
+					</c:forEach>
 			</tbody>
 		</table>
 	</div>
