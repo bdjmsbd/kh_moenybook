@@ -93,7 +93,7 @@
 			<textarea class="form-control mt-3" name="ab_detail" id="detail">${ab.ab_detail }</textarea>
 		</div>
 		<input type="hidden" class="form-control" name="ab_num" id="num" value="${ab.ab_num }">
-		<button type="submit" class="col-12 btn btn-submit">가계부 수정</button>
+		<button type="submit" class="col-12 btn btn-submit btn-primary">가계부 수정</button>
 	</form>
 </div>
 <script>

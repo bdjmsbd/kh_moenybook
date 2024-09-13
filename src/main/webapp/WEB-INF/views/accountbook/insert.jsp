@@ -6,6 +6,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 
+<link rel="stylesheet" href="<c:url value="/resources/css/insert.css"/>">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>
 
 <div class="modal-header">
@@ -106,7 +107,7 @@
 				placeholder='메모'></textarea>
 		</div>
 
-		<button type="submit" class="col-12 btn btn-submit">가계부 등록</button>
+		<button type="submit" class="col-12 btn btn-submit btn-primary">가계부 등록</button>
 	</form>
 </div>
 <script>
