@@ -37,7 +37,7 @@ public class AccountBook extends HttpServlet {
 		int year = 0;
 		int month = 0; // 0 ~ 11
 		int day = 0;
-
+		String btnCheck = request.getParameter("btncheck");
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		String searchType = request.getParameter("searchType");
 		if(searchType == null) searchType = "0"; 
@@ -168,6 +168,7 @@ public class AccountBook extends HttpServlet {
 			request.setAttribute("amount_list", amount_list);
 			request.setAttribute("searchType", searchType);
 
+			request.setAttribute("btnCheck", btnCheck);
 			request.setAttribute("pp_list", pp_list);
 			request.setAttribute("pt_list", pt_list);
 			request.setAttribute("at_list", at_list);

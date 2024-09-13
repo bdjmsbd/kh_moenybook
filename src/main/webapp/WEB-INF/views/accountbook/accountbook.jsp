@@ -123,6 +123,9 @@
 						<th>분류</th>
 						<th>금액</th>
 						<th>수단</th>
+						<c:if test="${btnCheck eq 'true' }">
+						<th>날짜</th>
+						</c:if> 
 						<th>메모</th>
 						<th>정기 결제</th>
 						<th></th>
@@ -138,6 +141,9 @@
 							<td class="text-center">${pp_list[ab.ab_pp_num-1].pp_name}</td>
 							<td class="text-right"><fmt:formatNumber value="${ab.ab_amount}" pattern="#,###"/></td>
 							<td class="text-center">${pt_list[ab.ab_pt_num-1].pt_name}</td>
+							<c:if test="${btnCheck eq 'true' }">
+							<td><fmt:formatDate value="${ab.ab_date}" pattern="MM/dd"/></td>
+							</c:if>
 							<td>${ab.ab_detail }</td>
 							<td class="text-center">
 								<c:if test="${ab.ab_period eq 1}"> 매주 </c:if> 
