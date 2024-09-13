@@ -33,7 +33,7 @@
 			<c:set var="now" value="<%=new java.util.Date()%>" />
 			<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nowDate" />
 			<label for="date">날짜</label> <input type="date" class="form-control"
-				name="ab_date" id="date" value="${nowDate }">
+				name="ab_date" id="date" value="${date }">
 		</div>
 		<div class="form-group">
 			<label for="amount">금액</label> 
