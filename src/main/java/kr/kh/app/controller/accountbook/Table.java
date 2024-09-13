@@ -43,9 +43,6 @@ public class Table extends HttpServlet {
 			String year = searchDate.substring(0,4);
 			String month = searchDate.substring(5,7);
 			
-			System.out.println("year :" + year);
-			System.out.println("month :" + month);
-			
 		}
 		
 		List<AccountBookVO> ab_list = accountBookService.getAccountBookList(user, searchDate);

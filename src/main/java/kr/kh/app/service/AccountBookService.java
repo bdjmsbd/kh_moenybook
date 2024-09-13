@@ -205,13 +205,13 @@ public class AccountBookService {
 
 			for (int j = 1; j <= 100; j++) {
 				String title = "더미데이터 <" + j + ">";
-				String content = "더미데이터 <" + (i*j<10?"00":i*j<100?"0":"") + i * j + ">";
+				String content = "더미데이터 <" + (i*j<10?"00":i*j<100?"0":"") + ">";
 
 				PostVO post = new PostVO(i, title, content, user.getMe_id());
 
 				postService.insertPost(post);
 				
-				//System.err.println("더미 데이터 생성 중 에러");
+				System.out.println("[더미데이터 " + (i*j<10?"00":i*j<100?"0":"") + "]");
 			}
 		}
 
